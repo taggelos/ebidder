@@ -117,7 +117,7 @@ public class UserBean {
         return current != null;
     } 
     
-    public String edit(){
+    public String edit_usr(){
     	System.out.println("EDIT---CURRENT");
     	//System.out.println(current.getUserID());
 	   // System.out.println(current.getUsername());
