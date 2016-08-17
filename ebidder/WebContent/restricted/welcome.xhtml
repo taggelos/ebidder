@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <h:title>Welcome page</h:title>
+        <h:outputStylesheet name="newcss.css" library="css"/>
+    </h:head>
+    <h:body>
+            <h1> Welcome <h:outputText id="welcome" value="#{user.username}" required="true" 
+                                           requiredMessage="Please enter your username"/> </h1>
+            <h:form>
+                 <h:commandButton value="Manage Bids" action="#{site.manage}" />
+             </h:form>
+             <p/>
+             <h:form >
+                <h:commandButton value="Search Bids" action="#{site.search}" />
+                <h:messages globalOnly="true" styleClass="error"/>
+            </h:form>
+            <p/>
+    </h:body>
+</html>

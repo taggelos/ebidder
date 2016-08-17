@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Register User</title>
+        <h:outputStylesheet name="newcss.css" library="css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1> Registration Form </h1>
+            <h:panelGrid columns="3">
+                Username: 
+                <h:inputText id="username" value="#{user.username}" 
+                             validatorMessage="Maximum length is 50 characters"
+                             required="true" requiredMessage="Please enter your username">
+                     <f:validateLength maximum="50"/>
+                </h:inputText>                  
+                <h:message for="username" styleClass="error"/>
+                Password: 
+                <h:inputSecret id="password" value="#{user.password}" 
+                             validatorMessage="Maximum length is 15 characters"
+                             required="true" requiredMessage="Please enter your password">
+                <f:validateLength maximum="15"/>
+                </h:inputSecret>                  
+                <h:message for="password" styleClass="error"/>
+                Name: 
+                <h:inputText id="name" value="#{user.name}" 
+                             validatorMessage="Maximum length is 50 characters"
+                             required="true" requiredMessage="Please enter your first name">
+                <f:validateLength maximum="50"/>
+                </h:inputText>                  
+                <h:message for="name" styleClass="error"/>
+                Surname: 
+                <h:inputText id="surname" value="#{user.surname}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your last name">
+                <f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="surname" styleClass="error"/>
+                Location: 
+                <h:inputText id="location" value="#{user.location}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your last name">
+                <f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="location" styleClass="error"/>
+                Country: 
+                <h:inputText id="country" value="#{user.country}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your last name">
+                <f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="country" styleClass="error"/>
+                E-mail: 
+                <h:inputText id="email" value="#{user.email}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your last name">
+                <f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="email" styleClass="error"/>
+                Tax-Registration-Number: 
+                <h:inputText id="taxRegistrationNumber" value="#{user.taxRegistrationNumber}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your last name">
+                <f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="taxRegistrationNumber" styleClass="error"/>
+                Phone: 
+                <h:inputText id="phone" value="#{user.phone}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your last name">
+                <f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="phone" styleClass="error"/>
+            </h:panelGrid>
+            <p/>
+            <h:commandButton id="register" value="Register user" action="#{user.registerUser}"/>
+            <h:messages globalOnly="true" styleClass="error"/>
+        </h:form>
+    </h:body>
+</html>

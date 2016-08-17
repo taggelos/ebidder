@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <h:title>Login page</h:title>
+        <h:outputStylesheet name="newcss.css" library="css"/>
+    </h:head>
+    <h:body>
+            <h1> Please Login</h1>
+            <h:form id="frm1">
+                <h:panelGrid columns="3">
+                    Username: <h:inputText id="username" value="#{user.username}" required="true" 
+                                           requiredMessage="Please enter your username"/>
+                    <h:message for="username" styleClass="error"/>
+                    Password: <h:inputSecret id="password" value="#{user.password}" required="true" 
+                                             requiredMessage="Please enter your password"/>
+                    <h:message for="password" styleClass="error"/>
+                </h:panelGrid>
+                 <p/>
+                <h:commandButton value="login" action="#{user.login}" />
+                <h:messages globalOnly="true" styleClass="error"/>
+            </h:form>
+            <p/>
+            <h:form>
+            	<h:commandButton id="Register" value="Register NOW" action="#{user.register}"/>
+        </h:form>
+    </h:body>
+</html>

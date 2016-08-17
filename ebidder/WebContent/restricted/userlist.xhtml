@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>User List</title>
+        <h:outputStylesheet name="newcss.css" library="css"/>
+    </h:head>
+    <h:body>
+            <h1> User List</h1>
+            <h:form>
+                <h:dataTable  value="#{users.userlist}" var="usr" 
+                    styleClass="userTable"
+                    headerClass="userTableHeader"
+                    rowClasses="userTableOddRow,userTableEvenRow">
+                 <h:column> 
+                    <f:facet name="header">ID</f:facet>
+                    #{usr.userID}
+                 </h:column>
+                 <h:column>    				
+                    <f:facet name="header">Username</f:facet>    				
+                    #{usr.username}
+                 </h:column>
+                 <h:column>
+                    <f:facet name="header">First Name</f:facet>
+                    #{usr.name}
+                 </h:column>
+                 <h:column>
+                    <f:facet name="header">Last Name</f:facet>
+                    #{usr.surname}
+                 </h:column>
+                 <h:column>
+                    <f:facet name="header">Location</f:facet>
+                    #{usr.location}
+                 </h:column>
+                 <h:column>
+                    <f:facet name="header">Country</f:facet>
+                    #{usr.country}
+                 </h:column>
+                 <h:column>
+                    <f:facet name="header">E-mail</f:facet>
+                    #{usr.email}
+                 </h:column>
+                 <h:column>
+                    <f:facet name="header">Tax-Registration-Number</f:facet>
+                    #{usr.taxRegistrationNumber}
+                 </h:column>
+                 <h:column>
+                    <f:facet name="header">Phone</f:facet>
+                    #{usr.phone}
+                 </h:column>
+                 <h:column>
+                    <h:commandButton value="Edit" action="#{usr.edit}"/>
+                 </h:column>
+                </h:dataTable>
+       </h:form>
+        <p/>
+        <h:form>
+            <h:commandButton id="logout" value="Logout" action="#{user.logout}"/>
+        </h:form>
+    </h:body>
+</html>
