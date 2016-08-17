@@ -1,0 +1,37 @@
+/* 
+    Document   : newcss
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.error {
+   color: red;
+}
+
+.userTable {   
+   border-collapse: collapse;
+   border: 1px solid #000000;
+}
+
+.userTableHeader {
+   text-align: center;
+   background: none repeat scroll 0 0 #B5B5B5;
+   border-bottom: 1px solid #000000;  
+   padding: 2px;
+}
+
+.userTableOddRow {
+   text-align: center;
+   background: none repeat scroll 0 0 #FFFFFF;	
+}
+
+.userTableEvenRow {
+   text-align:center;
+   background:none repeat scroll 0 0 #D3D3D3;
+}
+
