@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Create Bid</title>
+        <h:outputStylesheet name="newcss.css" library="css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1> Create Bid </h1>
+            <h:panelGrid columns="3">
+                Name: 
+                <h:inputText id="name" value="#{bid.name}" 
+                             validatorMessage="Maximum length is 50 characters"
+                             required="true" requiredMessage="Please enter bid's name">
+                     <f:validateLength maximum="50"/>
+                </h:inputText>                  
+                <h:message for="name" styleClass="error"/>
+                Category: 
+                <h:inputText id="category" value="#{bid.category}" 
+                             validatorMessage="Maximum length is 15 characters"
+                             required="true" requiredMessage="Please enter category">
+                	<f:validateLength maximum="15"/>
+                </h:inputText> 
+                <h:message for="category" styleClass="error"/>                 
+                Buy_Price: 
+                <h:inputText id="buy_price" value="#{bid.buy_price}"
+                         validatorMessage="Maximum length is 100 characters">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="buy_price" styleClass="error"/>   
+                First_Bid: 
+                <h:inputText id="first_bid" value="#{bid.first_bid}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter first_bid">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="first_bid" styleClass="error"/>
+         		Location: 
+                <h:inputText id="location" value="#{bid.location}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your location">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="location" styleClass="error"/>
+                Country: 
+                <h:inputText id="country" value="#{bid.country}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your country">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="country" styleClass="error"/>
+                Started: 
+                <h:inputText id="started" value="#{bid.started}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter started time">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="started" styleClass="error"/>
+                Ends: 
+                <h:inputText id="ends" value="#{bid.ends}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter end's time">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="ends" styleClass="error"/>           		         		
+                Description: 
+                <h:inputText id="description" value="#{bid.description}"
+                         validatorMessage="Maximum length is 500 characters"
+                         required="true" requiredMessage="Please enter description">
+                	<f:validateLength maximum="500"/>
+                </h:inputText>
+                <h:message for="description" styleClass="error"/>     
+                Images: 
+                <h:inputText id="images" value="#{bid.images}"
+                         validatorMessage="Maximum length is 500 characters"
+                         required="true" requiredMessage="Please enter description">
+                	<f:validateLength maximum="500"/>
+                </h:inputText>
+                <h:message for="images" styleClass="error"/>        	           		
+            </h:panelGrid>
+            <p/>
+            <h:commandButton id="create_bid" value="Create Bid" action="#{bid.create_bid}"/>
+            <h:messages globalOnly="true" styleClass="error"/>
+        </h:form>
+    </h:body>
+</html>
