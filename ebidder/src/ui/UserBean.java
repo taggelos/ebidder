@@ -20,6 +20,7 @@ public class UserBean {
     private String surname;
     private String password;
     private String username;
+    
     private User current;
 
     
@@ -109,6 +110,7 @@ public class UserBean {
     }
     
     public String logout() {
+    	System.out.println("LOGOUT");
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/html/login?faces-redirect=true";
     }
@@ -117,7 +119,7 @@ public class UserBean {
         return current != null;
     } 
     
-    public String edit_usr(){
+    public String edit(){
     	System.out.println("EDIT---CURRENT");
     	//System.out.println(current.getUserID());
 	   // System.out.println(current.getUsername());

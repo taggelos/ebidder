@@ -76,6 +76,25 @@ public class UserListBean {
         return userList;
     }
 
+    
+    public List<User> getList()
+    {
+
+    	List<User> list;
+    	if(value.equals("showall")){
+    		list = userDAO.getUsers("all"); 
+    	}
+    	else if (value.equals("acceptedlist")) {
+    		list = userDAO.getUsers("nopending");
+    	}
+    	else {
+    		list = userDAO.getUsers("pending");
+    	}
+        System.out.println("new "+this.value);
+    	return list;    	
+    }
+    
+    
     public String show(String value){
     	setValue(value);
     	//System.out.println(this.value);
