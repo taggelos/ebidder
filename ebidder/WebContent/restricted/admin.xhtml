@@ -11,13 +11,19 @@
         <h1> Admin Site </h1>
         <h:form>
                  <h:column> 
-                    <h:commandButton id="show" value="Show All Users" action="#{users.show('showall')}"/>
+                    <h:commandButton id="show" value="Show All Users" action="#{user.show}">
+                    	<f:param name="action" value="showall" />
+                    </h:commandButton>
                  </h:column>
                  <h:column> 
-                    <h:commandButton id="Accepted" value="Show Accepted Users" action="#{users.show('acceptedlist')}"/>
+                 	<h:commandButton id="Accepted" value="Show Accepted Users" action="#{user.show}">
+                    	<f:param name="action" value="accepted" />
+                    </h:commandButton>
                  </h:column>
               	 <h:column> 
-                    <h:commandButton id="Pending" value="Show Pending Users" action="#{users.show('pendinglist')}"/>
+              	 	<h:commandButton id="Pending" value="Show Pending Users" action="#{user.show}">
+                    	<f:param name="action" value="pending" />
+                    </h:commandButton>
                  </h:column>
        </h:form>
         <p/>

@@ -12,63 +12,63 @@
             <h1> Edit Form </h1>
             <h:panelGrid columns="3">
             	UserID 
-                <h:inputText id="userID" value="#{user.userID}" 
+                <h:inputText id="userID" value="#{manager.userID}" 
                              validatorMessage="Maximum length is 50 characters"
                              required="true" requiredMessage="Please enter your username">
                      <f:validateLength maximum="50"/>
                 </h:inputText> 
                 <h:message for="userID" styleClass="error"/>    
                 Username 
-                <h:inputText id="username" value="#{user.username}" 
+                <h:inputText id="username" value="#{manager.username}" 
                              validatorMessage="Maximum length is 50 characters"
                              required="true" requiredMessage="Please enter your username">
                      <f:validateLength maximum="50"/>
                 </h:inputText>                  
                 <h:message for="username" styleClass="error"/>                 
                 Name: 
-                <h:inputText id="name" value="#{user.name}" 
+                <h:inputText id="name" value="#{manager.name}" 
                              validatorMessage="Maximum length is 50 characters"
                              required="true" requiredMessage="Please enter your first name">
                 <f:validateLength maximum="50"/>
                 </h:inputText>                  
                 <h:message for="name" styleClass="error"/>
                 Surname: 
-                <h:inputText id="surname" value="#{user.surname}"
+                <h:inputText id="surname" value="#{manager.surname}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="surname" styleClass="error"/>
                 Location: 
-                <h:inputText id="location" value="#{user.location}"
+                <h:inputText id="location" value="#{manager.location}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="location" styleClass="error"/>
                 Country: 
-                <h:inputText id="country" value="#{user.country}"
+                <h:inputText id="country" value="#{manager.country}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="country" styleClass="error"/>
                 E-mail: 
-                <h:inputText id="email" value="#{user.email}"
+                <h:inputText id="email" value="#{manager.email}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="email" styleClass="error"/>
                 Tax-Registration-Number: 
-                <h:inputText id="taxRegistrationNumber" value="#{user.taxRegistrationNumber}"
+                <h:inputText id="taxRegistrationNumber" value="#{manager.taxRegistrationNumber}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="taxRegistrationNumber" styleClass="error"/>
                 Phone: 
-                <h:inputText id="phone" value="#{user.phone}"
+                <h:inputText id="phone" value="#{manager.phone}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
@@ -76,7 +76,7 @@
                 <h:message for="phone" styleClass="error"/>
             </h:panelGrid>
             <p/>
-            <h:commandButton value="Save Changes" action="#{user.submit}"/>
+            <h:commandButton value="Save Changes" action="#{manager.submit}"/>
             <h:messages globalOnly="true" styleClass="error"/>
         </h:form>
         <p/>

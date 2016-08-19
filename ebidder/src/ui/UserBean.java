@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.Column;
 
+
 @ManagedBean(name="user")
 @SessionScoped
 public class UserBean {
@@ -54,16 +55,7 @@ public class UserBean {
 	
 	public String registerUser()
     {
-        FacesContext context = FacesContext.getCurrentInstance();
-/*
-        //User user = new User();
-        User user = current;
-        user.setName(name);
-        user.setSurname(surname);
-        user.setPassword(password);
-        user.setUsername(username);
-       // user.setUserID(user.getUserID()+1);
-   */    
+        FacesContext context = FacesContext.getCurrentInstance();  
         User user =  new User();
         user.setName(name);
 	    user.setSurname(surname);
@@ -119,7 +111,7 @@ public class UserBean {
         return current != null;
     } 
     
-    public String edit(){
+    public String blue(){
     	System.out.println("EDIT---CURRENT");
     	//System.out.println(current.getUserID());
 	   // System.out.println(current.getUsername());
@@ -164,8 +156,8 @@ public class UserBean {
     	return "/restricted/admin"; //msg ok?
     }
     
-    /*
-    public String showall(){
+    //////////////////
+    public String show(){
     	return "/restricted/userlist";
     }
     
@@ -176,8 +168,8 @@ public class UserBean {
     
     public String acceptedlist(){
     	return "/restricted/acceptedlist";
-    }*/
-    
+    }
+    //////////////////action="#{users.show('showall')}
     
     /*functions*/
     

@@ -10,7 +10,7 @@
 <h:body>
 	<h1>User List</h1>
 	<h:form>
-		<h:dataTable value="#{users.userlist}" var="usr"
+		<h:dataTable value="#{manager.userlist}" var="usr"
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">
 			<h:column>
@@ -50,11 +50,9 @@
                     #{usr.phone}
                  </h:column>
 			<h:column>
-				<h:form>
-					<h:commandButton id="edit" value="Edit" action="" >
-						<f:param name="usr" value="#{usr}" />
-					</h:commandButton>
-				</h:form>
+				<h:commandButton value="Edit" action="#{manager.edit}" >
+				 	<f:setPropertyActionListener target="#{manager.user}" value="#{usr}" />
+				</h:commandButton>
 			</h:column>
 		</h:dataTable>
 	</h:form>
