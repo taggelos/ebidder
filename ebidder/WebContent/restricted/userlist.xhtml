@@ -54,10 +54,28 @@
 				 	<f:setPropertyActionListener target="#{manager.user}" value="#{usr}" />
 				</h:commandButton>
 			</h:column>
+			<h:column  rendered="#{manager.acceptButtonEnabled}">
+				<h:commandButton value="Accept" action="#{manager.accept}" >
+				 	<f:setPropertyActionListener target="#{manager.user}" value="#{usr}" />
+				</h:commandButton>
+			</h:column>
+			<h:column  rendered="#{manager.declineButtonEnabled}">
+				<h:commandButton value="Decline" action="#{manager.decline}" >
+				 	<f:setPropertyActionListener target="#{manager.user}" value="#{usr}" />
+				</h:commandButton>
+			</h:column>
+			<h:column  rendered="#{manager.banButtonEnabled}">
+				<h:commandButton value="Ban" action="#{manager.decline}" >
+				 	<f:setPropertyActionListener target="#{manager.user}" value="#{usr}" />
+				</h:commandButton>
+			</h:column>
 		</h:dataTable>
 	</h:form>
 	<p />
+	 <h:messages globalOnly="true" styleClass="error"/>
 	<h:form>
+		<h:commandButton id="GoBack" value="Go Back" action="#{manager.goBack}" />
+		<p />
 		<h:commandButton id="logout" value="Logout" action="#{user.logout}" />
 	</h:form>
 </h:body>

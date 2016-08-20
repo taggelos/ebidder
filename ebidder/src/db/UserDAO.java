@@ -109,6 +109,28 @@ public class UserDAO {
 		}
 	}
 	
+	public String remove(User user) {
+		String retMessage = "";
+		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		try {
+			user = em.merge(user);
+			em.remove(user);
+			em.flush();  
+			tx.commit();
+			retMessage = "ok";
+			return retMessage;
+		} catch (PersistenceException e) {
+			if (tx.isActive())
+				tx.rollback();
+			retMessage = e.getMessage();
+			return retMessage;
+		} finally {
+			em.close();
+		}
+	}
+	
 	 public void setJpaResourceBean(JPAResourceBean jpaResourceBean) {
 	        this.jpaResourceBean = jpaResourceBean;
 	    }

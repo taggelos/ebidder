@@ -5,7 +5,7 @@ import entities.User;
 import java.util.List;
 import java.util.Map;
 
-
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
@@ -28,63 +28,71 @@ public class UserManagerBean {
     
     private List<User> userList;
     
+    private String dot ="";
+    
 	private User user;
 
     public void setUser(User user) {
 		this.user = user;
 	}
+    
+    boolean acceptButtonEnabled=false;
+    public boolean getAcceptButtonEnabled() {
+        return acceptButtonEnabled;
+    }
+    
 
+    boolean declineButtonEnabled=false;
+    public boolean getDeclineButtonEnabled() {
+        return declineButtonEnabled;
+    }
+    
+    boolean banButtonEnabled=false;
+    public boolean getBanButtonEnabled() {
+        return banButtonEnabled;
+    }
+    
+    
 	public List<User> getUserlist()
     {
     	Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
     	String value = params.get("action");
     	
-        if (userList == null && value!= null )
+    	if( !dot.equals(value) && value!= null)  //dot used to recognise what we need
         {
         	//List<User> list;
         	System.out.println("here");
         	
         	if(value.equals("showall")){
         		userList = userDAO.getUsers("all"); 
+        		dot = "showall";
+        		acceptButtonEnabled = false;
+        		declineButtonEnabled = false;
+        		banButtonEnabled = false;
         	}
         	else if (value.equals("accepted")) {
         		userList = userDAO.getUsers("nopending");
+        		dot = "accepted";
+        		acceptButtonEnabled = false;
+        		declineButtonEnabled = false;
+        		banButtonEnabled = true;
         	}
         	else {
         		userList = userDAO.getUsers("pending");
+        		dot = "pending";
+        		acceptButtonEnabled = true;
+        		declineButtonEnabled = true;
+        		banButtonEnabled = false;
         	}
-        	/*
-            if (list !=null) {
-                ArrayList<User> uList = new ArrayList<User>();
-
-                for (User u: list)
-                {
-                    //User ub = new User();
-                    user.setName(u.getName());
-                    user.setSurname(u.getSurname());
-                    user.setUsername(u.getUsername());
-                    user.setUserID(u.getUserID());
-
-                    user.setLocation(u.getLocation());
-                    user.setCountry(u.getCountry());
-                    user.setEmail(u.getEmail());
-                    user.setTaxRegistrationNumber(u.getTaxRegistrationNumber());
-                    user.setPhone(u.getPhone());
-            	    
-                    uList.add(user);
-                }
-                userList = new ArrayList<User>(uList);
-            }*/
         }
-        //System.out.println(this.value);
         System.out.println(value);
         return userList;
     }
 
     public String edit(){
     	System.out.println("EDIT---CURRENT");
-    	//System.out.println(current.getUserID());
-	   // System.out.println(current.getUsername());
+    	///////diaforetika koumpia gia kathena
+    	dot = "";
 		return "/restricted/edit";
     }
     
@@ -102,43 +110,33 @@ public class UserManagerBean {
 	public String submit(){
     	System.out.println("SUBMIT---CURRENT");
 	    System.out.println("EDIT---NEW");
- 
+	    dot = "";
     	userDAO.update(user);
-    	
-    	//userDAO.update(user);
     	return "/restricted/userlist";
     }
     
     public String accept(){
     	//dao update pending
-    	return "/restricted/admin"; //msg ok?
+    	user.setPending(0);
+    	dot = "";
+    	userDAO.update(user);
+    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successful Accept"));
+    	return "/restricted/userlist"; //msg ok?
     }
     
     public String decline(){
     	//same
-    	return "/restricted/admin"; //msg ok?
+    	dot = "";
+    	userDAO.remove(user);
+    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successful Operation"));
+    	return "/restricted/userlist"; //msg ok?
     }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+    
+   public String goBack(){
+	   dot = "";
+	   return "/restricted/admin";
+   }
 	
 	///////////////////////////////////////////////////
 	
