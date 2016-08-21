@@ -11,6 +11,7 @@
 	<h1>User List</h1>
 	<h:form>
 		<h:dataTable value="#{manager.userlist}" var="usr"
+			first="#{manager.first}" rows="#{manager.rows}"
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">
 			<h:column>
@@ -50,31 +51,44 @@
                     #{usr.phone}
                  </h:column>
 			<h:column>
-				<h:commandButton value="Edit" action="#{manager.edit}" >
-				 	<f:setPropertyActionListener target="#{manager.user}" value="#{usr}" />
+				<h:commandButton value="Edit" action="#{manager.edit}">
+					<f:setPropertyActionListener target="#{manager.user}"
+						value="#{usr}" />
 				</h:commandButton>
 			</h:column>
-			<h:column  rendered="#{manager.acceptButtonEnabled}">
-				<h:commandButton value="Accept" action="#{manager.accept}" >
-				 	<f:setPropertyActionListener target="#{manager.user}" value="#{usr}" />
+			<h:column rendered="#{manager.acceptButtonEnabled}">
+				<h:commandButton value="Accept" action="#{manager.accept}">
+					<f:setPropertyActionListener target="#{manager.user}"
+						value="#{usr}" />
 				</h:commandButton>
 			</h:column>
-			<h:column  rendered="#{manager.declineButtonEnabled}">
-				<h:commandButton value="Decline" action="#{manager.decline}" >
-				 	<f:setPropertyActionListener target="#{manager.user}" value="#{usr}" />
+			<h:column rendered="#{manager.declineButtonEnabled}">
+				<h:commandButton value="Decline" action="#{manager.decline}">
+					<f:setPropertyActionListener target="#{manager.user}"
+						value="#{usr}" />
 				</h:commandButton>
 			</h:column>
-			<h:column  rendered="#{manager.banButtonEnabled}">
-				<h:commandButton value="Ban" action="#{manager.decline}" >
-				 	<f:setPropertyActionListener target="#{manager.user}" value="#{usr}" />
+			<h:column rendered="#{manager.banButtonEnabled}">
+				<h:commandButton value="Ban" action="#{manager.decline}">
+					<f:setPropertyActionListener target="#{manager.user}"
+						value="#{usr}" />
 				</h:commandButton>
 			</h:column>
 		</h:dataTable>
 	</h:form>
-	<p />
-	 <h:messages globalOnly="true" styleClass="error"/>
 	<h:form>
-		<h:commandButton id="GoBack" value="Go Back" action="#{manager.goBack}" />
+		<h:commandButton disabled="#{manager.prev}" value="Previous Page"
+			action="#{manager.display('prev')}" />
+		<h:commandButton disabled="#{manager.next}" value="Next Page"
+			action="#{manager.display('next')}" />
+
+		<h:inputText value="#{manager.first}" />
+	</h:form>
+	<p />
+	<h:messages globalOnly="true" styleClass="error" />
+	<h:form>
+		<h:commandButton id="GoBack" value="Go Back"
+			action="#{manager.goBack}" />
 		<p />
 		<h:commandButton id="logout" value="Logout" action="#{user.logout}" />
 	</h:form>
