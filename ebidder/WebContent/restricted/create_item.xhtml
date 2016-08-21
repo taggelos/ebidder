@@ -4,85 +4,111 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Create Bid</title>
+        <title>Create Item</title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
         <h:form>
-            <h1> Create Bid </h1>
+            <h1> Create Item </h1>
             <h:panelGrid columns="3">
                 Name: 
-                <h:inputText id="name" value="#{bid.name}" 
+                <h:inputText id="name" value="#{item.name}" 
                              validatorMessage="Maximum length is 50 characters"
-                             required="true" requiredMessage="Please enter bid's name">
+                             required="true" requiredMessage="Please enter item's name">
                      <f:validateLength maximum="50"/>
                 </h:inputText>                  
                 <h:message for="name" styleClass="error"/>
                 Category: 
-                <h:inputText id="category" value="#{bid.category}" 
-                             validatorMessage="Maximum length is 15 characters"
-                             required="true" requiredMessage="Please enter category">
-                	<f:validateLength maximum="15"/>
-                </h:inputText> 
-                <h:message for="category" styleClass="error"/>                 
+                <h:panelGrid columns="2">
+	                <h:inputText id="category" value="#{item.current_category}" 
+	                             validatorMessage="Maximum length is 15 characters"
+	                             required="true" requiredMessage="Please enter category">
+	                	<f:validateLength maximum="15"/>
+	                </h:inputText>
+	                <h:commandButton value="Add" action="#{item.add}" />	
+                </h:panelGrid>
+                <h:message for="category" styleClass="error"/>
+                 
+               	Selected Categories				
+				<h:dataTable id="added_categories" value="#{item.cate }" var="itm">					
+					<h:column>
+					 #{itm}
+					 </h:column>
+				</h:dataTable>
+				<h:message for="added_categories" styleClass="error"/>
+                                       
                 Buy_Price: 
-                <h:inputText id="buy_price" value="#{bid.buy_price}"
+                <h:inputText id="buy_price" value="#{item.buy_price}"
                          validatorMessage="Maximum length is 100 characters">
                 	<f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="buy_price" styleClass="error"/>   
                 First_Bid: 
-                <h:inputText id="first_bid" value="#{bid.first_bid}"
+                <h:inputText id="first_bid" value="#{item.first_bid}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter first_bid">
                 	<f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="first_bid" styleClass="error"/>
-         		Location: 
-                <h:inputText id="location" value="#{bid.location}"
+                Latitude: 
+                <h:inputText id="latitude" value="#{item.latitude}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your location">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="location" styleClass="error"/>
+                Longitude: 
+                <h:inputText id="longitude" value="#{item.longitude}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your location">
                 	<f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="location" styleClass="error"/>
                 Country: 
-                <h:inputText id="country" value="#{bid.country}"
+                <h:inputText id="country" value="#{item.country}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your country">
                 	<f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="country" styleClass="error"/>
+                
+           <!--      Dokimastiko:
+				<a4j:outputPanel id="calendar" layout="block">
+                    <rich:calendar value="#{calendarBean.selectedDate}"
+                        locale="#{calendarBean.locale}"
+                        popup="#{calendarBean.popup}"
+                        datePattern="#{calendarBean.pattern}"
+                        showApplyButton="#{calendarBean.showApply}" cellWidth="24px" cellHeight="22px" style="width:200px"/>
+           	 	</a4j:outputPanel> -->
+                
                 Started: 
-                <h:inputText id="started" value="#{bid.started}"
+                <h:inputText id="started" value="#{item.started}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter started time">
                 	<f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="started" styleClass="error"/>
                 Ends: 
-                <h:inputText id="ends" value="#{bid.ends}"
+                <h:inputText id="ends" value="#{item.ends}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter end's time">
                 	<f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="ends" styleClass="error"/>           		         		
                 Description: 
-                <h:inputText id="description" value="#{bid.description}"
+                <h:inputText id="description" value="#{item.description}"
                          validatorMessage="Maximum length is 500 characters"
                          required="true" requiredMessage="Please enter description">
                 	<f:validateLength maximum="500"/>
                 </h:inputText>
                 <h:message for="description" styleClass="error"/>     
                 Images: 
-                <h:inputText id="images" value="#{bid.images}"
-                         validatorMessage="Maximum length is 500 characters"
-                         required="true" requiredMessage="Please enter description">
-                	<f:validateLength maximum="500"/>
+                <h:inputText id="images" value="#{item.images}">
                 </h:inputText>
                 <h:message for="images" styleClass="error"/>        	           		
             </h:panelGrid>
             <p/>
-            <h:commandButton id="create_bid" value="Create Bid" action="#{bid.create_bid}"/>
+            <h:commandButton id="create_item" value="Create item" action="#{item.create_item}"/>
             <h:messages globalOnly="true" styleClass="error"/>
         </h:form>
     </h:body>

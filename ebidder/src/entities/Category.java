@@ -6,11 +6,10 @@ import java.util.List;
 
 
 /**
- * The persistent class for the categories database table.
+ * The persistent class for the category database table.
  * 
  */
 @Entity
-@Table(name="categories")
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;

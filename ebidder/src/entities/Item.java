@@ -2,15 +2,15 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
 /**
- * The persistent class for the items database table.
+ * The persistent class for the item database table.
  * 
  */
 @Entity
-@Table(name="items")
 @NamedQuery(name="Item.findAll", query="SELECT i FROM Item i")
 public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -29,19 +29,23 @@ public class Item implements Serializable {
 
 	private String description;
 
-	private String ends;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date ends;
 
 	private int first_Bid;
 
-	private String latitude;
+	private float latitude;
 
-	private String longitude;
+	private float longitude;
+
+	private String name;
 
 	private int number_of_Bids;
 
 	private int sellerID;
 
-	private String started;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date started;
 
 	private String time;
 
@@ -52,7 +56,7 @@ public class Item implements Serializable {
 	//bi-directional many-to-many association to Category
 	@ManyToMany
 	@JoinTable(
-		name="items_has_categories"
+		name="items_has_category"
 		, joinColumns={
 			@JoinColumn(name="Items_ItemID")
 			}
@@ -118,11 +122,11 @@ public class Item implements Serializable {
 		this.description = description;
 	}
 
-	public String getEnds() {
+	public Date getEnds() {
 		return this.ends;
 	}
 
-	public void setEnds(String ends) {
+	public void setEnds(Date ends) {
 		this.ends = ends;
 	}
 
@@ -134,20 +138,28 @@ public class Item implements Serializable {
 		this.first_Bid = first_Bid;
 	}
 
-	public String getLatitude() {
+	public float getLatitude() {
 		return this.latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(float latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getLongitude() {
+	public float getLongitude() {
 		return this.longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(float longitude) {
 		this.longitude = longitude;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getNumber_of_Bids() {
@@ -166,11 +178,11 @@ public class Item implements Serializable {
 		this.sellerID = sellerID;
 	}
 
-	public String getStarted() {
+	public Date getStarted() {
 		return this.started;
 	}
 
-	public void setStarted(String started) {
+	public void setStarted(Date started) {
 		this.started = started;
 	}
 
