@@ -53,23 +53,23 @@ public class Item implements Serializable {
 	@OneToMany(mappedBy="item")
 	private List<Bid> bids;
 
-	//bi-directional many-to-many association to Category
-	@ManyToMany
-	@JoinTable(
-		name="items_has_category"
-		, joinColumns={
-			@JoinColumn(name="Items_ItemID")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="Categories_Name")
-			}
-		)
-	private List<Category> categories;
-
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="users_UserID")
 	private User user;
+
+	//bi-directional many-to-many association to Category
+	@ManyToMany
+	@JoinTable(
+		name="item_has_category"
+		, joinColumns={
+			@JoinColumn(name="item_ItemID")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="category_Name")
+			}
+		)
+	private List<Category> categories;
 
 	public Item() {
 	}
@@ -216,20 +216,20 @@ public class Item implements Serializable {
 		return bid;
 	}
 
-	public List<Category> getCategories() {
-		return this.categories;
-	}
-
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
-	}
-
 	public User getUser() {
 		return this.user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Category> getCategories() {
+		return this.categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 }

@@ -18,6 +18,10 @@ public class Category implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String name;
 
+	//bi-directional many-to-one association to ItemHasCategory
+	@OneToMany(mappedBy="category")
+	private List<ItemHasCategory> itemHasCategories;
+
 	//bi-directional many-to-many association to Item
 	@ManyToMany(mappedBy="categories")
 	private List<Item> items;
@@ -31,6 +35,28 @@ public class Category implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<ItemHasCategory> getItemHasCategories() {
+		return this.itemHasCategories;
+	}
+
+	public void setItemHasCategories(List<ItemHasCategory> itemHasCategories) {
+		this.itemHasCategories = itemHasCategories;
+	}
+
+	public ItemHasCategory addItemHasCategory(ItemHasCategory itemHasCategory) {
+		getItemHasCategories().add(itemHasCategory);
+		itemHasCategory.setCategory(this);
+
+		return itemHasCategory;
+	}
+
+	public ItemHasCategory removeItemHasCategory(ItemHasCategory itemHasCategory) {
+		getItemHasCategories().remove(itemHasCategory);
+		itemHasCategory.setCategory(null);
+
+		return itemHasCategory;
 	}
 
 	public List<Item> getItems() {
