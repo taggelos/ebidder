@@ -56,12 +56,12 @@
 						value="#{usr}" />
 				</h:commandButton>
 			</h:column>
-			<h:column rendered="#{manager.acceptButtonEnabled}">
+			<h:column rendered="#{manager.acceptButtonEnabled}" >
 				<h:commandButton value="Accept" action="#{manager.accept}">
 					<f:setPropertyActionListener target="#{manager.user}"
 						value="#{usr}" />
 				</h:commandButton>
-			</h:column>
+			</h:column> 
 			<h:column rendered="#{manager.declineButtonEnabled}">
 				<h:commandButton value="Decline" action="#{manager.decline}">
 					<f:setPropertyActionListener target="#{manager.user}"

@@ -3,6 +3,7 @@ package ui;
 import db.UserDAO;
 import entities.User;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean(name = "manager")
 @SessionScoped
@@ -101,11 +104,12 @@ public class UserManagerBean {
 		return "/restricted/userlist"; // msg ok?
 	}
 
-	public String decline() {
+	public String decline(){
 		// same
 		dot = "";
 		userDAO.remove(user);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successful Operation"));
+
 		return "/restricted/userlist"; // msg ok?
 	}
 	
@@ -119,13 +123,17 @@ public class UserManagerBean {
 		}
 		return null;
 	}
-
+	
 	public boolean getNext(){
 		return first==userList.size() - userList.size()%rows;
 	}
 	
 	public boolean getPrev(){
 		return first==0;
+	}
+	
+	public boolean getVisible(){
+		return true;
 	}
 	
 	public void setUser(User user) {
