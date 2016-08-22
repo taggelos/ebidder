@@ -1,6 +1,8 @@
 package db;
 
+import entities.Category;
 import entities.Item;
+
 
 import java.sql.SQLException;
 import java.util.List;
@@ -86,13 +88,36 @@ public class ItemDAO {
 	}
 	*/
 	
+	@ManagedProperty(value="#{categoryDAO}")
+    private CategoryDAO categoryDAO;
+	
+	public CategoryDAO getCategoryDAO() {
+		return categoryDAO;
+	}
+
+
+	public void setCategoryDAO(CategoryDAO categoryDAO) {
+		this.categoryDAO = categoryDAO;
+	}
+
+
 	public String insertItem(Item item) {
+		
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
-			em.persist(item);
+			List<Category> categories= item.getCategories();
+			for(int i = 0; i < categories.size() ; i++)
+			{
+				Category temp;
+				if ( (temp=em.find(Category.class,categories.get(i).getName()))!=null )
+				{
+					categories.set(i,temp );
+				}
+			}		
+			em.persist(item);			
 			em.flush();  
 			tx.commit();
 			retMessage = "ok";
@@ -106,6 +131,8 @@ public class ItemDAO {
 			em.close();
 		}
 	}
+	
+	
 	/*
 	public String remove(User user) {
 		String retMessage = "";

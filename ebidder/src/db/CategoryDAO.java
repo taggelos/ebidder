@@ -63,7 +63,7 @@ public class CategoryDAO {
 		}
 	}
 	
-	/*
+	
 	@SuppressWarnings("unchecked")
 	public boolean exist(Category category) {
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
@@ -80,7 +80,7 @@ public class CategoryDAO {
 		else
 			return false;
 	}
-	*/
+	
 	
 	public void setJpaResourceBean(JPAResourceBean jpaResourceBean) {
 		this.jpaResourceBean = jpaResourceBean;
