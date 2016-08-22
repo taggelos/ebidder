@@ -27,34 +27,33 @@ public class ItemBean {
 
 	private String name;
 	private List<Category> categories = new ArrayList<Category>();
+	
+	private List<String> cate;
+	
+	public List<String> getCate() {
+		return cate;
+	}
+
+	public void setCate(List<String> cate) {
+		this.cate = cate;
+	}
+
 	private int buy_price;
 	private int first_bid;
 	private float latitude;
 	private float longitude;
 	private String country;
-	private Date started= new Date(0);  
-	private Date ends=new Date(0);  
+	private Date started;  
+	private Date ends;  
 	private String  description;
 	private String images; //tha allaksei se lista apo fotos
 
 	private int amount;  
 
 	private String current_category;
-	private Category category_for_delete;
 	
-	private String started_day;
-	private String started_month;
-	private String started_year;
-	private String started_hour;
-	private String started_minute;
 	
-	private String ends_day;
-	private String ends_month;
-	private String ends_year;
-	private String ends_hour;
-	private String ends_minute;
-
-	@ManagedProperty(value="#{itemDAO}")
+    @ManagedProperty(value="#{itemDAO}")
     private ItemDAO itemDAO;
 	
 
@@ -80,32 +79,9 @@ public class ItemBean {
     }
     
     /* Operations */
-    @SuppressWarnings("deprecation")
-	public String create_item(){
-    	System.out.println("ellla");
-    	    	
-    	/*System.out.println(Integer.valueOf(started_day));
-    	System.out.println(Integer.parseInt(started_month));
-    	System.out.println(Integer.parseInt(started_year));
-    	System.out.println(Integer.parseInt(started_hour));
-    	System.out.println(Integer.parseInt(started_minute));*/
+    public String create_item(){
     	/*
-    	started.setDate(Integer.valueOf(started_day));
-    	started.setMonth(Integer.valueOf(started_month));
-    	started.setYear(Integer.valueOf(started_year));
-    	//started.setHours(Integer.valueOf(started_hour));
-    	started.setMinutes(Integer.valueOf(started_minute));
-    	
-    	started.setDate(Integer.valueOf(ends_day));
-    	started.setMonth(Integer.valueOf(ends_month));
-    	started.setYear(Integer.valueOf(ends_year));
-    	//started.setHours(Integer.valueOf(ends_hour));
-    	started.setMinutes(Integer.valueOf(ends_minute)); 
-    	*/
-    	System.out.println(started);
-    	System.out.println(ends);
-    	
-    	FacesContext context = FacesContext.getCurrentInstance(); 
+    	//FacesContext context = FacesContext.getCurrentInstance(); 
     	Item item =  new Item();
     	item.setName(name);
     	item.setCategories(categories);
@@ -121,7 +97,7 @@ public class ItemBean {
     	item.setDescription(description);
     	//item.setImages(images);
     	
-   /* 
+   /* 	
     	String message = itemDAO.insertItem(item);
     	
     	if (!message.equals("ok"))
@@ -133,21 +109,24 @@ public class ItemBean {
         else 
         	return "/restricted/manage";  
         	*/
+    	
+    	/*for(int i=0 ; i<categories.size(); i++){
+    		categories[i];
+    	}*/
     	return null;
     }
     
     public String add()
     {
+    	System.out.println("here");
     	Category category= new Category();
     	category.setName(current_category);
     	Add_Category(category);
-    	return null;
-    }
-    
-    public String delete_category()
-    {
-    	Delete_Category(category_for_delete);
-    	return null;
+    	return null; 
+    	/*
+    	String category="mpika";
+    	cate.add(category);
+    	return null;*/
     }
     
     
@@ -170,19 +149,15 @@ public class ItemBean {
 
 	void Add_Category(Category category)
 	{
+		System.out.println(category.getName());
 		categories.add(category);
 	}
 	
-	void Delete_Category(Category category)
-	{
-		categories.remove(category);
-	}
-	
-	public List<Category> getCategories() {
+	public List<Category> getCategory() {
 		return categories;
 	}
 
-	public void setCategories(List<Category> categories) {
+	public void setCategory(List<Category> categories) {
 		this.categories = categories;
 	}
 
@@ -274,92 +249,4 @@ public class ItemBean {
 		this.current_category = current_category;
 	}
 
-    public Category getCategory_for_delete() {
-		return category_for_delete;
-	}
-
-	public void setCategory_for_delete(Category category_for_delete) {
-		this.category_for_delete = category_for_delete;
-	}
-	
-	public String getStarted_day() {
-		return started_day;
-	}
-	
-	public void setStarted_day(String started_day) {
-		this.started_day = started_day;
-	}
-
-	public String getStarted_month() {
-		return started_month;
-	}
-
-	public void setStarted_month(String started_month) {
-		this.started_month = started_month;
-	}
-
-	public String getStarted_year() {
-		return started_year;
-	}
-
-	public void setStarted_year(String started_year) {
-		this.started_year = started_year;
-	}
-
-	public String getStarted_hour() {
-		return started_hour;
-	}
-
-	public void setStarted_hour(String started_hour) {
-		this.started_hour = started_hour;
-	}
-
-	public String getStarted_minute() {
-		return started_minute;
-	}
-
-	public void setStarted_minute(String started_minute) {
-		this.started_minute = started_minute;
-	}
-
-	public String getEnds_day() {
-		return ends_day;
-	}
-
-	public void setEnds_day(String ends_day) {
-		this.ends_day = ends_day;
-	}
-
-	public String getEnds_month() {
-		return ends_month;
-	}
-
-	public void setEnds_month(String ends_month) {
-		this.ends_month = ends_month;
-	}
-
-	public String getEnds_year() {
-		return ends_year;
-	}
-
-	public void setEnds_year(String ends_year) {
-		this.ends_year = ends_year;
-	}
-
-	public String getEnds_hour() {
-		return ends_hour;
-	}
-
-	public void setEnds_hour(String ends_hour) {
-		this.ends_hour = ends_hour;
-	}
-
-	public String getEnds_minute() {
-		return ends_minute;
-	}
-
-	public void setEnds_minute(String ends_minute) {
-		this.ends_minute = ends_minute;
-	}	
-	
 }
