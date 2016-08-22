@@ -3,7 +3,6 @@ package ui;
 import db.UserDAO;
 import entities.User;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean(name = "manager")
 @SessionScoped
@@ -125,7 +122,12 @@ public class UserManagerBean {
 	}
 	
 	public boolean getNext(){
-		return first==userList.size() - userList.size()%rows;
+		System.out.println(first);
+		//return first==userList.size() - userList.size()%rows - rows;
+		if( userList.size()%rows == 0){
+			return true;
+		}
+		return (userList.size() <= (first + rows -1));
 	}
 	
 	public boolean getPrev(){

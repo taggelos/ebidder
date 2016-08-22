@@ -8,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -19,13 +20,13 @@ import entities.Item;
 import entities.User;
 
 @ManagedBean(name="item")
-@RequestScoped
+@ViewScoped
 public class ItemBean {
     
 	private BidPK id;
 
 	private String name;
-	private List<Category> categories;
+	private List<Category> categories = new ArrayList<Category>();
 	
 	private List<String> cate;
 	
@@ -79,7 +80,8 @@ public class ItemBean {
     
     /* Operations */
     public String create_item(){
-    	FacesContext context = FacesContext.getCurrentInstance(); 
+    	/*
+    	//FacesContext context = FacesContext.getCurrentInstance(); 
     	Item item =  new Item();
     	item.setName(name);
     	item.setCategories(categories);
@@ -107,19 +109,24 @@ public class ItemBean {
         else 
         	return "/restricted/manage";  
         	*/
+    	
+    	/*for(int i=0 ; i<categories.size(); i++){
+    		categories[i];
+    	}*/
     	return null;
     }
     
     public String add()
     {
-    	/*Category category= new Category();
+    	System.out.println("here");
+    	Category category= new Category();
     	category.setName(current_category);
     	Add_Category(category);
-    	return null; */	
-    	
+    	return null; 
+    	/*
     	String category="mpika";
     	cate.add(category);
-    	return null;
+    	return null;*/
     }
     
     
@@ -142,6 +149,7 @@ public class ItemBean {
 
 	void Add_Category(Category category)
 	{
+		System.out.println(category.getName());
 		categories.add(category);
 	}
 	

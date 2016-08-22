@@ -30,9 +30,9 @@
                 <h:message for="category" styleClass="error"/>
                  
                	Selected Categories				
-				<h:dataTable id="added_categories" value="#{item.cate }" var="itm">					
+				<h:dataTable id="added_categories" value="#{item.category }" var="itm">					
 					<h:column>
-					 #{itm}
+					 #{itm.getName()}
 					 </h:column>
 				</h:dataTable>
 				<h:message for="added_categories" styleClass="error"/>
@@ -81,7 +81,7 @@
                         showApplyButton="#{calendarBean.showApply}" cellWidth="24px" cellHeight="22px" style="width:200px"/>
            	 	</a4j:outputPanel> -->
                 
-                Started: 
+             <!--     Started: 
                 <h:inputText id="started" value="#{item.started}"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter started time">
@@ -94,7 +94,7 @@
                          required="true" requiredMessage="Please enter end's time">
                 	<f:validateLength maximum="100"/>
                 </h:inputText>
-                <h:message for="ends" styleClass="error"/>           		         		
+                <h:message for="ends" styleClass="error"/>  -->          		         		
                 Description: 
                 <h:inputText id="description" value="#{item.description}"
                          validatorMessage="Maximum length is 500 characters"
