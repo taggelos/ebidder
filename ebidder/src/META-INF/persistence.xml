@@ -6,8 +6,6 @@
 		<class>entities.Category</class>
 		<class>entities.Item</class>
 		<class>entities.User</class>
-		<class>entities.ItemHasCategory</class>
-		<class>entities.ItemHasCategoryPK</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/database"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

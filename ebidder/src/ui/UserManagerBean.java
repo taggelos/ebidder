@@ -122,12 +122,7 @@ public class UserManagerBean {
 	}
 	
 	public boolean getNext(){
-		System.out.println(first);
-		//return first==userList.size() - userList.size()%rows - rows;
-		if( userList.size()%rows == 0){
-			return true;
-		}
-		return (userList.size() <= (first + rows -1));
+		return (userList.size() <= (first + rows));
 	}
 	
 	public boolean getPrev(){

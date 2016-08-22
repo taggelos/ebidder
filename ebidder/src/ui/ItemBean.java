@@ -1,7 +1,9 @@
 package ui;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -11,7 +13,10 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import db.CategoryDAO;
 import db.ItemDAO;
 import db.UserDAO;
 import entities.BidPK;
@@ -32,8 +37,8 @@ public class ItemBean {
 	private float latitude;
 	private float longitude;
 	private String country;
-	private Date started= new Date(0);  
-	private Date ends=new Date(0);  
+	private Timestamp started= new Timestamp(0); 
+	private Timestamp ends=new Timestamp(0);
 	private String  description;
 	private String images; //tha allaksei se lista apo fotos
 
@@ -65,6 +70,17 @@ public class ItemBean {
 	public void setItemDAO(ItemDAO itemDAO) {
 		this.itemDAO = itemDAO;
 	}
+	
+	@ManagedProperty(value="#{categoryDAO}")
+    private CategoryDAO categoryDAO;
+
+	public CategoryDAO getCategoryDAO() {
+		return categoryDAO;
+	}
+
+	public void setCategoryDAO(CategoryDAO categoryDAO) {
+		this.categoryDAO = categoryDAO;
+	}
 
 	/* Pages */
     public String manage(){
@@ -80,30 +96,21 @@ public class ItemBean {
     }
     
     /* Operations */
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public String create_item(){
-    	System.out.println("ellla");
-    	    	
-    	/*System.out.println(Integer.valueOf(started_day));
-    	System.out.println(Integer.parseInt(started_month));
-    	System.out.println(Integer.parseInt(started_year));
-    	System.out.println(Integer.parseInt(started_hour));
-    	System.out.println(Integer.parseInt(started_minute));*/
-    	/*
-    	started.setDate(Integer.valueOf(started_day));
+    	
+		// Thelei ki allous elegxous stis times twn pediwn
+    	started.setDate(Integer.valueOf(started_day)); 
     	started.setMonth(Integer.valueOf(started_month));
-    	started.setYear(Integer.valueOf(started_year));
-    	//started.setHours(Integer.valueOf(started_hour));
+    	started.setYear(Integer.valueOf(started_year)-1900);   	
+    	started.setHours(Integer.valueOf(started_hour));
     	started.setMinutes(Integer.valueOf(started_minute));
     	
-    	started.setDate(Integer.valueOf(ends_day));
-    	started.setMonth(Integer.valueOf(ends_month));
-    	started.setYear(Integer.valueOf(ends_year));
-    	//started.setHours(Integer.valueOf(ends_hour));
-    	started.setMinutes(Integer.valueOf(ends_minute)); 
-    	*/
-    	System.out.println(started);
-    	System.out.println(ends);
+    	ends.setDate(Integer.valueOf(ends_day));
+    	ends.setMonth(Integer.valueOf(ends_month));
+    	ends.setYear(Integer.valueOf(ends_year)-1900);
+    	ends.setHours(Integer.valueOf(ends_hour));
+    	ends.setMinutes(Integer.valueOf(ends_minute)); 
     	
     	FacesContext context = FacesContext.getCurrentInstance(); 
     	Item item =  new Item();
@@ -121,9 +128,9 @@ public class ItemBean {
     	item.setDescription(description);
     	//item.setImages(images);
     	
-   /* 
     	String message = itemDAO.insertItem(item);
-    	
+    	    	
+    	/*
     	if (!message.equals("ok"))
         {
             context.addMessage(null, new FacesMessage(message));
@@ -226,19 +233,19 @@ public class ItemBean {
 		this.country = country;
 	}
 
-	public Date getStarted() {
+	public Timestamp getStarted() {
 		return started;
 	}
 
-	public void setStarted(Date started) {
+	public void setStarted(Timestamp started) {
 		this.started = started;
 	}
 
-	public Date getEnds() {
+	public Timestamp getEnds() {
 		return ends;
 	}
 
-	public void setEnds(Date ends) {
+	public void setEnds(Timestamp ends) {
 		this.ends = ends;
 	}
 
