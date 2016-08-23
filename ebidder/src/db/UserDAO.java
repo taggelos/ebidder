@@ -42,7 +42,7 @@ public class UserDAO {
 		em.close();
 		return users;
 	}
-	
+		
 	
 	@SuppressWarnings("unchecked")
 	public User find(String username, String password) {

@@ -133,15 +133,15 @@ public class ItemDAO {
 	}
 	
 	
-	/*
-	public String remove(User user) {
+	
+	public String remove(Item item) {
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
-			user = em.merge(user);
-			em.remove(user);
+			item = em.merge(item);
+			em.remove(item);
 			em.flush();  
 			tx.commit();
 			retMessage = "ok";
@@ -155,7 +155,7 @@ public class ItemDAO {
 			em.close();
 		}
 	}
-	*/
+	
 	
 	 public void setJpaResourceBean(JPAResourceBean jpaResourceBean) {
 	        this.jpaResourceBean = jpaResourceBean;

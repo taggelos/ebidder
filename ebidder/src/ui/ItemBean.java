@@ -71,17 +71,9 @@ public class ItemBean {
 		this.itemDAO = itemDAO;
 	}
 	
-	@ManagedProperty(value="#{categoryDAO}")
-    private CategoryDAO categoryDAO;
+	private  List<Item> all_my_items =  new ArrayList<Item>();
 
-	public CategoryDAO getCategoryDAO() {
-		return categoryDAO;
-	}
-
-	public void setCategoryDAO(CategoryDAO categoryDAO) {
-		this.categoryDAO = categoryDAO;
-	}
-
+	
 	/* Pages */
     public String manage(){
     	return "/restricted/manage";
@@ -141,22 +133,21 @@ public class ItemBean {
         	return "/restricted/manage";  
         	*/
     	return null;
-    }
+    }	
     
     public String add()
     {
     	Category category= new Category();
     	category.setName(current_category);
-    	Add_Category(category);
+    	categories.add(category);
     	return null;
     }
     
     public String delete_category()
     {
-    	Delete_Category(category_for_delete);
+    	categories.remove(category_for_delete);
     	return null;
     }
-    
     
     /* Getters and Setters */
     public BidPK getId() {
@@ -175,16 +166,6 @@ public class ItemBean {
 		this.name = name;
 	}
 
-	void Add_Category(Category category)
-	{
-		categories.add(category);
-	}
-	
-	void Delete_Category(Category category)
-	{
-		categories.remove(category);
-	}
-	
 	public List<Category> getCategories() {
 		return categories;
 	}
@@ -288,7 +269,7 @@ public class ItemBean {
 	public void setCategory_for_delete(Category category_for_delete) {
 		this.category_for_delete = category_for_delete;
 	}
-	
+		
 	public String getStarted_day() {
 		return started_day;
 	}
@@ -368,5 +349,13 @@ public class ItemBean {
 	public void setEnds_minute(String ends_minute) {
 		this.ends_minute = ends_minute;
 	}	
+	
+	public List<Item> getAll_my_items() {
+		return all_my_items;
+	}
+
+	public void setAll_my_items(List<Item> all_my_items) {
+		this.all_my_items = all_my_items;
+	}
 	
 }

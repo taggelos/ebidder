@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:h="http://java.sun.com/jsf/html"
+     	xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <h:title>Welcome page</h:title>
         <h:outputStylesheet name="newcss.css" library="css"/>
@@ -13,10 +14,57 @@
 				<h:commandButton value="Manage Items" action="#{item.manage}" />
             </h:form>
              <p/>
-             <h:form >
-                <h:commandButton value="Search Items" action="#{item.search}" />
-                <h:messages globalOnly="true" styleClass="error"/>
-            </h:form>
+             
+             
+		   	<h:form> 
+	    		<h:dataTable id="Items" value="#{ item_list.items_list }" var="itm"	
+				styleClass="userTable" headerClass="userTableHeader"
+				rowClasses="userTableOddRow,userTableEvenRow">				
+					<h:column>
+					<f:facet name="header">Name</f:facet>
+						 #{itm.getName()}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Category</f:facet>
+						 #{itm.getName()}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Currently</f:facet>
+						 #{itm.getCurrently()}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Buy_Price</f:facet>
+						 #{itm.getBuy_Price()}
+					</h:column>
+					<h:column>
+					<f:facet name="header">First_Bid</f:facet>
+						 #{itm.getFirst_Bid()}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Number_of_Bids</f:facet>
+						 #{itm.getNumber_of_Bids()}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Country</f:facet>
+						 #{itm.getCountry()}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Started</f:facet>
+						 #{itm.getStarted()}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Ends</f:facet>
+						 #{itm.getEnds()}
+					</h:column>
+					<h:column>
+						<h:commandButton value="more" action="#{ item_list.details }">
+							<f:setPropertyActionListener target="#{item_list.item_for_details}"
+							value="#{itm}" />
+						</h:commandButton>
+					</h:column>
+				</h:dataTable>
+	        </h:form>
+
             <p/>
     </h:body>
 </html>

@@ -24,8 +24,7 @@ public class UserBean {
     
     private User current;
 
-    
-    private String country;
+	private String country;
 	private String email;
 	private String location;
 	private String phone;
@@ -270,5 +269,9 @@ public class UserBean {
 		this.username = username;
 	}
     
+    
+    public User getCurrent() {
+		return current;
+	}
        
 }
