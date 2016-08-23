@@ -27,7 +27,7 @@ public class UserListBean {
     @ManagedProperty(value="#{userDAO}")
     private UserDAO userDAO;
     
-    /*
+    
     public String getValue() {
 		return value;
 	}
@@ -37,7 +37,7 @@ public class UserListBean {
 	}
 
 
-	private String value;*/
+	private String value;
     
     public DataModel<UserBean> getUserlist()
     {

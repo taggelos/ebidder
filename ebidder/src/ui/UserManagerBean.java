@@ -11,11 +11,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "manager")
+
 @SessionScoped
-// @ViewScoped
 public class UserManagerBean {
 
 	// private DataModel<UserBean> userList;
@@ -129,9 +130,6 @@ public class UserManagerBean {
 		return first==0;
 	}
 	
-	public boolean getVisible(){
-		return true;
-	}
 	
 	public void setUser(User user) {
 		this.user = user;

@@ -170,6 +170,15 @@ public class UserBean {
     }
     //////////////////action="#{users.show('showall')}
     
+    public boolean getLoginButtonEnabled() {
+    	if (current!= null){
+    		return false;
+    	}
+    	return true;
+	}
+    
+    
+    
     /*functions*/
     
     public int getUserID() {
