@@ -8,11 +8,87 @@
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
-            <h1> Details  </h1>
-         
-             
-             
-		   
+    	<h1> Details  </h1>		
+		<h:panelGrid columns="2">
+			Images:
+			<h:form id="map">
+	            <m:map width="500" height="450px" latitude="37.13" longitude="22.43" enableScrollWheelZoom="true">
+	                <m:marker>
+	                    <m:htmlInformationWindow htmlText="This is Sparta, Greece"/>
+	                </m:marker>
+	            </m:map>
+        	</h:form>
+			Name: 
+			<h:form>
+				#{item_list.item_for_details.name}    
+			</h:form> 
+			Description:
+			<h:form>
+				#{item_list.item_for_details.description} 
+			</h:form>
+			Category:
+			<h:form> 
+	    		<h:dataTable id="Categories" value="#{ item_list.item_for_details.categories }" var="cat" 
+	    		styleClass="userTable" headerClass="userTableHeader"
+				rowClasses="userTableOddRow,userTableEvenRow">	
+					<h:column>
+						#{cat.name}
+					</h:column>
+				</h:dataTable>
+			</h:form>
+			Currently:
+			<h:form>
+				#{item_list.item_for_details.currently} $
+			</h:form> 
+			Buy_Price:
+			<h:form>
+				#{item_list.item_for_details.buy_Price} $
+			</h:form> 
+			First_Bid:
+			<h:form>
+				#{item_list.item_for_details.first_Bid} 
+			</h:form> 
+			Number of Bids:
+			<h:form>
+				#{item_list.item_for_details.number_of_Bids} 
+			</h:form>
+			Location:
+			<h:form>
+
+			</h:form>
+			Country:
+			<h:form>
+				#{item_list.item_for_details.country} 
+			</h:form>
+			Started:
+			<h:form>
+				#{item_list.item_for_details.started} 
+			</h:form>
+			Ends:
+			<h:form>
+				#{item_list.item_for_details.ends} 
+			</h:form>
+			Seller:
+			<h:form>
+				#{item_list.item_for_details.user.name}
+			</h:form> 
+			
+			
+				 
+    	</h:panelGrid>    	
+    	<h:panelGrid columns="2"> 
+			<h:inputText id="submit_bid" value="#{item.sub_value_bid}"
+			         validatorMessage="Maximum length is 100 characters"
+			         required="true" requiredMessage="Please enter your bid">
+			<f:validateLength maximum="100"/>
+			</h:inputText>
+			<h:commandButton id="submit" value="Submit your bid" action="#{item.submit_bid}" rendered="#{item.submit_button}" />
+    	</h:panelGrid>
+    	<h:form rendered="#{item.warning_submit}">
+    		Are you sure that you want to submit this bid?
+    		<h:commandButton   value="yes" action="#{item.yes_tapped}" />
+    		<h:commandButton   value="no" action="#{item.no_tapped}"/>
+    	</h:form>
     </h:body>
     
 </html>

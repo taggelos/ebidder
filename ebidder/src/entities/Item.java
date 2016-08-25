@@ -43,7 +43,7 @@ public class Item implements Serializable {
 	private int number_of_Bids;
 
 	private int sellerID;
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date started;
 

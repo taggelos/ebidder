@@ -58,25 +58,27 @@ public class ItemBean {
 	private String ends_year;
 	private String ends_hour;
 	private String ends_minute;
+	
+	private float sub_value_bid;
+	private boolean warning_submit=false;
+	private boolean submit_button=true;
 
 	@ManagedProperty(value="#{itemDAO}")
     private ItemDAO itemDAO;
 	
+    @ManagedProperty(value="#{user}")
+    private UserBean my_user;
 
-	public ItemDAO getItemDAO() {
-		return itemDAO;
-	}
-
-	public void setItemDAO(ItemDAO itemDAO) {
-		this.itemDAO = itemDAO;
-	}
-	
 	private  List<Item> all_my_items =  new ArrayList<Item>();
 
 	
 	/* Pages */
     public String manage(){
     	return "/restricted/manage";
+    }
+    
+    public String all_items(){
+    	return "/restricted/all_items";
     }
     
     public String create(){
@@ -116,7 +118,7 @@ public class ItemBean {
     	item.setCountry(country);
     	item.setStarted(started);
     	item.setEnds(ends);
-    	//item.seller()..getClass()..
+    	item.setUser(my_user.getCurrent());
     	item.setDescription(description);
     	//item.setImages(images);
     	
@@ -146,6 +148,28 @@ public class ItemBean {
     public String delete_category()
     {
     	categories.remove(category_for_delete);
+    	return null;
+    }
+    
+    public String submit_bid()
+    {
+    	warning_submit=true;
+    	submit_button=false;
+    	return null;
+    }
+    
+    public String yes_tapped()
+    {
+    	warning_submit=false;
+    	////////////
+    	submit_button=true;
+    	return null;
+    }
+    
+    public String no_tapped()
+    {
+    	warning_submit=true;
+    	submit_button=false;
     	return null;
     }
     
@@ -350,12 +374,52 @@ public class ItemBean {
 		this.ends_minute = ends_minute;
 	}	
 	
+	public float getSub_value_bid() {
+		return sub_value_bid;
+	}
+
+	public void setSub_value_bid(float sub_value_bid) {
+		this.sub_value_bid = sub_value_bid;
+	}
+	
+	public boolean isWarning_submit() {
+		return warning_submit;
+	}
+
+	public void setWarning_submit(boolean warning_submit) {
+		this.warning_submit = warning_submit;
+	}
+	
+	public boolean isSubmit_button() {
+		return submit_button;
+	}
+
+	public void setSubmit_button(boolean submit_button) {
+		this.submit_button = submit_button;
+	}
+	
 	public List<Item> getAll_my_items() {
 		return all_my_items;
 	}
 
 	public void setAll_my_items(List<Item> all_my_items) {
 		this.all_my_items = all_my_items;
+	}
+
+	public ItemDAO getItemDAO() {
+		return itemDAO;
+	}
+
+	public void setItemDAO(ItemDAO itemDAO) {
+		this.itemDAO = itemDAO;
+	}
+	
+	public UserBean getMy_user() {
+		return my_user;
+	}
+
+	public void setMy_user(UserBean my_user) {
+		this.my_user = my_user;
 	}
 	
 }

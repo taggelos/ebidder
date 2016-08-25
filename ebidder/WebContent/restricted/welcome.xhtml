@@ -11,60 +11,17 @@
             <h1> Welcome <h:outputText id="welcome" value="#{user.username}" required="true" 
                                            requiredMessage="Please enter your username"/> </h1>
             <h:form>
-				<h:commandButton value="Manage Items" action="#{item.manage}" />
+                <h:column>
+					<h:commandButton value="All Items" action="#{item.all_items}" />
+				</h:column>
+            	<h:column>
+            		<h:commandButton value="Manage Items" action="#{item.manage}" />
+            	</h:column>
             </h:form>
-             <p/>
-             
-             
-		   	<h:form> 
-	    		<h:dataTable id="Items" value="#{ item_list.items_list }" var="itm"	
-				styleClass="userTable" headerClass="userTableHeader"
-				rowClasses="userTableOddRow,userTableEvenRow">				
-					<h:column>
-					<f:facet name="header">Name</f:facet>
-						 #{itm.getName()}
-					</h:column>
-					<h:column>
-					<f:facet name="header">Category</f:facet>
-						 #{itm.getName()}
-					</h:column>
-					<h:column>
-					<f:facet name="header">Currently</f:facet>
-						 #{itm.getCurrently()}
-					</h:column>
-					<h:column>
-					<f:facet name="header">Buy_Price</f:facet>
-						 #{itm.getBuy_Price()}
-					</h:column>
-					<h:column>
-					<f:facet name="header">First_Bid</f:facet>
-						 #{itm.getFirst_Bid()}
-					</h:column>
-					<h:column>
-					<f:facet name="header">Number_of_Bids</f:facet>
-						 #{itm.getNumber_of_Bids()}
-					</h:column>
-					<h:column>
-					<f:facet name="header">Country</f:facet>
-						 #{itm.getCountry()}
-					</h:column>
-					<h:column>
-					<f:facet name="header">Started</f:facet>
-						 #{itm.getStarted()}
-					</h:column>
-					<h:column>
-					<f:facet name="header">Ends</f:facet>
-						 #{itm.getEnds()}
-					</h:column>
-					<h:column>
-						<h:commandButton value="more" action="#{ item_list.details }">
-							<f:setPropertyActionListener target="#{item_list.item_for_details}"
-							value="#{itm}" />
-						</h:commandButton>
-					</h:column>
-				</h:dataTable>
-	        </h:form>
-
             <p/>
+             
+            <h3> Suggestions </h3> 
+            
+
     </h:body>
 </html>
