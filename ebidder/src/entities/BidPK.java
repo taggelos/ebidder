@@ -12,24 +12,25 @@ public class BidPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	private String name;
+	@Column(insertable=false, updatable=false)
+	private int item_ItemID;
 
 	@Column(insertable=false, updatable=false)
-	private int items_ItemID;
+	private int user_UserID;
 
 	public BidPK() {
 	}
-	public String getName() {
-		return this.name;
+	public int getItem_ItemID() {
+		return this.item_ItemID;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setItem_ItemID(int item_ItemID) {
+		this.item_ItemID = item_ItemID;
 	}
-	public int getItems_ItemID() {
-		return this.items_ItemID;
+	public int getUser_UserID() {
+		return this.user_UserID;
 	}
-	public void setItems_ItemID(int items_ItemID) {
-		this.items_ItemID = items_ItemID;
+	public void setUser_UserID(int user_UserID) {
+		this.user_UserID = user_UserID;
 	}
 
 	public boolean equals(Object other) {
@@ -41,15 +42,15 @@ public class BidPK implements Serializable {
 		}
 		BidPK castOther = (BidPK)other;
 		return 
-			this.name.equals(castOther.name)
-			&& (this.items_ItemID == castOther.items_ItemID);
+			(this.item_ItemID == castOther.item_ItemID)
+			&& (this.user_UserID == castOther.user_UserID);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.name.hashCode();
-		hash = hash * prime + this.items_ItemID;
+		hash = hash * prime + this.item_ItemID;
+		hash = hash * prime + this.user_UserID;
 		
 		return hash;
 	}

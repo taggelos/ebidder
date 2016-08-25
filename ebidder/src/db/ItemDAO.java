@@ -65,14 +65,14 @@ public class ItemDAO {
 
 	}
 */
-/*	
-	public String update(User user) {
+	
+	public String update(Item item) {
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
-			em.merge(user);
+			em.merge(item);
 			em.flush();  
 			tx.commit();
 			retMessage = "ok";
@@ -86,7 +86,7 @@ public class ItemDAO {
 			em.close();
 		}
 	}
-	*/
+	
 	
 	@ManagedProperty(value="#{categoryDAO}")
     private CategoryDAO categoryDAO;

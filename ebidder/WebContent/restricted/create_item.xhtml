@@ -10,6 +10,15 @@
     <h:body>
         <h:form>
             <h1> Create Item </h1>
+            
+            
+                <h:form>
+      <h:inputtext value="#{someBean.val}"/>
+      <h:commandButton action="#{someBean.foo}"/>
+    </h:form>
+            
+            
+            
             <h:panelGrid columns="3">
                 Name: 
                 <h:inputText id="name" value="#{item.name}" 

@@ -15,11 +15,11 @@ public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String name;
 
 	//bi-directional many-to-many association to Item
-	@ManyToMany(mappedBy="categories", cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy="categories")
 	private List<Item> items;
 
 	public Category() {

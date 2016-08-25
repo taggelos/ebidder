@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -16,16 +17,17 @@ public class Bid implements Serializable {
 	@EmbeddedId
 	private BidPK id;
 
-	private int amount;
+	private float amount;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date time;
 
 	//bi-directional many-to-one association to Item
 	@ManyToOne
-	@JoinColumn(name="Items_ItemID")
 	private Item item;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="users_UserID")
 	private User user;
 
 	public Bid() {
@@ -39,12 +41,20 @@ public class Bid implements Serializable {
 		this.id = id;
 	}
 
-	public int getAmount() {
+	public float getAmount() {
 		return this.amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(float amount) {
 		this.amount = amount;
+	}
+
+	public Date getTime() {
+		return this.time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
 	}
 
 	public Item getItem() {

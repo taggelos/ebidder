@@ -59,10 +59,6 @@ public class ItemBean {
 	private String ends_hour;
 	private String ends_minute;
 	
-	private float sub_value_bid;
-	private boolean warning_submit=false;
-	private boolean submit_button=true;
-
 	@ManagedProperty(value="#{itemDAO}")
     private ItemDAO itemDAO;
 	
@@ -148,28 +144,6 @@ public class ItemBean {
     public String delete_category()
     {
     	categories.remove(category_for_delete);
-    	return null;
-    }
-    
-    public String submit_bid()
-    {
-    	warning_submit=true;
-    	submit_button=false;
-    	return null;
-    }
-    
-    public String yes_tapped()
-    {
-    	warning_submit=false;
-    	////////////
-    	submit_button=true;
-    	return null;
-    }
-    
-    public String no_tapped()
-    {
-    	warning_submit=true;
-    	submit_button=false;
     	return null;
     }
     
@@ -373,31 +347,7 @@ public class ItemBean {
 	public void setEnds_minute(String ends_minute) {
 		this.ends_minute = ends_minute;
 	}	
-	
-	public float getSub_value_bid() {
-		return sub_value_bid;
-	}
 
-	public void setSub_value_bid(float sub_value_bid) {
-		this.sub_value_bid = sub_value_bid;
-	}
-	
-	public boolean isWarning_submit() {
-		return warning_submit;
-	}
-
-	public void setWarning_submit(boolean warning_submit) {
-		this.warning_submit = warning_submit;
-	}
-	
-	public boolean isSubmit_button() {
-		return submit_button;
-	}
-
-	public void setSubmit_button(boolean submit_button) {
-		this.submit_button = submit_button;
-	}
-	
 	public List<Item> getAll_my_items() {
 		return all_my_items;
 	}

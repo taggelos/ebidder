@@ -21,18 +21,18 @@ public class Item implements Serializable {
 
 	private int amount;
 
-	private int buy_Price;
+	private float buy_Price;
 
 	private String country;
 
-	private int currently;
+	private float currently;
 
 	private String description;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date ends;
 
-	private int first_Bid;
+	private float first_Bid;
 
 	private float latitude;
 
@@ -43,18 +43,16 @@ public class Item implements Serializable {
 	private int number_of_Bids;
 
 	private int sellerID;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date started;
-
-	private String time;
 
 	//bi-directional many-to-one association to Bid
 	@OneToMany(mappedBy="item")
 	private List<Bid> bids;
 
 	//bi-directional many-to-many association to Category
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany
 	@JoinTable(
 		name="item_has_category"
 		, joinColumns={
@@ -90,11 +88,11 @@ public class Item implements Serializable {
 		this.amount = amount;
 	}
 
-	public int getBuy_Price() {
+	public float getBuy_Price() {
 		return this.buy_Price;
 	}
 
-	public void setBuy_Price(int buy_Price) {
+	public void setBuy_Price(float buy_Price) {
 		this.buy_Price = buy_Price;
 	}
 
@@ -106,11 +104,11 @@ public class Item implements Serializable {
 		this.country = country;
 	}
 
-	public int getCurrently() {
+	public float getCurrently() {
 		return this.currently;
 	}
 
-	public void setCurrently(int currently) {
+	public void setCurrently(float currently) {
 		this.currently = currently;
 	}
 
@@ -130,11 +128,11 @@ public class Item implements Serializable {
 		this.ends = ends;
 	}
 
-	public int getFirst_Bid() {
+	public float getFirst_Bid() {
 		return this.first_Bid;
 	}
 
-	public void setFirst_Bid(int first_Bid) {
+	public void setFirst_Bid(float first_Bid) {
 		this.first_Bid = first_Bid;
 	}
 
@@ -184,14 +182,6 @@ public class Item implements Serializable {
 
 	public void setStarted(Date started) {
 		this.started = started;
-	}
-
-	public String getTime() {
-		return this.time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
 	}
 
 	public List<Bid> getBids() {
