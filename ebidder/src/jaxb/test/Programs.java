@@ -1,4 +1,4 @@
-package jaxb;
+package jaxb.test;
 
 import java.util.ArrayList;
 import java.util.List;

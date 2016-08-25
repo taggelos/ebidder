@@ -144,7 +144,7 @@ public class UserBean {
     	//userDAO.update(user);
     	return "/restricted/userlist";
     }
-    
+    /*
     public String accept(){
     	//dao update pending
     	return "/restricted/admin"; //msg ok?
@@ -154,6 +154,7 @@ public class UserBean {
     	//same
     	return "/restricted/admin"; //msg ok?
     }
+    */
     
     //////////////////
     public String show(){

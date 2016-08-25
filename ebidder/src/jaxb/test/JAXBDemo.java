@@ -1,4 +1,4 @@
-package jaxb;
+package jaxb.test;
 
 //import java.io.File;
 import javax.xml.bind.JAXBContext;

@@ -1,4 +1,4 @@
-package jaxb;
+package jaxb.test;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

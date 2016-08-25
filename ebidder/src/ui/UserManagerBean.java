@@ -11,7 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "manager")
@@ -45,7 +44,7 @@ public class UserManagerBean {
 		String value = params.get("action");
 
 		if (!dot.equals(value) && value != null) // dot used to recognise what
-													// we need
+													// we need as list to be filled by Dao
 		{
 			if (value.equals("showall")) {
 				userList = userDAO.getUsers("all");
@@ -53,18 +52,21 @@ public class UserManagerBean {
 				acceptButtonEnabled = false;
 				declineButtonEnabled = false;
 				banButtonEnabled = false;
+				first = 0;
 			} else if (value.equals("accepted")) {
 				userList = userDAO.getUsers("nopending");
 				dot = "accepted";
 				acceptButtonEnabled = false;
 				declineButtonEnabled = false;
 				banButtonEnabled = true;
+				first = 0;
 			} else {
 				userList = userDAO.getUsers("pending");
 				dot = "pending";
 				acceptButtonEnabled = true;
 				declineButtonEnabled = true;
 				banButtonEnabled = false;
+				first = 0;
 			}
 		}
 		return userList;
@@ -130,6 +132,10 @@ public class UserManagerBean {
 		return first==0;
 	}
 	
+	public String goBack() {
+		dot = "";
+		return "/restricted/admin";
+	}
 	
 	public void setUser(User user) {
 		this.user = user;
@@ -145,11 +151,6 @@ public class UserManagerBean {
 
 	public boolean getBanButtonEnabled() {
 		return banButtonEnabled;
-	}
-
-	public String goBack() {
-		dot = "";
-		return "/restricted/admin";
 	}
 	
 	public int getFirst() {
