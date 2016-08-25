@@ -2,22 +2,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
-     	xmlns:f="http://java.sun.com/jsf/core">
+     	xmlns:f="http://java.sun.com/jsf/core" 
+     	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
     <h:head>
+        <script 
+        	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb6aFntrr2pSFENG2Z5N1tIFAXyehyC8Y"
+        	type="text/javascript"> 
+        </script>           
         <h:title>Details</h:title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
-    <h:body>
+    <h:body> 
     	<h1> Details  </h1>		
 		<h:panelGrid columns="2">
 			Images:
-			<h:form id="map">
-	            <m:map width="500" height="450px" latitude="37.13" longitude="22.43" enableScrollWheelZoom="true">
-	                <m:marker>
-	                    <m:htmlInformationWindow htmlText="This is Sparta, Greece"/>
-	                </m:marker>
-	            </m:map>
-        	</h:form>
+			
+			    	
 			Name: 
 			<h:form>
 				#{item_list.item_for_details.name}    
@@ -54,7 +55,11 @@
 			</h:form>
 			Location:
 			<h:form>
-
+	            <m:map width="500" height="450px" latitude="#{item_list.item_for_details.latitude}" longitude="#{item_list.item_for_details.longitude}" enableScrollWheelZoom="true">
+		            <m:marker>
+	                    <m:htmlInformationWindow htmlText="This is Sparta, Greece"/>
+	                </m:marker>
+                </m:map>
 			</h:form>
 			Country:
 			<h:form>
