@@ -5,7 +5,9 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
+import entities.Bid;
+import entities.Category;
+import entities.Item;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,26 @@ public class ItemsXml implements Serializable {
 		this.items = items;
 	}
 
+
+	public void setItems() {    
+		for (ItemXml i : items){
+			i.setItem();
+		}
+	}
+	
+	public List<ItemXml> getItems (){
+		return items;
+	}
+	/*
+	public List<Item> itemXmlToItem(List<ItemXml> itemxml){
+		List<Item> items = new ArrayList<>();
+		for (ItemXml i: itemxml)
+        {            
+			items.add(i.getItem());
+        }
+ 		return items;
+	}*/
+	
 	@Override
 	public String toString() {
 		return "Items [" + (items != null ? "items=" + items : "") + "]";

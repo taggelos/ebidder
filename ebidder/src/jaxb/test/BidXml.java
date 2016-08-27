@@ -8,6 +8,9 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import entities.Bid;
+import entities.Item;
+
 
 
 /**
@@ -18,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class BidXml implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	//private Item item;
+	private Bid bid = new Bid();
 
 	private float amount;
 
@@ -59,8 +62,15 @@ public class BidXml implements Serializable {
 	}
 
 
+	public void setBid(){
+		bid.setTime(time);
+		bid.setAmount(amount);	
+		bid.setUser(Bidder.getBidder());
+	}
 	
-	
+	public Bid getBid(){
+		return bid;	
+	}
 	
 	@Override
 	public String toString() {

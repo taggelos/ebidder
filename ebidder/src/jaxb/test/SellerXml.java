@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import entities.User;
+
 
 /**
  * The persistent class for the item database table.
@@ -22,7 +24,9 @@ public class SellerXml implements Serializable {
 	public String getRating() {
 		return rating;
 	}
-
+	
+	private User seller = new User();
+	
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
@@ -36,5 +40,13 @@ public class SellerXml implements Serializable {
 		this.userID = userID;
 	}
 	
+	public void setSeller(){
+		//seller.setUserID(Integer.parseInt(userID));
+		seller.setRating_Seller(Integer.parseInt(rating));
+	}
+	
+	public User getSeller(){
+		return seller;
+	}
 	
 }

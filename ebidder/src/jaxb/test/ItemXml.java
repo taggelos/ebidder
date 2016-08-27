@@ -8,9 +8,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
+import entities.Bid;
 import entities.Category;
 import entities.Item;
+import entities.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,7 @@ import java.util.List;
 public class ItemXml implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Item item;
+	private Item item = new Item();
 	
 	private String name;
 	
@@ -64,12 +65,13 @@ public class ItemXml implements Serializable {
 	//bid //bidder //userID //rating //location - country
 	
 	//seller //userID -rating
-	
+	private SellerXml seller = new SellerXml();
 	
 	
 	
 	///////////////////////////////////////////////////////////////////////setters getters 
 	
+
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlElement(name="Name")
 	public String getName() {
@@ -175,7 +177,16 @@ public class ItemXml implements Serializable {
 		this.bids = bids;
 	}
 
-	
+	@XmlElement(name="Seller")
+	public SellerXml getSeller() {
+		return seller;
+	}
+
+
+	public void setSeller(SellerXml seller) {
+		this.seller = seller;
+	}
+
 
 	/*@Override
 	public String toString() {
@@ -189,8 +200,6 @@ public class ItemXml implements Serializable {
         {            
             category.add(c.getName());
         }
-
-		System.out.println("ropaloooo2");
  		return category;
 	}
 
@@ -202,10 +211,43 @@ public class ItemXml implements Serializable {
 			cat.setName(s);
 			categories.add(cat);
 		}
-		System.out.println("ropaloooo");
 		this.categories = categories;
 	}
 	
+	public void setItem(){
+		item.setName(name);
+		item.setDescription(description);
+		item.setItemID(itemID);
+		item.setCategories(categories);
+		item.setBids(bidXmlToBid(bids.getBids()));
+		item.setUser(seller.getSeller());
+		
+		item.setAmount(0);
+		item.setBuy_Price(0);
+		item.setCountry("");
+		item.setEnds(ends);
+		item.setLatitude(0);
+		item.setLongitude(0);
+		item.setStarted(started);
+		item.setNumber_of_Bids(0);
+
+		
+		System.out.println("ropalooooo");
+		System.out.println(item.getName());
+	}
+	
+	public Item getItem(){
+		return item;
+	}
+	
+	public List<Bid> bidXmlToBid(List<BidXml> bidxml){
+		List<Bid> bids = new ArrayList<>();
+		for (BidXml b: bidxml)
+        {            
+            bids.add(b.getBid());
+        }
+ 		return bids;
+	}
 	
 	@Override
 	public String toString() {
