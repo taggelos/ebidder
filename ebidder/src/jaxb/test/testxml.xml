@@ -1,5 +1,50 @@
 <?xml version="1.0"?>
-  <ItemXml>
-    <Name>Precious Moments Girl Stove Mini Tea Set</Name>
-    <Description>PRECIOUS MOMENTS GIRL/STOVE MINI TEA SET: This really cute little mini decorative teaset is mint in box. It was only removed for photo. It is about 6 inches across. Original price was $20.00. Buyer to pay postage and handling of $4.50 for delivery in USA.</Description>
-  </ItemXml>
+  <Items>
+	  <Item ItemID="1043374545">
+	    <Name>Precious Moments Girl Stove Mini Tea Set</Name>
+	    <Description>PRECIOUS MOMENTS GIRL/STOVE MINI TEA SET: This really cute little mini decorative teaset is mint in box. It was only removed for photo. It is about 6 inches across. Original price was $20.00. Buyer to pay postage and handling of $4.50 for delivery in USA.</Description>
+	  	<Category>Collectibles</Category>
+	    <Category>Decorative &amp; Holiday</Category>
+	    <Category>Decorative by Brand</Category>
+	    <Bids>
+	      <Bid>
+	        <Bidder Rating="427" UserID="nobody138">
+	          <Location>GOD BLESS AMERICA, FROM SOUTH, MS</Location>
+	          <Country>USA</Country>
+	        </Bidder>
+	        <Time>Dec-04-01 23:20:07</Time>
+	        <Amount>$12.99</Amount>
+	      </Bid>
+	      <Bid>
+	        <Bidder Rating="1" UserID="danielhb2000">
+	          <Location>Huntington Beach, Ca.</Location>
+	          <Country>USA</Country>
+	        </Bidder>
+	        <Time>Dec-06-01 02:00:07</Time>
+	        <Amount>$15.99</Amount>
+	      </Bid>
+	    </Bids>
+	  </Item>
+	  <Item ItemID="1043374545">
+	    <Name>Kwlompiano</Name>
+	    <Description>Axne.</Description>
+	    <Bids>
+	      <Bid>
+	        <Bidder Rating="888" UserID="nobody888">
+	          <Location>998</Location>
+	          <Country>US999A</Country>
+	        </Bidder>
+	        <Time>Dec-04-01 23:20:07</Time>
+	        <Amount>$12.99</Amount>
+	      </Bid>
+	      <Bid>
+	        <Bidder Rating="9" UserID="dan99990">
+	          <Location>Hu000, Ca.</Location>
+	          <Country>U999A</Country>
+	        </Bidder>
+	        <Time>Dec-06-01 02:00:07</Time>
+	        <Amount>$15.99</Amount>
+	      </Bid>
+	    </Bids>
+	  </Item>
+</Items> 

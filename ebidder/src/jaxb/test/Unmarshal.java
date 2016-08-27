@@ -10,12 +10,12 @@ import javax.xml.bind.Unmarshaller;
 
 
 public class Unmarshal {
-	private static List<ItemXml> list;
+	private static List<ItemsXml> list;
 
 	public static void main(String args[]) throws Exception {
-		JAXBContext context = JAXBContext.newInstance(ItemXml.class); //1
+		JAXBContext context = JAXBContext.newInstance(ItemsXml.class); //1
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		ItemXml item = (ItemXml)unmarshaller.unmarshal(new FileReader("./src/jaxb/test/testxml.xml")); //2
+		ItemsXml item = (ItemsXml)unmarshaller.unmarshal(new FileReader("./src/jaxb/test/testxml.xml")); //2
 		System.out.println(item); //3
 		/*
 		ArrayList<ItemXml> uList = new ArrayList<ItemXml>();
