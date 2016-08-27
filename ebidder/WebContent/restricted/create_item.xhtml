@@ -8,17 +8,8 @@
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
-        <h:form>
-            <h1> Create Item </h1>
-            
-            
-                <h:form>
-      <h:inputtext value="#{someBean.val}"/>
-      <h:commandButton action="#{someBean.foo}"/>
-    </h:form>
-            
-            
-            
+        <h:form enctype="multipart/form-data">
+            <h1> Create Item </h1>           
             <h:panelGrid columns="3">
                 Name: 
                 <h:inputText id="name" value="#{item.name}" 
@@ -34,7 +25,7 @@
 	                             required="true" requiredMessage="Please enter category">
 	                	<f:validateLength maximum="15"/>
 	                </h:inputText>
-	                <h:commandButton value="Add" action="#{item.add}" />	
+	                <h:commandButton value="Add" action="#{item.add_category}" />	
                 </h:panelGrid>
                 <h:message for="category" styleClass="error"/>
                  
@@ -432,12 +423,29 @@
                 	<f:validateLength maximum="500"/>
                 </h:inputText>
                 <h:message for="description" styleClass="error"/>     
-                Images: 
-                <h:inputText id="images" value="#{item.images}">
-                </h:inputText>
-                <h:message for="images" styleClass="error"/>        	           		
+                Images: 				  
+				<h:form id="form" enctype="multipart/form-data">
+					<h:inputFile id="image" value="#{item.current_image_part}"/>
+                	<h:commandButton value="Save" action="#{item.add_image}"/>
+               	</h:form>
+                <h:message for="image" styleClass="error"/>
+                
+                Selected Images:				
+				<h:dataTable id="added_images" value="#{item.my_images}" var="my_img">					
+					<h:column>
+						#{my_img.getFilename()} 
+					</h:column> 
+					<h:column>
+						<h:commandButton value="delete_image" action="#{item.delete_image}">
+							<f:setPropertyActionListener target="#{item.image_part_for_delete}"
+							value="#{my_img}" /> 
+						</h:commandButton>	
+					</h:column>
+				</h:dataTable>
+				<h:message for="added_images" styleClass="error"/> 
+  	           		
             </h:panelGrid>
-            <p/>
+            <p/>           
             <h:commandButton id="create_item" value="Create item" action="#{item.create_item}"/>
             <h:messages globalOnly="true" styleClass="error"/>
         </h:form>

@@ -17,9 +17,15 @@
     	<h1> Details  </h1>			
 		<h:panelGrid columns="2">
 			Images:
-			<h:form>
-				<h:graphicImage value="" />
-			</h:form> 
+			<h:form> 
+	    		<h:dataTable id="Images" value="#{ item_list.item_for_details.images }" var="img" 
+	    		styleClass="userTable" headerClass="userTableHeader"
+				rowClasses="userTableOddRow,userTableEvenRow">	
+					<h:column>
+						<h:graphicImage value="/images/#{img.imageID}"  />
+					</h:column>
+				</h:dataTable>
+			</h:form>						
 			Item ID: 
 			<h:form>
 				#{item_list.item_for_details.itemID}    

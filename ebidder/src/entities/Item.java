@@ -51,8 +51,12 @@ public class Item implements Serializable {
 	@OneToMany(mappedBy="item")
 	private List<Bid> bids;
 
+	//bi-directional many-to-one association to Image
+	@OneToMany(cascade=CascadeType.PERSIST,mappedBy="item")
+	private List<Image> images;
+
 	//bi-directional many-to-many association to Category
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(
 		name="item_has_category"
 		, joinColumns={
@@ -204,6 +208,28 @@ public class Item implements Serializable {
 		bid.setItem(null);
 
 		return bid;
+	}
+
+	public List<Image> getImages() {
+		return this.images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+
+	public Image addImage(Image image) {
+		getImages().add(image);
+		image.setItem(this);
+
+		return image;
+	}
+
+	public Image removeImage(Image image) {
+		getImages().remove(image);
+		image.setItem(null);
+
+		return image;
 	}
 
 	public List<Category> getCategories() {

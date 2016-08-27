@@ -1,28 +1,24 @@
 package ui;
 
-import java.sql.Date;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.servlet.http.Part;
 
-import db.CategoryDAO;
+import db.ImageDAO;
 import db.ItemDAO;
-import db.UserDAO;
 import entities.BidPK;
 import entities.Category;
+import entities.Image;
 import entities.Item;
-import entities.User;
 
 @ManagedBean(name="item")
 @ViewScoped
@@ -40,13 +36,16 @@ public class ItemBean {
 	private Timestamp started= new Timestamp(0); 
 	private Timestamp ends=new Timestamp(0);
 	private String  description;
-	private String images; //tha allaksei se lista apo fotos
+	private List<MyImage> my_images = new ArrayList<MyImage>();
 
 	private int amount;  
 
 	private String current_category;
 	private Category category_for_delete;
-	
+	private Part current_image_part;
+	private Image current_image=new Image();
+	private MyImage my_image_for_delete;
+
 	private String started_day;
 	private String started_month;
 	private String started_year;
@@ -61,10 +60,13 @@ public class ItemBean {
 	
 	@ManagedProperty(value="#{itemDAO}")
     private ItemDAO itemDAO;
-	
-    @ManagedProperty(value="#{user}")
-    private UserBean my_user;
 
+    @ManagedProperty(value="#{imageDAO}")
+    private ImageDAO imageDAO;
+
+	@ManagedProperty(value="#{user}")
+    private UserBean my_user;
+    
 	private  List<Item> all_my_items =  new ArrayList<Item>();
 
 	
@@ -87,7 +89,7 @@ public class ItemBean {
     
     /* Operations */
 	@SuppressWarnings("deprecation")
-	public String create_item(){
+	public String create_item() throws IOException{
     	
 		// Thelei ki allous elegxous stis times twn pediwn
     	started.setDate(Integer.valueOf(started_day)); 
@@ -101,7 +103,7 @@ public class ItemBean {
     	ends.setYear(Integer.valueOf(ends_year)-1900);
     	ends.setHours(Integer.valueOf(ends_hour));
     	ends.setMinutes(Integer.valueOf(ends_minute)); 
-    	
+    	    	
     	FacesContext context = FacesContext.getCurrentInstance(); 
     	Item item =  new Item();
     	item.setName(name);
@@ -116,9 +118,22 @@ public class ItemBean {
     	item.setEnds(ends);
     	item.setUser(my_user.getCurrent());
     	item.setDescription(description);
-    	//item.setImages(images);
     	
-    	String message = itemDAO.insertItem(item);
+   	
+    	    	
+    	String[] result = itemDAO.insertItem(item);
+    	
+    	if (result[0].equals("ok"))
+    	{
+    		item.setItemID(Integer.valueOf(result[1]) );
+        	Image temp_image= new Image();
+        	for (int i=0; i<my_images.size();i++)
+        	{
+        		temp_image.setItem(item);
+        		temp_image.setImage(my_images.get(i).getImage());
+        		imageDAO.insertImage(temp_image);
+        	} 
+    	}
     	    	
     	/*
     	if (!message.equals("ok"))
@@ -133,7 +148,7 @@ public class ItemBean {
     	return null;
     }	
     
-    public String add()
+    public String add_category()
     {
     	Category category= new Category();
     	category.setName(current_category);
@@ -144,6 +159,29 @@ public class ItemBean {
     public String delete_category()
     {
     	categories.remove(category_for_delete);
+    	return null;
+    }
+    
+    
+    public String add_image() throws IOException
+    {
+    	MyImage myimage= new MyImage();
+    	myimage.setFilename(current_image_part.getSubmittedFileName());
+    	
+    	InputStream input = current_image_part.getInputStream();    	
+    	ByteArrayOutputStream output = new ByteArrayOutputStream();
+		byte[] buffer = new byte[16777215];
+    	for (int length = 0; (length = input.read(buffer)) > 0;) 
+    		output.write(buffer, 0, length);    	
+    	myimage.setImage( output.toByteArray() ); 
+    	
+    	my_images.add(myimage);    	
+    	return null;
+    }
+    
+    public String delete_image()
+    {
+    	my_images.remove(my_image_for_delete);
     	return null;
     }
     
@@ -236,12 +274,13 @@ public class ItemBean {
 		this.description = description;
 	}
 
-	public String getImages() {
-		return images;
+
+	public List<MyImage> getMy_images() {
+		return my_images;
 	}
 
-	public void setImages(String images) {
-		this.images = images;
+	public void setMy_images(List<MyImage> my_images) {
+		this.my_images = my_images;
 	}
 	
 	public int getAmount() {
@@ -266,6 +305,30 @@ public class ItemBean {
 
 	public void setCategory_for_delete(Category category_for_delete) {
 		this.category_for_delete = category_for_delete;
+	}
+	
+	public Part getCurrent_image_part() {
+		return current_image_part;
+	}
+
+	public void setCurrent_image_part(Part current_image_part) {
+		this.current_image_part = current_image_part;
+	}
+	
+	public Image getCurrent_image() {
+		return current_image;
+	}
+
+	public void setCurrent_image(Image current_image) {
+		this.current_image = current_image;
+	}
+		
+	public MyImage getImage_part_for_delete() {
+		return my_image_for_delete;
+	}
+
+	public void setImage_part_for_delete(MyImage my_image_for_delete) {
+		this.my_image_for_delete = my_image_for_delete;
 	}
 		
 	public String getStarted_day() {
@@ -362,6 +425,14 @@ public class ItemBean {
 
 	public void setItemDAO(ItemDAO itemDAO) {
 		this.itemDAO = itemDAO;
+	}
+		
+    public ImageDAO getImageDAO() {
+		return imageDAO;
+	}
+
+	public void setImageDAO(ImageDAO imageDAO) {
+		this.imageDAO = imageDAO;
 	}
 	
 	public UserBean getMy_user() {

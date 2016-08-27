@@ -6,14 +6,11 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.persistence.PersistenceException;
 
+import db.BidDAO;
 import db.ItemDAO;
 import entities.Bid;
-import entities.BidPK;
 import entities.Item;
 
 @ManagedBean(name="item_list")
@@ -30,12 +27,10 @@ public class ItemListBean {
 	
     @ManagedProperty(value="#{user}")
     private UserBean my_user;
+    
+	@ManagedProperty(value="#{bidDAO}")
+    private BidDAO bidDAO;	
 	
-	public String details()
-	{
-		return "/restricted/details";
-	}
-		
     public String submit_bid()
     {
     	if ( item_for_details.getCurrently()==0 && item_for_details.getFirst_Bid()>sub_value_bid )
@@ -49,16 +44,32 @@ public class ItemListBean {
     		return null;
     	}
     	
-    	Bid new_bid=new Bid();    	
-    	new_bid.setItem(item_for_details);
-    	new_bid.setUser(my_user.getCurrent()); 
-    	new_bid.setAmount(sub_value_bid);
-    	new_bid.setTime(new Timestamp(System.currentTimeMillis()));
 		List<Bid> temp=item_for_details.getBids();
-    	temp.add(new_bid);
-    	item_for_details.setBids(temp);
+		boolean flag=false;
+		for (int i=0; i<temp.size();i++)
+		{
+			Bid temp_bid=temp.get(i);
+			if (temp_bid.getUser()==my_user.getCurrent())
+			{		
+				temp_bid.setAmount(sub_value_bid);
+				temp_bid.setTime(new Timestamp(System.currentTimeMillis()));
+				bidDAO.update(temp_bid);
+				flag=true;
+			}
+		}
+		if(flag==false)
+		{
+	    	Bid new_bid=new Bid();    	
+	    	new_bid.setItem(item_for_details);
+	    	new_bid.setUser(my_user.getCurrent()); 
+	    	new_bid.setAmount(sub_value_bid);
+	    	new_bid.setTime(new Timestamp(System.currentTimeMillis()));
+	    	temp.add(new_bid);
+	    	item_for_details.setBids(temp);
+		}
+    	
     	item_for_details.setNumber_of_Bids( item_for_details.getNumber_of_Bids()+1 );
-    	item_for_details.setCurrently(sub_value_bid);
+    	item_for_details.setCurrently(sub_value_bid);    	
     	itemDAO.update(item_for_details);
     	
     	if( item_for_details.getBuy_Price()!= 0 && sub_value_bid>=item_for_details.getBuy_Price())
@@ -84,6 +95,19 @@ public class ItemListBean {
 
 	public void setItemDAO(ItemDAO itemDAO) {
 		this.itemDAO = itemDAO;
+	}
+	
+	public BidDAO getBidDAO() {
+		return bidDAO;
+	}
+	
+	public void setBidDAO(BidDAO bidDAO) {
+		this.bidDAO = bidDAO;
+	}
+
+	public String details()
+	{
+		return "/restricted/details";
 	}
 	
 	public UserBean getMy_user() {

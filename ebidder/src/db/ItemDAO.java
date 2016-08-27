@@ -101,7 +101,7 @@ public class ItemDAO {
 	}
 
 
-	public String insertItem(Item item) {
+	public String[] insertItem(Item item) {
 		
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
@@ -118,15 +118,16 @@ public class ItemDAO {
 				}
 			}		
 			em.persist(item);			
-			em.flush();  
+			em.flush(); 
+			
 			tx.commit();
 			retMessage = "ok";
-			return retMessage;
+			return new String[] {retMessage, String.valueOf(item.getItemID()) }; 
 		} catch (PersistenceException e) {
 			if (tx.isActive())
 				tx.rollback();
 			retMessage = e.getMessage();
-			return retMessage;
+			return new String[] {retMessage };
 		} finally {
 			em.close();
 		}
