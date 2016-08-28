@@ -5,7 +5,6 @@
 		<class>entities.BidPK</class>
 		<class>entities.Category</class>
 		<class>entities.Image</class>
-		<class>entities.ImagePK</class>
 		<class>entities.Item</class>
 		<class>entities.User</class>
 		<properties>

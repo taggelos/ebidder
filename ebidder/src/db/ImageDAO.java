@@ -18,7 +18,6 @@ import javax.servlet.ServletContext;
 
 import entities.Category;
 import entities.Image;
-import entities.ImagePK;
 import entities.Item;
 
 @ManagedBean(name="imageDAO")

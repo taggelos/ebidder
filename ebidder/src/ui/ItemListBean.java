@@ -135,9 +135,11 @@ public class ItemListBean {
 	}	
 		
 	  public String foo(){
-		    System.out.println(sub_value_bid);
-		    return "SUCCESS";
-		  }
+		  Item a = new Item();
+		  a= item_for_details;
+		  return null;
+
+	 }
 	
 	
 }

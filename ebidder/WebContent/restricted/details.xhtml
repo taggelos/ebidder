@@ -14,7 +14,7 @@
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body> 
-    	<h1> Details  </h1>			
+    	<h1> Details  </h1>	
 		<h:panelGrid columns="2">
 			Images:
 			<h:form> 
@@ -22,10 +22,10 @@
 	    		styleClass="userTable" headerClass="userTableHeader"
 				rowClasses="userTableOddRow,userTableEvenRow">	
 					<h:column>
-						<h:graphicImage value="/images/#{img.imageID}"  />
+						<h:graphicImage value="/images/#{img.imageID}"  />						
 					</h:column>
 				</h:dataTable>
-			</h:form>						
+			</h:form>
 			Item ID: 
 			<h:form>
 				#{item_list.item_for_details.itemID}    
@@ -40,14 +40,14 @@
 			</h:form>
 			Category:
 			<h:form> 
-	    		<h:dataTable id="Categories" value="#{ item_list.item_for_details.categories }" var="cat" 
-	    		styleClass="userTable" headerClass="userTableHeader"
-				rowClasses="userTableOddRow,userTableEvenRow">	
-					<h:column>
-						#{cat.name}
-					</h:column>
-				</h:dataTable>
-			</h:form>
+				<h:panelGrid columns="#{ item_list.item_for_details.categories.size() }"> 
+		    		<h:dataTable id="Categories" value="#{ item_list.item_for_details.categories }" var="cat" >
+						<h:column>
+								#{cat.name}
+						</h:column>
+					</h:dataTable>
+				</h:panelGrid>
+			</h:form>			
 			Currently:
 			<h:form>
 				#{item_list.item_for_details.currently} $

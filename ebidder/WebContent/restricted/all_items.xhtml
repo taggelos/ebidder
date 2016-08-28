@@ -50,6 +50,16 @@
 				<f:facet name="header">Ends</f:facet>
 					 #{itm.getEnds()}
 				</h:column>
+				
+				
+				
+				<h:column>
+				<f:facet name="header">Images</f:facet>
+					 #{itm.images}
+				</h:column>
+				
+				
+				
 				<h:column>
 					<h:commandButton value="more" action="#{ item_list.details }">
 						<f:setPropertyActionListener target="#{item_list.item_for_details}"

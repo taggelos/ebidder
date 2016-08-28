@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -20,9 +21,9 @@ public class Image implements Serializable {
 	@Lob
 	private byte[] image;
 
-	//bi-directional many-to-one association to Item
-	@ManyToOne
-	private Item item;
+	//bi-directional many-to-many association to Item
+	@ManyToMany(mappedBy="images")
+	private List<Item> items;
 
 	public Image() {
 	}
@@ -43,12 +44,12 @@ public class Image implements Serializable {
 		this.image = image;
 	}
 
-	public Item getItem() {
-		return this.item;
+	public List<Item> getItems() {
+		return this.items;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 
 }

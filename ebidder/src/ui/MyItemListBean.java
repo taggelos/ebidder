@@ -34,7 +34,7 @@ public class MyItemListBean {
 
 	public List<Item> getAll_my_items() {
 		
-		//all_my_items=userDAO.getItems(my_user.getCurrent());
+		all_my_items= itemDAO.getItems("All");  //=userDAO.getItems(my_user.getCurrent());
 		return all_my_items;
 	}
 

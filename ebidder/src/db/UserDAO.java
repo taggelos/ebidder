@@ -1,5 +1,6 @@
 package db;
 
+import entities.Item;
 import entities.User;
 import java.util.List;
 
@@ -42,7 +43,26 @@ public class UserDAO {
 		em.close();
 		return users;
 	}
-		
+	
+/*	
+	@SuppressWarnings("unchecked")
+	public List<User> getItems(User user) {
+		List<Item> users = null;
+		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query q;
+		q = em.createQuery("Select u from user,item u");
+	
+		users = q.getResultList();
+
+		tx.commit();
+		em.close();
+		return users;
+	}
+*/		
+	
 	
 	@SuppressWarnings("unchecked")
 	public User find(String username, String password) {

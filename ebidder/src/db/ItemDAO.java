@@ -103,6 +103,8 @@ public class ItemDAO {
 
 	public String[] insertItem(Item item) {
 		
+		System.out.println("$$$$$$$$$$$$$ "+item.getImages().size());
+		
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();

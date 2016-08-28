@@ -118,23 +118,17 @@ public class ItemBean {
     	item.setEnds(ends);
     	item.setUser(my_user.getCurrent());
     	item.setDescription(description);
-    	
-   	
-    	    	
-    	String[] result = itemDAO.insertItem(item);
-    	
-    	if (result[0].equals("ok"))
-    	{
-    		item.setItemID(Integer.valueOf(result[1]) );
-        	Image temp_image= new Image();
-        	for (int i=0; i<my_images.size();i++)
-        	{
-        		temp_image.setItem(item);
-        		temp_image.setImage(my_images.get(i).getImage());
-        		imageDAO.insertImage(temp_image);
-        	} 
+       	   	   	    	
+    	List<Image > temp_images_list = new ArrayList<Image>();
+    	Image temp_image;
+    	for (int i=0; i<my_images.size();i++)
+    	{   temp_image= new Image();  	     		        		
+    		temp_image.setImage(my_images.get(i).getImage());
+    		temp_images_list.add(temp_image);
     	}
-    	    	
+    	item.setImages(temp_images_list);
+    
+    	String[] result = itemDAO.insertItem(item);	
     	/*
     	if (!message.equals("ok"))
         {
