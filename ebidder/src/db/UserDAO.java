@@ -1,6 +1,5 @@
 package db;
 
-import entities.Item;
 import entities.User;
 import java.util.List;
 
@@ -12,13 +11,13 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
-@ManagedBean(name="userDAO")
+@ManagedBean(name = "userDAO")
 @SessionScoped
 public class UserDAO {
 
-	@ManagedProperty(value="#{jpaResourceBean}")
+	@ManagedProperty(value = "#{jpaResourceBean}")
 	protected JPAResourceBean jpaResourceBean;
-	
+
 	@SuppressWarnings("unchecked")
 	public List<User> getUsers(String value) {
 		List<User> users = null;
@@ -27,43 +26,36 @@ public class UserDAO {
 		tx.begin();
 
 		Query q;
-		if(value == "all"){
-			q = em.createNamedQuery("User.findAll"); //Query q = em.createQuery("Select u from users u");
-		}
-		else if(value == "nopending"){
+		if (value == "all") {
+			q = em.createNamedQuery("User.findAll"); // Query q =
+														// em.createQuery("Select
+														// u from users u");
+		} else if (value == "nopending") {
 			q = em.createQuery("Select u from User u where u.pending!=1");
-		}
-		else {
+		} else {
 			q = em.createQuery("Select u from User u where u.pending=1");
 		}
-	
+
 		users = q.getResultList();
 
 		tx.commit();
 		em.close();
 		return users;
 	}
-	
-/*	
-	@SuppressWarnings("unchecked")
-	public List<User> getItems(User user) {
-		List<Item> users = null;
-		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
 
-		Query q;
-		q = em.createQuery("Select u from user,item u");
-	
-		users = q.getResultList();
+	/*
+	 * @SuppressWarnings("unchecked") public List<User> getItems(User user) {
+	 * List<Item> users = null; EntityManager em =
+	 * jpaResourceBean.getEMF().createEntityManager(); EntityTransaction tx =
+	 * em.getTransaction(); tx.begin();
+	 * 
+	 * Query q; q = em.createQuery("Select u from user,item u");
+	 * 
+	 * users = q.getResultList();
+	 * 
+	 * tx.commit(); em.close(); return users; }
+	 */
 
-		tx.commit();
-		em.close();
-		return users;
-	}
-*/		
-	
-	
 	@SuppressWarnings("unchecked")
 	public User find(String username, String password) {
 		User user = null;
@@ -94,7 +86,7 @@ public class UserDAO {
 		tx.begin();
 		try {
 			em.merge(user);
-			em.flush();  
+			em.flush();
 			tx.commit();
 			retMessage = "ok";
 			return retMessage;
@@ -107,15 +99,16 @@ public class UserDAO {
 			em.close();
 		}
 	}
-	
+
 	public String insertUser(User user) {
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
+			em.merge(user.getLocation());
 			em.persist(user);
-			em.flush();  
+			em.flush();
 			tx.commit();
 			retMessage = "ok";
 			return retMessage;
@@ -128,7 +121,7 @@ public class UserDAO {
 			em.close();
 		}
 	}
-	
+
 	public String remove(User user) {
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
@@ -137,7 +130,7 @@ public class UserDAO {
 		try {
 			user = em.merge(user);
 			em.remove(user);
-			em.flush();  
+			em.flush();
 			tx.commit();
 			retMessage = "ok";
 			return retMessage;
@@ -150,13 +143,13 @@ public class UserDAO {
 			em.close();
 		}
 	}
-	
-	 public void setJpaResourceBean(JPAResourceBean jpaResourceBean) {
-	        this.jpaResourceBean = jpaResourceBean;
-	    }
 
-	    public JPAResourceBean getJpaResourceBean() {
-	        return jpaResourceBean;
-	    }
+	public void setJpaResourceBean(JPAResourceBean jpaResourceBean) {
+		this.jpaResourceBean = jpaResourceBean;
+	}
+
+	public JPAResourceBean getJpaResourceBean() {
+		return jpaResourceBean;
+	}
 
 }

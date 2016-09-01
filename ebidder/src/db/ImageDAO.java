@@ -1,24 +1,15 @@
 package db;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Properties;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 import javax.servlet.ServletContext;
-
-import entities.Category;
 import entities.Image;
-import entities.Item;
 
 @ManagedBean(name="imageDAO")
 @SessionScoped

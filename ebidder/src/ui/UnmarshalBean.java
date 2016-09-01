@@ -1,22 +1,24 @@
-package jaxb.test;
+package ui;
 
 import java.io.FileReader;
 //import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import db.ItemDAO;
-import db.UserDAO;
-import entities.Item;
+import jaxb.ItemXml;
+import jaxb.ItemsXml;
 
-@ManagedBean(name="xmlbean")
-@SessionScoped
 
-public class Unmarshal {
+@ManagedBean(name = "unmarshal")
+
+@RequestScoped
+
+public class UnmarshalBean {
 	//private static List<ItemsXml> list;
 
 	@ManagedProperty(value="#{itemDAO}")
@@ -30,18 +32,18 @@ public class Unmarshal {
 		this.itemDAO = itemDAO;
 	}
 
-	public String mainXml() throws Exception {
-		JAXBContext context = JAXBContext.newInstance(ItemsXml.class); //1
+	public String unmarshalXml() throws Exception {
+		JAXBContext context = JAXBContext.newInstance(ItemsXml.class); 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		ItemsXml item = (ItemsXml)unmarshaller.unmarshal(new FileReader("./src/jaxb/test/testxml.xml")); //2
-		//System.out.println(item); //3
-		item.setItems();
+		ItemsXml item = (ItemsXml)unmarshaller.unmarshal(new FileReader("testxml.xml")); 
+		//item.setItems(); //set every itemxml as entity item
 		System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+		System.out.println(item);
 		for (ItemXml i : item.getItems()){
 			i.getItem();
-			System.out.println(i);
+			//System.out.println(i);
 			//ItemDAO itemDAO = new ItemDAO();
-			itemDAO.insertItem(i.getItem());
+			//itemDAO.insertItem(i.getItem());
 		}
 		
 		/*
@@ -54,6 +56,7 @@ public class Unmarshal {
             it.setName(u.getName());
             uList.add(it);
         }*/
-		return null;
+
+		return "/html/commnon";
 	}
 }

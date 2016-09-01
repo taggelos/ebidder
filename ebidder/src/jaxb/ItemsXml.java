@@ -55,6 +55,6 @@ public class ItemsXml implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Items [" + (items != null ? "items=" + items : "") + "]";
+		return "Items " + "\n" + (items != null ?  items : "");
 	}
 }

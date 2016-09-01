@@ -1,6 +1,6 @@
 package jaxb;
 
-import java.io.Serializable;
+
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -16,25 +16,25 @@ import entities.User;
  * 
  */
 @XmlRootElement(name="Bidder")
-public class BidderXml implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class BidderXml   {
 	
-	private String rating;
+	private int rating;
 	
 	private String userID;
 	
-	private String location;
+	private LocationXml location = new LocationXml();
 	
 	private String country;
 	
 	private User bidder = new User();
 
+	
 	@XmlAttribute(name="Rating")
-	public String getRating() {
+	public int getRating() {
 		return rating;
 	}
 
-	public void setRating(String rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 
@@ -47,14 +47,13 @@ public class BidderXml implements Serializable {
 		this.userID = userID;
 	}
 	
-	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlElement(name="Location")
-	public String getLocation() {
+	public LocationXml getLocation() {
 		return location;
 	}
 
 
-	public void setLocation(String location) {
+	public void setLocation(LocationXml location) {
 		this.location = location;
 	}
 
@@ -65,21 +64,27 @@ public class BidderXml implements Serializable {
 		return country;
 	}
 
-
 	public void setCountry(String country) {
 		this.country = country;
 	}
 	
 	public void setBidder(){
-		bidder.setLocation(location);
 		//bidder.setUserID(Integer.parseInt(userID));
 		bidder.setCountry(country);
-		bidder.setRating_Bidder(Integer.parseInt(rating));
+		bidder.setRating_Bidder(rating);
+		bidder.setLocation(location.getLocation());
 	}
 	
 	public User getBidder(){
 		return bidder;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "   Bidder "
+	+ "\n        " + (userID != null ? "bidderID=" + userID +  ", " : "no userID")
+	+ "\n        " + (rating != 0 ? "rating=" + rating + ", " : "no rating")
+	+ "\n        " + (location != null ? location + ", " : "no location")
+	+ "\n        " + (country != null ? "country=" + country + ", " : "no country");
+	}
 }

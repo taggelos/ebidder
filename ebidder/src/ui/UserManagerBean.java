@@ -195,14 +195,6 @@ public class UserManagerBean {
 		user.setEmail(email);
 	}
 
-	public String getLocation() {
-		return user.getLocation();
-	}
-
-	public void setLocation(String location) {
-		user.setLocation(location);
-	}
-
 	public String getName() {
 		return user.getName();
 	}

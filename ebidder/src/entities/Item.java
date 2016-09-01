@@ -19,24 +19,20 @@ public class Item implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int itemID;
 
-	private int amount;
+	private Float amount;
 
-	private float buy_Price;
+	private Float buy_Price;
 
 	private String country;
 
-	private float currently;
+	private Float currently;
 
 	private String description;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date ends;
 
-	private float first_Bid;
-
-	private float latitude;
-
-	private float longitude;
+	private Float first_Bid;
 
 	private String name;
 
@@ -51,6 +47,10 @@ public class Item implements Serializable {
 	@OneToMany(mappedBy="item")
 	private List<Bid> bids;
 
+	//bi-directional many-to-one association to Image
+	@OneToMany(mappedBy="item")
+	private List<Image> images;
+
 	//bi-directional many-to-many association to Category
 	@ManyToMany
 	@JoinTable(
@@ -64,23 +64,13 @@ public class Item implements Serializable {
 		)
 	private List<Category> categories;
 
+	//bi-directional many-to-one association to Location
+	@ManyToOne
+	private Location location;
+
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="users_UserID")
 	private User user;
-
-	//bi-directional many-to-many association to Image
-	@ManyToMany(cascade={CascadeType.PERSIST,CascadeType.REMOVE})
-	@JoinTable(
-		name="item_has_image"
-		, joinColumns={
-			@JoinColumn(name="item_ItemID")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="image_ImageID")
-			}
-		)
-	private List<Image> images;
 
 	public Item() {
 	}
@@ -93,19 +83,19 @@ public class Item implements Serializable {
 		this.itemID = itemID;
 	}
 
-	public int getAmount() {
+	public Float getAmount() {
 		return this.amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
 
-	public float getBuy_Price() {
+	public Float getBuy_Price() {
 		return this.buy_Price;
 	}
 
-	public void setBuy_Price(float buy_Price) {
+	public void setBuy_Price(Float buy_Price) {
 		this.buy_Price = buy_Price;
 	}
 
@@ -117,11 +107,11 @@ public class Item implements Serializable {
 		this.country = country;
 	}
 
-	public float getCurrently() {
+	public Float getCurrently() {
 		return this.currently;
 	}
 
-	public void setCurrently(float currently) {
+	public void setCurrently(Float currently) {
 		this.currently = currently;
 	}
 
@@ -141,28 +131,12 @@ public class Item implements Serializable {
 		this.ends = ends;
 	}
 
-	public float getFirst_Bid() {
+	public Float getFirst_Bid() {
 		return this.first_Bid;
 	}
 
-	public void setFirst_Bid(float first_Bid) {
+	public void setFirst_Bid(Float first_Bid) {
 		this.first_Bid = first_Bid;
-	}
-
-	public float getLatitude() {
-		return this.latitude;
-	}
-
-	public void setLatitude(float latitude) {
-		this.latitude = latitude;
-	}
-
-	public float getLongitude() {
-		return this.longitude;
-	}
-
-	public void setLongitude(float longitude) {
-		this.longitude = longitude;
 	}
 
 	public String getName() {
@@ -219,6 +193,28 @@ public class Item implements Serializable {
 		return bid;
 	}
 
+	public List<Image> getImages() {
+		return this.images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+
+	public Image addImage(Image image) {
+		getImages().add(image);
+		image.setItem(this);
+
+		return image;
+	}
+
+	public Image removeImage(Image image) {
+		getImages().remove(image);
+		image.setItem(null);
+
+		return image;
+	}
+
 	public List<Category> getCategories() {
 		return this.categories;
 	}
@@ -227,20 +223,20 @@ public class Item implements Serializable {
 		this.categories = categories;
 	}
 
+	public Location getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	public User getUser() {
 		return this.user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public List<Image> getImages() {
-		return this.images;
-	}
-
-	public void setImages(List<Image> images) {
-		this.images = images;
 	}
 
 }

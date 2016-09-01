@@ -1,6 +1,6 @@
 package jaxb;
 
-import java.io.Serializable;
+
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,9 +17,7 @@ import java.util.List;
  * 
  */
 @XmlRootElement(name="Bids")
-public class BidsXml implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class BidsXml {
 	private List<BidXml> bids;
 	
 	@XmlElement(name = "Bid")
@@ -36,6 +34,6 @@ public class BidsXml implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Bids [" + (bids != null ? "bids=" + bids : "") + "]";
+		return " Bids " + "\n"+ (bids != null ?  bids : "\n") ;
 	}
 }

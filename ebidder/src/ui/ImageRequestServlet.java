@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +34,7 @@ public class ImageRequestServlet extends HttpServlet {
         BufferedOutputStream output = null;
 
         try {
-        	InputStream image_data = new ByteArrayInputStream(image.getImage());
+        	InputStream image_data = new ByteArrayInputStream((byte[]) image.getImage());
             input = new BufferedInputStream(image_data); 
             output = new BufferedOutputStream(response.getOutputStream());
             byte[] buffer = new byte[16777215];

@@ -11,9 +11,9 @@ import javax.faces.context.FacesContext;
 import javax.persistence.Column;
 
 
-@ManagedBean(name="user")
+@ManagedBean(name="message")
 @SessionScoped
-public class UserBean {
+public class MessageBean {
 
     
     //private int id;
@@ -126,19 +126,20 @@ public class UserBean {
     public String submit(){
     	System.out.println("SUBMIT---CURRENT");
     	System.out.println(current.getUserID());
-	   System.out.println(current.getUsername());
+	    System.out.println(current.getUsername());
 	    
     	User user =  current;
     	//user.setUserID(userID);
         user.setName(name);
 	    user.setSurname(surname);
 	    user.setUsername(username);
-	    user.setPassword(password);Location location = new Location();
+	    user.setPassword(password);
+	    Location location = new Location();
 	    // TODO
 	    //location.setLatitude(latitude);
 	    //location.setLatitude(latitude);
 	    location.setName(this.location);
-	    user.setLocation(location);
+	    user.setLocation(location);                                          
 	    user.setCountry(country);
 	    user.setEmail(email);
 	    user.setTaxRegistrationNumber(taxRegistrationNumber);

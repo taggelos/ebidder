@@ -1,6 +1,7 @@
 package jaxb;
 
-import java.io.Serializable;
+
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -22,8 +23,7 @@ import java.util.List;
  * 
  */
 @XmlRootElement(name="Item")
-public class ItemXml implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class ItemXml  {
 
 	private Item item = new Item();
 	
@@ -36,12 +36,11 @@ public class ItemXml implements Serializable {
 	
 	private BidsXml bids;
 
-	private int currently;
+	private Float currently;
 
-
-	private int buy_Price;
+	private Float buy_Price;
 	
-	private int first_Bid;
+	private Float first_Bid;
 	
 	private int number_of_Bids;
 	
@@ -95,32 +94,35 @@ public class ItemXml implements Serializable {
 	}
 
 	@XmlElement(name="Currently")
-	public int getCurrently() {
+	@XmlJavaTypeAdapter(PriceAdapterXml.class)
+	public Float getCurrently() {
 		return currently;
 	}
 
 
-	public void setCurrently(int currently) {
+	public void setCurrently(Float currently) {
 		this.currently = currently;
 	}
 
 	@XmlElement(name="Buy_Price")
-	public int getBuy_Price() {
+	@XmlJavaTypeAdapter(PriceAdapterXml.class)
+	public Float getBuy_Price() {
 		return buy_Price;
 	}
 
 
-	public void setBuy_Price(int buy_Price) {
+	public void setBuy_Price(Float buy_Price) {
 		this.buy_Price = buy_Price;
 	}
 
 	@XmlElement(name="First_Bid")
-	public int getFirst_Bid() {
+	@XmlJavaTypeAdapter(PriceAdapterXml.class)
+	public Float getFirst_Bid() {
 		return first_Bid;
 	}
 
 
-	public void setFirst_Bid(int first_Bid) {
+	public void setFirst_Bid(Float first_Bid) {
 		this.first_Bid = first_Bid;
 	}
 
@@ -136,8 +138,9 @@ public class ItemXml implements Serializable {
 
 
 	@XmlElement(name="Ends")
+	@XmlJavaTypeAdapter(DateAdapterXml.class)
 	public Date getEnds() {
-		return ends;
+		return ends; 
 	}
 
 
@@ -147,6 +150,7 @@ public class ItemXml implements Serializable {
 
 
 	@XmlElement(name="Started")
+	@XmlJavaTypeAdapter(DateAdapterXml.class)
 	public Date getStarted() {
 		return started;
 	}
@@ -185,12 +189,6 @@ public class ItemXml implements Serializable {
 	public void setSeller(SellerXml seller) {
 		this.seller = seller;
 	}
-
-
-	/*@Override
-	public String toString() {
-		return "Item \n" + (name != null ? "name=" + name + ", " : "") + (description != null ? "description=" + description : "") + "]";
-	}*/
 	
 	@XmlElement(name= "Category")
 	public List<String> getCategories() {
@@ -201,7 +199,6 @@ public class ItemXml implements Serializable {
         }
  		return category;
 	}
-
 
 	public void setCategories(List<String> category) {
 		List<Category> categories = new ArrayList<>();
@@ -221,18 +218,16 @@ public class ItemXml implements Serializable {
 		item.setBids(bidXmlToBid(bids.getBids()));
 		item.setUser(seller.getSeller());
 		
-		item.setAmount(0);
-		item.setBuy_Price(0);
-		item.setCountry("");
+		//item.setBuy_Price(Float.valueOf(String.valueOf(buy_Price)));
+		item.setBuy_Price(Float.valueOf(buy_Price));
+		//item.setCountry(country);
 		item.setEnds(ends);
-		item.setLatitude(0);
-		item.setLongitude(0);
+		//item.setLatitude(0);
+		//item.setLongitude(0);
 		item.setStarted(started);
-		item.setNumber_of_Bids(0);
-
+		item.setNumber_of_Bids(number_of_Bids);
 		
-		System.out.println("ropalooooo");
-		System.out.println(item.getName());
+
 	}
 	
 	public Item getItem(){
@@ -251,22 +246,32 @@ public class ItemXml implements Serializable {
 	@Override
 	public String toString() {
 		String str;
-		str ="User ["
-				+ "\n" + (name != null ? "name=" + name + ", " : "")
-				+ "\n" + (description != null ? "description=" + description
-						+  ", " : "")
-				+ "\n" + (itemID != 0 ? "ItemID=" + itemID + ", " : "") + "]";
+		str =" Item "
+				+ "\n   " + (itemID != 0 ? "ItemID=" + itemID + ", " : "no itemID,") 
+				+ "\n   " + (name != null ? "name=" + name + ", " : "no name,")
+				+ "\n   " + (description != null ? "description=" + description +  ", " : "no description,")
+				+ "\n   " + (started != null ? "started= " + started + ", " : "no started,")
+				+ "\n   " + (ends != null ? "ends= " + ends + ", " : "no ends,")
+				+ "\n   " + (first_Bid != null ? "first_Bid= " + first_Bid + "$" + ", " : "no first_Bid,")
+				+ "\n   " + (currently != null ? "currently= " + currently + "$" + ", " : "no currently,")
+				+ "\n   " + (buy_Price != null ? "buy_Price= " + buy_Price + "$" + ", " : "no buy_price,")
+				+ "\n   " + (number_of_Bids != 0 ? "number_of_bids = " + number_of_Bids + ", " : "no number_of_Bids," );
 		for(Category c : categories){
-			str += "\n" + c.getName() + "\n";
+			str += "\n   " + (c.getName()!=null ? "category =  " + c.getName() + ", " : "no categories,")  ;
 		}
-		for (BidXml bid : bids.getBids()){
-			str += "\n" + bid.getAmount() + "\n";
-			str += "\n" + bid.getTime() + "\n";
-			str += "\n" + bid.getBidder().getUserID() + "\n";
-			str += "\n" + bid.getBidder().getRating() + "\n";
-			str += "\n" + bid.getBidder().getLocation() + "\n";
-			str += "\n" + bid.getBidder().getCountry() + "\n";
-		}
+		str+= "\n   " + (seller != null ?  seller : "") ;
+		str+=(bids != null ?  bids : "") ;
+		//alternative printing
+		/* 
+		for (BidXml bid : bids.getBids()){  
+			str += "\n " + "Amount " + bid.getAmount() + "\n";
+			str += "\n " + "Time " + bid.getTime() + "\n";
+			str += "\n " + "UserID " + bid.getBidder().getUserID() + "\n";
+			str += "\n " + "Rating " + bid.getBidder().getRating() + "\n";
+			str += "\n " + "Location " + bid.getBidder().getLocation() + "\n";
+			str += "\n " + "Country " + bid.getBidder().getCountry() + "\n";
+			//str+= bid;
+		}*/
 		return str;
 	}
 }

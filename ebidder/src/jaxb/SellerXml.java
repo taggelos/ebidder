@@ -49,4 +49,10 @@ public class SellerXml implements Serializable {
 		return seller;
 	}
 	
+	@Override
+	public String toString() {
+		return "   Seller "
+	+ "\n      " + (userID != null ? "sellerID=" + userID +  ", " : "no userID")
+	+ "\n      " + (rating != null ? "rating=" + rating + ", " : "no rating");
+	}
 }

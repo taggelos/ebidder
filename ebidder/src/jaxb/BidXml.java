@@ -1,12 +1,12 @@
 package jaxb;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import entities.Bid;
 
@@ -17,12 +17,10 @@ import entities.Bid;
  * 
  */
 @XmlRootElement(name="Bid")
-public class BidXml implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class BidXml {
 	private Bid bid = new Bid();
 
-	private float amount;
+	private Float amount;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;
@@ -31,16 +29,18 @@ public class BidXml implements Serializable {
 
 
 	@XmlElement(name="Amount")
-	public float getAmount() {
+	@XmlJavaTypeAdapter(PriceAdapterXml.class)
+	public Float getAmount() {
 		return amount;
 	}
 
 
-	public void setAmount(float amount) {
+	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
 
 	@XmlElement(name="Time")
+	@XmlJavaTypeAdapter(DateAdapterXml.class)
 	public Date getTime() {
 		return time;
 	}
@@ -73,10 +73,9 @@ public class BidXml implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "User ["
-	+ "\n" + (time != null ? "time=" + time + ", " : "")
-	+ "\n" + (amount != 0 ? "amount=" + amount
-	+  ", " : "")
-	+ "\n" + (amount != 0 ? "amount=" + amount + ", " : "") + "]";
+		return "  Bid "
+	+ "\n    " + (time != null ? "time=" + time + ", " : "no time")
+	+ "\n    " + (amount != 0 ? "amount=" + amount +  ", " : "no amount")
+	+ "\n    " + Bidder ;
 	}
 }

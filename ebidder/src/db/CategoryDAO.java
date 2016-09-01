@@ -1,9 +1,6 @@
 package db;
 
 import entities.Category;
-import entities.Item;
-import entities.User;
-
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;

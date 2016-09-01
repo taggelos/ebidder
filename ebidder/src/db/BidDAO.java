@@ -1,22 +1,14 @@
 package db;
 
 import entities.Bid;
-import entities.Category;
-import entities.Item;
 
-
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Properties;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 
 @ManagedBean(name="bidDAO")
 @SessionScoped

@@ -26,10 +26,11 @@
                     </h:commandButton>
                  </h:column>
                  <h:column> 
-              	 	<h:commandButton id="Xml" value="Show Xml" action="#{xmlbean.mainXml()}">
-                    	<f:param name="action" value="xmlval" />
-                    </h:commandButton>
-                 </h:column>
+						<h:commandButton id="mXml" value="Unmarshal Xml" action="#{unmarshal.unmarshalXml()}" />
+				</h:column> 
+				<h:column> 
+						<h:commandButton id="uXml" value="Marshal Xml" action="#{marshal.marshalXml()}" />
+				</h:column> 
        </h:form>
         <p/>
         <h:form>

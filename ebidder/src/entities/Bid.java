@@ -14,10 +14,11 @@ import java.util.Date;
 public class Bid implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private BidPK id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int bidID;
 
-	private float amount;
+	private Float amount;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;
@@ -33,19 +34,19 @@ public class Bid implements Serializable {
 	public Bid() {
 	}
 
-	public BidPK getId() {
-		return this.id;
+	public int getBidID() {
+		return this.bidID;
 	}
 
-	public void setId(BidPK id) {
-		this.id = id;
+	public void setBidID(int bidID) {
+		this.bidID = bidID;
 	}
 
-	public float getAmount() {
+	public Float getAmount() {
 		return this.amount;
 	}
 
-	public void setAmount(float amount) {
+	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
 
