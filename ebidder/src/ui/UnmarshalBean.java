@@ -10,6 +10,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import db.ItemDAO;
+import entities.Item;
 import jaxb.ItemXml;
 import jaxb.ItemsXml;
 
@@ -35,15 +36,16 @@ public class UnmarshalBean {
 	public String unmarshalXml() throws Exception {
 		JAXBContext context = JAXBContext.newInstance(ItemsXml.class); 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		ItemsXml item = (ItemsXml)unmarshaller.unmarshal(new FileReader("testxml.xml")); 
-		//item.setItems(); //set every itemxml as entity item
+		ItemsXml items = (ItemsXml)unmarshaller.unmarshal(new FileReader("testxml.xml")); 
+		//items.setItems(); //set every itemxml as entity item
 		System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-		System.out.println(item);
-		for (ItemXml i : item.getItems()){
-			i.getItem();
+		System.out.println(items);
+		//ItemDAO itemDAO = new ItemDAO();
+		for (ItemXml i : items.getItems()){
+			//i.getItem();
 			//System.out.println(i);
-			//ItemDAO itemDAO = new ItemDAO();
-			//itemDAO.insertItem(i.getItem());
+			Item item = i.getItem();
+			itemDAO.insertItem(item);
 		}
 		
 		/*

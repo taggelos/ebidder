@@ -19,8 +19,6 @@ public class Item implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int itemID;
 
-	private Float amount;
-
 	private Float buy_Price;
 
 	private String country;
@@ -81,14 +79,6 @@ public class Item implements Serializable {
 
 	public void setItemID(int itemID) {
 		this.itemID = itemID;
-	}
-
-	public Float getAmount() {
-		return this.amount;
-	}
-
-	public void setAmount(Float amount) {
-		this.amount = amount;
 	}
 
 	public Float getBuy_Price() {

@@ -22,12 +22,22 @@ public class BidderXml   {
 	
 	private String userID;
 	
-	private LocationXml location = new LocationXml();
+	private LocationXml location;
 	
 	private String country;
 	
-	private User bidder = new User();
-
+	private User bidder;
+	
+	public BidderXml(){
+		location = new LocationXml();
+		bidder = new User();
+		bidder.setCountry("default country");
+		bidder.setName("default name");
+		bidder.setEmail("default e_mail");
+		bidder.setPassword("default password");
+		bidder.setSurname("default surname");
+		bidder.setTaxRegistrationNumber("default tax_registration_number");
+	}
 	
 	@XmlAttribute(name="Rating")
 	public int getRating() {
@@ -68,14 +78,16 @@ public class BidderXml   {
 		this.country = country;
 	}
 	
-	public void setBidder(){
-		//bidder.setUserID(Integer.parseInt(userID));
-		bidder.setCountry(country);
-		bidder.setRating_Bidder(rating);
-		bidder.setLocation(location.getLocation());
+	public void setBidder(User user){
+		userID = user.getUsername();
+		bidder = user;
 	}
 	
 	public User getBidder(){
+		bidder.setUsername(userID);
+		bidder.setCountry(country);
+		bidder.setRating_Bidder(rating);
+		bidder.setLocation(location.getLocation());
 		return bidder;
 	}
 	

@@ -1,15 +1,13 @@
 package db;
 
-import entities.Category;
 import entities.Item;
-
-
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
@@ -100,20 +98,15 @@ public class ItemDAO {
 
 	public String[] insertItem(Item item) {
 		String retMessage = "";
-		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
+		System.out.println(jpaResourceBean + "99999999");
+		EntityManagerFactory factory = jpaResourceBean.getEMF();
+		System.out.println(factory);
+		EntityManager em = factory.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
-			List<Category> categories= item.getCategories();
-			for(int i = 0; i < categories.size() ; i++)
-			{
-				Category temp;
-				if ( (temp=em.find(Category.class,categories.get(i).getName()))!=null )
-				{
-					categories.set(i,temp );
-				}
-			}		
-			em.persist(item);			
+
+			em.merge(item);			
 			em.flush(); 
 			
 			tx.commit();

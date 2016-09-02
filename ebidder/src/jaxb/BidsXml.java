@@ -28,7 +28,7 @@ public class BidsXml {
 		return bids;
 	}
 
-	public void setPrograms(List<BidXml> bids) {
+	public void setBids(List<BidXml> bids) {
 		this.bids = bids;
 	}
 

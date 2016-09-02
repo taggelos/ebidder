@@ -36,7 +36,7 @@ public class ItemsXml implements Serializable {
 
 	public void setItems() {    
 		for (ItemXml i : items){
-			i.setItem();
+			i.getItem();
 		}
 	}
 	
