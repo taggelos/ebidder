@@ -98,10 +98,7 @@ public class ItemDAO {
 
 	public String[] insertItem(Item item) {
 		String retMessage = "";
-		System.out.println(jpaResourceBean + "99999999");
-		EntityManagerFactory factory = jpaResourceBean.getEMF();
-		System.out.println(factory);
-		EntityManager em = factory.createEntityManager();
+		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {

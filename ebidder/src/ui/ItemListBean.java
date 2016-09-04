@@ -19,6 +19,8 @@ public class ItemListBean {
 
 	private List<Item> items_list = new ArrayList<Item>();;
 
+	private String search_panel;
+	private String selected_field;
 	private Item item_for_details;
 	private float sub_value_bid;
 
@@ -30,6 +32,13 @@ public class ItemListBean {
 
 	@ManagedProperty(value = "#{bidDAO}")
 	private BidDAO bidDAO;
+	
+	
+// Functions	
+	public String search()
+	{
+		return null;
+	}
 
 	public String submit_bid() {
 		if (item_for_details.getCurrently() == 0 && item_for_details.getFirst_Bid() > sub_value_bid) {
@@ -73,6 +82,23 @@ public class ItemListBean {
 		return null;
 	}
 
+// Getters and Setters
+	public String getSearch_panel() {
+		return search_panel;
+	}
+
+	public void setSearch_panel(String search_panel) {
+		this.search_panel = search_panel;
+	}
+	
+	public String getSelected_field() {
+		return selected_field;
+	}
+
+	public void setSelected_field(String selected_field) {
+		this.selected_field = selected_field;
+	}
+	
 	public List<Item> getItems_list() {
 		items_list = itemDAO.getItems("All");
 		return items_list;

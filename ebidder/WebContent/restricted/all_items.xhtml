@@ -8,20 +8,33 @@
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
-    	<h1> All Items  </h1>            
+    	<h1> All Items  </h1>              
 	   	<h:form> 
+	   		
+	   		 <h:panelGrid columns="3">
+ 			 	<h:inputText id="search_panel" value="#{item_list.search_panel}" /> 
+  			 	<h:selectOneMenu value="#{item_list.selected_field}">
+  			 		<f:selectItem itemValue="all" itemLabel="All" />
+				   	<f:selectItem itemValue="category" itemLabel="Category" />
+				   	<f:selectItem itemValue="description" itemLabel="Description" />
+				   	<f:selectItem itemValue="price" itemLabel="Price" />
+				   	<f:selectItem itemValue="location" itemLabel="Location" /> 
+		   		</h:selectOneMenu> 
+		   		<h:commandButton id="search" value="Search" action="#{item_list.search}"/>
+            </h:panelGrid>  
+	   	 
     		<h:dataTable id="Items" value="#{ item_list.items_list }" var="itm"	
 			styleClass="userTable" headerClass="userTableHeader"
-			rowClasses="userTableOddRow,userTableEvenRow">
+			rowClasses="userTableOddRow,userTableEvenRow">  
 			
 				<h:column>
 				<f:facet name="header">Image</f:facet>
-					<h:graphicImage width="50" height="50" value="/images/#{itm.getImages().get(0).imageID}"  />		
+					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.images) }" value="/images/${itm.getImages().get(0).imageID}"  />		
 				</h:column>
 							
-				<h:column>
-				<f:facet name="header">Name</f:facet>
-					 #{itm.getName()}
+				<h:column>   
+				<f:facet name="header">Name</f:facet> 
+					 #{itm.getName()} 
 				</h:column>
 					
 				<h:column>

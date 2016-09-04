@@ -42,11 +42,11 @@ public class Item implements Serializable {
 	private Date started;
 
 	//bi-directional many-to-one association to Bid
-	@OneToMany(mappedBy="item")
+	@OneToMany(cascade=CascadeType.REMOVE,mappedBy="item")
 	private List<Bid> bids;
 
 	//bi-directional many-to-one association to Image
-	@OneToMany(mappedBy="item")
+	@OneToMany(cascade=CascadeType.REMOVE,mappedBy="item")
 	private List<Image> images;
 
 	//bi-directional many-to-many association to Category

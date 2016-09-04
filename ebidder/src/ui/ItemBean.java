@@ -28,6 +28,7 @@ public class ItemBean {
 	private List<Category> categories = new ArrayList<Category>();
 	private Float buy_price;
 	private Float first_bid;
+	private String loc_name;
 	private Float latitude;
 	private Float longitude;
 	private String country;
@@ -109,7 +110,7 @@ public class ItemBean {
 		item.setBuy_Price(buy_price);
 		item.setFirst_Bid(first_bid);
 		Location location = new Location();
-		location.setName("");////////////////////////////////////////
+		location.setName(loc_name);
 		location.setLatitude(latitude);
 		location.setLongitude(longitude);
 		item.setLocation(location);
@@ -121,9 +122,10 @@ public class ItemBean {
 
 		List<Image> temp_images_list = new ArrayList<Image>();
 		Image temp_image;
-		for (int i = 0; i < my_images.size(); i++) {
-			temp_image = new Image();
-			temp_image.setImage(my_images.get(i).getImage());
+		for (MyImage my_image : my_images) {
+			temp_image= new Image();
+			temp_image.setItem(item);
+			temp_image.setImage(my_image.getImage());
 			temp_images_list.add(temp_image);
 		}
 		item.setImages(temp_images_list);
@@ -138,13 +140,15 @@ public class ItemBean {
 	}
 
 	public String add_category() {
-	// TODO
-	//	if (!categories.contains(current_category)) {
-			Category category = new Category();
-			category.setName(current_category);
-			categories.add(category);
-	//	}
-
+		Category temp= new Category(); temp.setName(current_category);
+		if (categories.contains(temp)) {
+			// Emfanise minuma stin html
+			return null;
+		}
+		
+		Category category = new Category();
+		category.setName(current_category);
+		categories.add(category);
 		return null;
 	}
 
@@ -205,6 +209,14 @@ public class ItemBean {
 
 	public void setFirst_bid(Float first_bid) {
 		this.first_bid = first_bid;
+	}
+	
+	public String getLoc_name() {
+		return loc_name;
+	}
+
+	public void setLoc_name(String loc_name) {
+		this.loc_name = loc_name;
 	}
 
 	public Float getLatitude() {

@@ -26,15 +26,15 @@ public class ImageRequestServlet extends HttpServlet {
             throws ServletException, IOException {    	
     	
     	ImageDAO imageDAO = (ImageDAO) getServletContext().getAttribute("imageDAO"); 
-
         String imageId = String.valueOf(request.getPathInfo().substring(1)); 
         Image image= imageDAO.findImage(Integer.valueOf(imageId) );
+        
         
         BufferedInputStream input = null;
         BufferedOutputStream output = null;
 
         try {
-        	InputStream image_data = new ByteArrayInputStream((byte[]) image.getImage());
+        	InputStream image_data = new ByteArrayInputStream(image.getImage());
             input = new BufferedInputStream(image_data); 
             output = new BufferedOutputStream(response.getOutputStream());
             byte[] buffer = new byte[16777215];

@@ -56,6 +56,13 @@
                 	<f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="first_bid" styleClass="error"/>
+                Location Name: 
+                <h:inputText id="location_name" value="#{item.loc_name}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your location name">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="location_name" styleClass="error"/>
                 Latitude: 
                 <h:inputText id="latitude" value="#{item.latitude}"
                          validatorMessage="Maximum length is 100 characters"
