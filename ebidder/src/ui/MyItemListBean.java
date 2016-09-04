@@ -32,7 +32,7 @@ public class MyItemListBean {
 
 	public List<Item> getAll_my_items() {
 		
-		all_my_items= itemDAO.getItems("All");  //=userDAO.getItems(my_user.getCurrent());
+		all_my_items= itemDAO.getMyItems(my_user.getCurrent()); 
 		return all_my_items;
 	}
 
@@ -41,9 +41,8 @@ public class MyItemListBean {
 	}
 	   
     public String edit_item()
-    {    	
-    	//all_my_items=itemDAO.getItems(A) ;
-    	return null;
+    {    
+    	return "/restricted/edit_item";
     }
 	
     public String delete_item()

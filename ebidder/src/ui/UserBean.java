@@ -53,6 +53,11 @@ public class UserBean {
 		return "register_user";
     }
 	
+	public String guest()
+    {
+		return "/html/all_items";
+    }
+	
 	public String registerUser()
     {
         FacesContext context = FacesContext.getCurrentInstance();  

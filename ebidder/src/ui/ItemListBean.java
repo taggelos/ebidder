@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -17,9 +18,14 @@ import entities.Item;
 @SessionScoped
 public class ItemListBean {
 
-	private List<Item> items_list = new ArrayList<Item>();;
+	private List<Item> items_list;
+    @PostConstruct
+    public void init(){
+    	items_list = new ArrayList<Item>();
+    	items_list= itemDAO.getItems("All");
+    }
 
-	private String search_panel;
+	private String search_value;
 	private String selected_field;
 	private Item item_for_details;
 	private float sub_value_bid;
@@ -34,9 +40,10 @@ public class ItemListBean {
 	private BidDAO bidDAO;
 	
 	
-// Functions	
+// Functions
 	public String search()
 	{
+		items_list=itemDAO.search(selected_field,search_value);
 		return null;
 	}
 
@@ -83,12 +90,12 @@ public class ItemListBean {
 	}
 
 // Getters and Setters
-	public String getSearch_panel() {
-		return search_panel;
+	public String getSearch_value() {
+		return search_value;
 	}
 
-	public void setSearch_panel(String search_panel) {
-		this.search_panel = search_panel;
+	public void setSearch_value(String search_value) {
+		this.search_value = search_value;
 	}
 	
 	public String getSelected_field() {
@@ -100,11 +107,12 @@ public class ItemListBean {
 	}
 	
 	public List<Item> getItems_list() {
-		items_list = itemDAO.getItems("All");
+		//items_list = itemDAO.getItems("All");
 		return items_list;
 	}
 
 	public void setItems_list(List<Item> all_my_items) {
+		
 		this.items_list = all_my_items;
 	}
 
@@ -125,7 +133,7 @@ public class ItemListBean {
 	}
 
 	public String details() {
-		return "/restricted/details";
+		return "/html/details";
 	}
 
 	public UserBean getMy_user() {
@@ -150,13 +158,6 @@ public class ItemListBean {
 
 	public void setSub_value_bid(float sub_value_bid) {
 		this.sub_value_bid = sub_value_bid;
-	}
-
-	public String foo() {
-		Item a = new Item();
-		a = item_for_details;
-		return null;
-
 	}
 
 }

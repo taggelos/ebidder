@@ -1,6 +1,8 @@
 package db;
 
 import entities.Item;
+import entities.User;
+
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -95,7 +97,80 @@ public class ItemDAO {
 		this.categoryDAO = categoryDAO;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Item> getMyItems(User user)
+	{		
+		List<Item> items = null;
+		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 
+		Query q=null;		
+		q = em.createQuery("Select i from Item i where i.user = :user "); 
+		q.setParameter("user", user);
+		items = q.getResultList();
+		tx.commit();
+		em.close();
+		return items;		
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Item> search(String field,String value)
+	{
+		if ( field.equals("price")  )
+		{
+	        try {
+	        	Float.valueOf(value);
+	        } catch (NumberFormatException e) {
+	            return null;
+	        }
+		}
+		
+		List<Item> items = null;
+		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query q=null;
+		
+		if (field.equals("all"))
+		{
+			q = em.createNamedQuery("Item.findAll");
+		}
+		else if (field.equals("category"))
+		{
+			q = em.createQuery("Select i from Item i where :category = ANY (Select c.name from i.categories c)"); 
+			q.setParameter("category", value);
+		}
+		else if (field.equals("description"))
+		{
+			q = em.createQuery("Select i from Item i where i.description like :description "); 
+			q.setParameter("description", "%"+value+"%");
+		}
+		else if (field.equals("price"))
+		{			
+			q = em.createQuery("Select i from Item i where i.currently = :price "); 
+			q.setParameter("price", Float.valueOf(value));
+		}
+		else if (field.equals("location"))
+		{
+			q = em.createQuery("Select i from Item i where :location = ANY (Select l.name from i.location l) "); 
+			q.setParameter("location", value);
+		}
+
+		if (q!=null)
+		{
+			items = q.getResultList();
+		}
+		
+		tx.commit();
+		em.close();
+		return items;		
+	}
+	
+	
 	public String[] insertItem(Item item) {
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();

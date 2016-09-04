@@ -74,7 +74,7 @@ public class ItemBean {
 	}
 
 	public String all_items() {
-		return "/restricted/all_items";
+		return "/html/all_items";
 	}
 
 	public String create() {

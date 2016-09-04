@@ -91,7 +91,7 @@
 		</h:panelGrid>			
 				 
     	<h:panelGrid columns="1"> 
-			<h:form>
+			<h:form rendered="#{ not empty(user.current) }" >
 				 <h:inputText value="#{item_list.sub_value_bid}"/>				
 				<h:commandButton id="submit" value="Submit your bid" onclick="return confirm('Are you sure?')" action="#{item_list.submit_bid}" />
 			</h:form> 
