@@ -437,18 +437,33 @@
                	</h:form>
                 <h:message for="image" styleClass="error"/>
                 
-                Selected Images:				
-				<h:dataTable id="added_images" value="#{my_item_list.item_for_change.images}" var="my_img">					
+                Selected Images:
+                <h:column>				
+					<h:dataTable id="added_images" value="#{my_item_list.my_images}" var="my_img">					
+						<h:column>
+							#{my_img.getFilename()} 
+						</h:column> 
+						<h:column>
+							<h:commandButton value="delete_image" action="#{my_item_list.delete_image}">
+								<f:setPropertyActionListener target="#{my_item_list.my_image_for_delete}"
+								value="#{my_img}"/>
+							</h:commandButton>	
+						</h:column> 
+					</h:dataTable>
+					<h:dataTable id="Images" value="#{ my_item_list.item_for_change.images }" var="img" 
+	    			styleClass="userTable" headerClass="userTableHeader"
+					rowClasses="userTableOddRow,userTableEvenRow">	
 					<h:column>
-						#{my_img.getFilename()} 
-					</h:column> 
+						<h:graphicImage width="80" height="80" value="/images/#{img.imageID}"  />						
+					</h:column>
 					<h:column>
-						<h:commandButton value="delete_image" action="#{my_item_list.delete_image}">
-							<f:setPropertyActionListener target="#{my_item_list.my_image_for_delete}"
-							value="#{my_img}" /> 
+						<h:commandButton value="delete_saved_image" action="#{my_item_list.delete_saved_image}">
+							<f:setPropertyActionListener target="#{my_item_list.saved_image_for_delete}"
+							value="#{img}"/>
 						</h:commandButton>	
-					</h:column> 
+					</h:column>
 				</h:dataTable>
+				</h:column>
 				<h:message for="added_images" styleClass="error"/> 
   	           		
             </h:panelGrid>

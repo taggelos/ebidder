@@ -3,6 +3,7 @@ package ui;
 import javax.swing.JOptionPane;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -22,6 +23,7 @@ import javax.servlet.http.Part;
 import db.ItemDAO;
 import db.UserDAO;
 import entities.Category;
+import entities.Image;
 import entities.Item;
 
 
@@ -48,6 +50,8 @@ public class MyItemListBean {
 	private Category category_for_delete;
 	private Part current_image_part;	
 	private MyImage my_image_for_delete;
+	private List<MyImage> my_images = new ArrayList<MyImage>();
+	private Image saved_image_for_delete;
 
 	private String started_day; 
 	private String started_month; 
@@ -75,6 +79,20 @@ public class MyItemListBean {
 	    item_for_change.setStarted(started_date);
 	    item_for_change.setEnds(ends_date);
 		item_for_change.setCurrently(item_for_change.getFirst_Bid());				
+		
+		List<Image> temp_images_list = new ArrayList<Image>();
+		Image temp_image;
+		for (MyImage my_image : my_images) {
+			temp_image= new Image();
+			temp_image.setItem(item_for_change);
+			temp_image.setImage(my_image.getImage());
+			temp_images_list.add(temp_image);
+		}
+		temp_images_list.addAll(item_for_change.getImages());
+		item_for_change.setImages(temp_images_list);
+		
+		System.out.println(item_for_change.getImages().size());
+		
 		String[] result = itemDAO.insertItem(item_for_change);
     	return null;
     }
@@ -101,14 +119,8 @@ public class MyItemListBean {
 		return null;
 	}
 	
-	public String add_image()
-	{	
-		/*
-		List<Category> temp_cat_list= new ArrayList<Category>();
-		temp_cat_list= item_for_change.getCategories();
-		temp_cat_list.remove(category_for_delete);
-		item_for_change.setCategories(temp_cat_list);
-		
+	public String add_image() throws IOException
+	{		
 		MyImage myimage = new MyImage();
 		myimage.setFilename(current_image_part.getSubmittedFileName());
 
@@ -118,17 +130,23 @@ public class MyItemListBean {
 		for (int length = 0; (length = input.read(buffer)) > 0;)
 			output.write(buffer, 0, length);
 		myimage.setImage(output.toByteArray());
-
 		my_images.add(myimage);
-		return null;
-		*/
+		
 		return null;
 	}
 	
 	public String delete_image()
 	{
-		//my_images.remove(my_image_for_delete);
-
+		my_images.remove(my_image_for_delete);
+		return null;
+	}
+	
+	public String delete_saved_image()
+	{
+		List<Image> temp_img_list= new ArrayList<Image>();
+		temp_img_list= item_for_change.getImages();
+		temp_img_list.remove(saved_image_for_delete);
+		item_for_change.setImages(temp_img_list);
 		return null;
 	}
 	
@@ -220,6 +238,30 @@ public class MyItemListBean {
 
 	public void setCurrent_image_part(Part current_image_part) {
 		this.current_image_part = current_image_part;
+	}
+	
+	public MyImage getMy_image_for_delete() {
+		return my_image_for_delete;
+	}
+
+	public void setMy_image_for_delete(MyImage my_image_for_delete) {
+		this.my_image_for_delete = my_image_for_delete;
+	}
+
+	public List<MyImage> getMy_images() {
+		return my_images;
+	}
+
+	public void setMy_images(List<MyImage> my_images) {
+		this.my_images = my_images;
+	}
+	
+	public Image getSaved_image_for_delete() {
+		return saved_image_for_delete;
+	}
+
+	public void setSaved_image_for_delete(Image saved_image_for_delete) {
+		this.saved_image_for_delete = saved_image_for_delete;
 	}
 	
     public Category getCategory_for_delete() {
