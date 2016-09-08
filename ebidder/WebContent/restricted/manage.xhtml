@@ -24,57 +24,36 @@
         <h:form>
     		<h:dataTable id="Items" value="#{ my_item_list.all_my_items }" var="itm"	
 			styleClass="userTable" headerClass="userTableHeader"
-			rowClasses="userTableOddRow,userTableEvenRow">				
+			rowClasses="userTableOddRow,userTableEvenRow">
+
+				<h:column>
+				<f:facet name="header">Image</f:facet>
+					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.images) }" value="/images/${itm.getImages().get(0).imageID}"  />		
+				</h:column>
 				<h:column>
 				<f:facet name="header">Name</f:facet>
 					 #{itm.getName()}
-				</h:column>
+				</h:column>			
 				<h:column>
-				<f:facet name="header">Category</f:facet>
-					 #{itm.getName()}
-				</h:column>
-				<h:column>
-				<f:facet name="header">Currently</f:facet>
-					 #{itm.getCurrently()}
-				</h:column>
-				<h:column>
-				<f:facet name="header">Buy_Price</f:facet>
-					 #{itm.getBuy_Price()}
-				</h:column>
-				<h:column>
-				<f:facet name="header">First_Bid</f:facet>
-					 #{itm.getFirst_Bid()}
-				</h:column>
-				<h:column>
-				<f:facet name="header">Number_of_Bids</f:facet>
-					 #{itm.getNumber_of_Bids()}
-				</h:column>
-				<h:column>
-				<f:facet name="header">Country</f:facet>
-					 #{itm.getCountry()}
-				</h:column>
-				<h:column>
-				<f:facet name="header">Started</f:facet>
-					 #{itm.getStarted()}
-				</h:column>
-				<h:column>
-				<f:facet name="header">Ends</f:facet>
-					 #{itm.getEnds()}
-				</h:column>
-				<h:column>
-					<h:commandButton value="Edit" action="#{my_item_list.edit_item()}">
-						<f:setPropertyActionListener target="#{my_item_list.item_for_edit}"
+					<h:commandButton value="More" action="#{my_item_list.more_item()}">
+						<f:setPropertyActionListener target="#{item_list.item_for_details}"
 						value="#{itm}" />
 					</h:commandButton>
 				</h:column>
 				<h:column>
-					<h:commandButton value="delete" action="#{my_item_list.delete_item()}">
-						<f:setPropertyActionListener target="#{my_item_list.item_for_delete}"
+					<h:commandButton value="Edit" action="#{my_item_list.edit_item()}" rendered="#{my_item_list.isCan_change( itm.started,itm.number_of_Bids )}" >
+						<f:setPropertyActionListener target="#{my_item_list.item_for_change}"
+						value="#{itm}" />
+					</h:commandButton>
+				</h:column>
+				<h:column>			
+					<h:commandButton value="Delete" rendered="#{my_item_list.isCan_change( itm.started,itm.number_of_Bids )}" action="#{my_item_list.delete_item()}">						
+						<f:setPropertyActionListener target="#{my_item_list.item_for_change}"
 						value="#{itm}" />
 					</h:commandButton>
 				</h:column>
 			</h:dataTable>
-        </h:form>
+        </h:form> 
         <h:form>
             <h:commandButton id="logout" value="Logout" action="#{user.logout}"/>
         </h:form>

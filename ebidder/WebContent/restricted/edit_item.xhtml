@@ -5,17 +5,456 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Manage Items</title>
+        <title>Update Items</title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
-    	elamamam
-    	
-    	
-    	
-    	
-    	
-    	
-  	
-  	</h:body>
+        <h:form enctype="multipart/form-data">
+            <h1> Update Item </h1>   
+            <h:panelGrid columns="3">
+                Name: 
+                <h:inputText id="name" value="#{my_item_list.item_for_change.name}" 
+                             validatorMessage="Maximum length is 50 characters"
+                             required="true" requiredMessage="Please enter item's name">
+                     <f:validateLength maximum="50"/>
+                </h:inputText>                  
+                <h:message for="name" styleClass="error"/>
+                Category: 
+                <h:panelGrid columns="2">
+	                <h:inputText id="category" value="#{my_item_list.current_category}" 
+	                             validatorMessage="Maximum length is 15 characters">
+	                	<f:validateLength maximum="15"/>
+	                </h:inputText>
+	                <h:commandButton value="Add" action="#{my_item_list.add_category}" />	
+                </h:panelGrid>
+                <h:message for="category" styleClass="error"/>
+                 
+               	Selected Categories				
+				<h:dataTable id="added_categories" value="#{my_item_list.item_for_change.categories }" var="cat">					
+					<h:column>
+					 #{cat.getName()}
+					</h:column>
+					<h:column>
+						<h:commandButton value="delete" action="#{my_item_list.delete_category}">
+							<f:setPropertyActionListener target="#{my_item_list.category_for_delete}"
+							value="#{cat}" />
+						</h:commandButton>
+					</h:column>
+				</h:dataTable>
+				<h:message for="added_categories" styleClass="error"/>
+                                       
+                Buy_Price: 
+                <h:inputText id="buy_price" value="#{my_item_list.item_for_change.buy_Price}"
+                         validatorMessage="Maximum length is 100 characters">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="buy_price" styleClass="error"/>   
+                First_Bid: 
+                <h:inputText id="first_bid" value="#{my_item_list.item_for_change.first_Bid}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter first_bid">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="first_bid" styleClass="error"/>
+                Location Name: 
+                <h:inputText id="location_name" value="#{my_item_list.item_for_change.location.name}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your location name">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="location_name" styleClass="error"/>
+                Latitude: 
+                <h:inputText id="latitude" value="#{my_item_list.item_for_change.location.latitude}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your location">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="location" styleClass="error"/>
+                Longitude: 
+                <h:inputText id="longitude" value="#{my_item_list.item_for_change.location.longitude}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your location">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="location" styleClass="error"/>
+                Country: 
+                <h:inputText id="country" value="#{my_item_list.item_for_change.country}"
+                         validatorMessage="Maximum length is 100 characters"
+                         required="true" requiredMessage="Please enter your country">
+                	<f:validateLength maximum="100"/>
+                </h:inputText>
+                <h:message for="country" styleClass="error"/>
+                
+                Started:                 
+                <h:panelGrid columns="5">
+	                <h:column>
+	                	<h:selectOneMenu value="#{my_item_list.started_day}">
+					   	<f:selectItem itemValue="1" itemLabel="1" />
+					   	<f:selectItem itemValue="2" itemLabel="2" />
+					   	<f:selectItem itemValue="3" itemLabel="3" />
+					   	<f:selectItem itemValue="4" itemLabel="4" />
+					   	<f:selectItem itemValue="5" itemLabel="5" />
+					   	<f:selectItem itemValue="6" itemLabel="6" />
+					   	<f:selectItem itemValue="7" itemLabel="7" />
+					   	<f:selectItem itemValue="8" itemLabel="8" />
+					   	<f:selectItem itemValue="9" itemLabel="9" />
+					   	<f:selectItem itemValue="10" itemLabel="10" />
+					   	<f:selectItem itemValue="11" itemLabel="11" />
+					   	<f:selectItem itemValue="12" itemLabel="12" />
+					   	<f:selectItem itemValue="13" itemLabel="13" />
+					   	<f:selectItem itemValue="14" itemLabel="14" />
+					   	<f:selectItem itemValue="15" itemLabel="15" />
+					   	<f:selectItem itemValue="16" itemLabel="16" />
+					   	<f:selectItem itemValue="17" itemLabel="17" />
+					   	<f:selectItem itemValue="18" itemLabel="18" />
+					   	<f:selectItem itemValue="19" itemLabel="19" />
+					   	<f:selectItem itemValue="20" itemLabel="20" />
+					   	<f:selectItem itemValue="21" itemLabel="21" />
+					   	<f:selectItem itemValue="22" itemLabel="22" />
+					   	<f:selectItem itemValue="23" itemLabel="23" />
+					   	<f:selectItem itemValue="24" itemLabel="24" />
+					   	<f:selectItem itemValue="25" itemLabel="25" />
+					   	<f:selectItem itemValue="26" itemLabel="26" />
+					   	<f:selectItem itemValue="27" itemLabel="27" />
+					   	<f:selectItem itemValue="28" itemLabel="28" />
+					   	<f:selectItem itemValue="29" itemLabel="29" />
+					   	<f:selectItem itemValue="30" itemLabel="30" />
+					   	<f:selectItem itemValue="31" itemLabel="31" />
+					</h:selectOneMenu>
+	              	</h:column>
+					<h:column>		
+		                <h:selectOneMenu value="#{my_item_list.started_month}">
+						   	<f:selectItem itemValue="1" itemLabel="Jan" />
+						   	<f:selectItem itemValue="2" itemLabel="Feb" />
+						   	<f:selectItem itemValue="3" itemLabel="Marc" />
+						   	<f:selectItem itemValue="4" itemLabel="Apr" />
+						   	<f:selectItem itemValue="5" itemLabel="May" />
+						   	<f:selectItem itemValue="6" itemLabel="Jun" />
+						   	<f:selectItem itemValue="7" itemLabel="Jul" />
+						   	<f:selectItem itemValue="8" itemLabel="Aug" />				   		
+						   	<f:selectItem itemValue="9" itemLabel="Sep" />
+						   	<f:selectItem itemValue="10" itemLabel="Oct" />
+						   	<f:selectItem itemValue="11" itemLabel="Nov" />
+						   	<f:selectItem itemValue="12" itemLabel="Dec" />				   	
+						</h:selectOneMenu>
+					</h:column>
+					<h:column>		
+		                <h:selectOneMenu value="#{my_item_list.started_year}">
+						   	<f:selectItem itemValue="2016" itemLabel="2016" />
+						   	<f:selectItem itemValue="2017" itemLabel="2017" />
+						   	<f:selectItem itemValue="2018" itemLabel="2018" />
+						   	<f:selectItem itemValue="2019" itemLabel="2019" />
+						   	<f:selectItem itemValue="2020" itemLabel="2020" />
+						   	<f:selectItem itemValue="2021" itemLabel="2021" />
+						   	<f:selectItem itemValue="2022" itemLabel="2022" />
+						   	<f:selectItem itemValue="2023" itemLabel="2023" />				   		
+						   	<f:selectItem itemValue="2024" itemLabel="2024" />
+						   	<f:selectItem itemValue="2025" itemLabel="2025" />
+						   	<f:selectItem itemValue="2026" itemLabel="2026" />
+						   	<f:selectItem itemValue="2027" itemLabel="2027" />	
+						   	<f:selectItem itemValue="2028" itemLabel="2028" />
+						   	<f:selectItem itemValue="2029" itemLabel="2029" />				   		
+						   	<f:selectItem itemValue="2030" itemLabel="2030" />
+						   	<f:selectItem itemValue="2031" itemLabel="2031" />
+						   	<f:selectItem itemValue="2032" itemLabel="2032" />
+						</h:selectOneMenu>
+					</h:column>
+					
+	                <h:column>
+	                	<h:selectOneMenu value="#{my_item_list.started_hour}">
+						   	<f:selectItem itemValue="0" itemLabel="00" />
+						   	<f:selectItem itemValue="1" itemLabel="01" />
+						   	<f:selectItem itemValue="2" itemLabel="02" />
+						   	<f:selectItem itemValue="3" itemLabel="03" />
+						   	<f:selectItem itemValue="4" itemLabel="04" />
+						   	<f:selectItem itemValue="5" itemLabel="05" />
+						   	<f:selectItem itemValue="6" itemLabel="06" />
+						   	<f:selectItem itemValue="7" itemLabel="07" />
+						   	<f:selectItem itemValue="8" itemLabel="08" />
+						   	<f:selectItem itemValue="9" itemLabel="09" />
+						   	<f:selectItem itemValue="10" itemLabel="10" />
+						   	<f:selectItem itemValue="11" itemLabel="11" />
+						   	<f:selectItem itemValue="12" itemLabel="12" />
+						   	<f:selectItem itemValue="13" itemLabel="13" />
+						   	<f:selectItem itemValue="14" itemLabel="14" />
+						   	<f:selectItem itemValue="15" itemLabel="15" />
+						   	<f:selectItem itemValue="16" itemLabel="16" />
+						   	<f:selectItem itemValue="17" itemLabel="17" />
+						   	<f:selectItem itemValue="18" itemLabel="18" />
+						   	<f:selectItem itemValue="19" itemLabel="19" />
+						   	<f:selectItem itemValue="20" itemLabel="20" />
+						   	<f:selectItem itemValue="21" itemLabel="21" />
+						   	<f:selectItem itemValue="22" itemLabel="22" />
+						   	<f:selectItem itemValue="23" itemLabel="23" />
+						</h:selectOneMenu>
+	              	</h:column>
+					<h:column>		
+		                <h:selectOneMenu value="#{my_item_list.started_minute}">
+		                <f:selectItem itemValue="0" itemLabel="00" />
+					   	<f:selectItem itemValue="1" itemLabel="01" />
+					   	<f:selectItem itemValue="2" itemLabel="02" />
+					   	<f:selectItem itemValue="3" itemLabel="03" />
+					   	<f:selectItem itemValue="4" itemLabel="04" />
+					   	<f:selectItem itemValue="5" itemLabel="05" />
+					   	<f:selectItem itemValue="6" itemLabel="06" />
+					   	<f:selectItem itemValue="7" itemLabel="07" />
+					   	<f:selectItem itemValue="8" itemLabel="08" />
+					   	<f:selectItem itemValue="9" itemLabel="09" />
+					   	<f:selectItem itemValue="10" itemLabel="10" />
+					   	<f:selectItem itemValue="11" itemLabel="11" />
+					   	<f:selectItem itemValue="12" itemLabel="12" />
+					   	<f:selectItem itemValue="13" itemLabel="13" />
+					   	<f:selectItem itemValue="14" itemLabel="14" />
+					   	<f:selectItem itemValue="15" itemLabel="15" />
+					   	<f:selectItem itemValue="16" itemLabel="16" />
+					   	<f:selectItem itemValue="17" itemLabel="17" />
+					   	<f:selectItem itemValue="18" itemLabel="18" />
+					   	<f:selectItem itemValue="19" itemLabel="19" />
+					   	<f:selectItem itemValue="20" itemLabel="20" />
+					   	<f:selectItem itemValue="21" itemLabel="21" />
+					   	<f:selectItem itemValue="22" itemLabel="22" />
+					   	<f:selectItem itemValue="23" itemLabel="23" />
+					   	<f:selectItem itemValue="24" itemLabel="24" />
+					   	<f:selectItem itemValue="25" itemLabel="25" />
+					   	<f:selectItem itemValue="26" itemLabel="26" />
+					   	<f:selectItem itemValue="27" itemLabel="27" />
+					   	<f:selectItem itemValue="28" itemLabel="28" />
+					   	<f:selectItem itemValue="29" itemLabel="29" />
+					   	<f:selectItem itemValue="30" itemLabel="30" />
+					   	<f:selectItem itemValue="31" itemLabel="31" />
+					   	<f:selectItem itemValue="32" itemLabel="32" />
+					   	<f:selectItem itemValue="33" itemLabel="33" />
+					   	<f:selectItem itemValue="34" itemLabel="34" />
+					   	<f:selectItem itemValue="35" itemLabel="35" />
+					   	<f:selectItem itemValue="36" itemLabel="36" />
+					   	<f:selectItem itemValue="37" itemLabel="37" />
+					   	<f:selectItem itemValue="38" itemLabel="38" />
+					   	<f:selectItem itemValue="39" itemLabel="39" />
+					   	<f:selectItem itemValue="40" itemLabel="40" />
+					   	<f:selectItem itemValue="41" itemLabel="41" />
+					   	<f:selectItem itemValue="42" itemLabel="42" />
+					   	<f:selectItem itemValue="43" itemLabel="43" />
+					   	<f:selectItem itemValue="44" itemLabel="44" />
+					   	<f:selectItem itemValue="45" itemLabel="45" />
+					   	<f:selectItem itemValue="46" itemLabel="46" />
+					   	<f:selectItem itemValue="47" itemLabel="47" />
+					   	<f:selectItem itemValue="48" itemLabel="48" />
+					   	<f:selectItem itemValue="49" itemLabel="49" />
+					   	<f:selectItem itemValue="50" itemLabel="50" />
+					   	<f:selectItem itemValue="51" itemLabel="51" />
+					   	<f:selectItem itemValue="52" itemLabel="52" />
+					   	<f:selectItem itemValue="53" itemLabel="53" />
+					   	<f:selectItem itemValue="54" itemLabel="54" />
+					   	<f:selectItem itemValue="55" itemLabel="55" />
+					   	<f:selectItem itemValue="56" itemLabel="56" />
+					   	<f:selectItem itemValue="57" itemLabel="57" />
+					   	<f:selectItem itemValue="58" itemLabel="58" />
+					   	<f:selectItem itemValue="59" itemLabel="59" />		   	
+						</h:selectOneMenu>
+					</h:column>	
+			    </h:panelGrid>
+				<h:message for="description" styleClass="error"/>                     
+                Ends: 
+                <h:panelGrid columns="5">
+	                <h:column>
+	                	<h:selectOneMenu value="#{my_item_list.ends_day}">
+					   	<f:selectItem itemValue="1" itemLabel="1" />
+					   	<f:selectItem itemValue="2" itemLabel="2" />
+					   	<f:selectItem itemValue="3" itemLabel="3" />
+					   	<f:selectItem itemValue="4" itemLabel="4" />
+					   	<f:selectItem itemValue="5" itemLabel="5" />
+					   	<f:selectItem itemValue="6" itemLabel="6" />
+					   	<f:selectItem itemValue="7" itemLabel="7" />
+					   	<f:selectItem itemValue="8" itemLabel="8" />
+					   	<f:selectItem itemValue="9" itemLabel="9" />
+					   	<f:selectItem itemValue="10" itemLabel="10" />
+					   	<f:selectItem itemValue="11" itemLabel="11" />
+					   	<f:selectItem itemValue="12" itemLabel="12" />
+					   	<f:selectItem itemValue="13" itemLabel="13" />
+					   	<f:selectItem itemValue="14" itemLabel="14" />
+					   	<f:selectItem itemValue="15" itemLabel="15" />
+					   	<f:selectItem itemValue="16" itemLabel="16" />
+					   	<f:selectItem itemValue="17" itemLabel="17" />
+					   	<f:selectItem itemValue="18" itemLabel="18" />
+					   	<f:selectItem itemValue="19" itemLabel="19" />
+					   	<f:selectItem itemValue="20" itemLabel="20" />
+					   	<f:selectItem itemValue="21" itemLabel="21" />
+					   	<f:selectItem itemValue="22" itemLabel="22" />
+					   	<f:selectItem itemValue="23" itemLabel="23" />
+					   	<f:selectItem itemValue="24" itemLabel="24" />
+					   	<f:selectItem itemValue="25" itemLabel="25" />
+					   	<f:selectItem itemValue="26" itemLabel="26" />
+					   	<f:selectItem itemValue="27" itemLabel="27" />
+					   	<f:selectItem itemValue="28" itemLabel="28" />
+					   	<f:selectItem itemValue="29" itemLabel="29" />
+					   	<f:selectItem itemValue="30" itemLabel="30" />
+					   	<f:selectItem itemValue="31" itemLabel="31" />
+					</h:selectOneMenu>
+	              	</h:column>
+					<h:column>		
+		                <h:selectOneMenu value="#{my_item_list.ends_month}">
+						   	<f:selectItem itemValue="1" itemLabel="Jan" />
+						   	<f:selectItem itemValue="2" itemLabel="Feb" />
+						   	<f:selectItem itemValue="3" itemLabel="Marc" />
+						   	<f:selectItem itemValue="4" itemLabel="Apr" />
+						   	<f:selectItem itemValue="5" itemLabel="May" />
+						   	<f:selectItem itemValue="6" itemLabel="Jun" />
+						   	<f:selectItem itemValue="7" itemLabel="Jul" />
+						   	<f:selectItem itemValue="8" itemLabel="Aug" />				   		
+						   	<f:selectItem itemValue="9" itemLabel="Sep" />
+						   	<f:selectItem itemValue="10" itemLabel="Oct" />
+						   	<f:selectItem itemValue="11" itemLabel="Nov" />
+						   	<f:selectItem itemValue="12" itemLabel="Dec" />				   	
+						</h:selectOneMenu>
+					</h:column>
+					<h:column>		
+		                <h:selectOneMenu value="#{my_item_list.ends_year}">
+						   	<f:selectItem itemValue="2016" itemLabel="2016" />
+						   	<f:selectItem itemValue="2017" itemLabel="2017" />
+						   	<f:selectItem itemValue="2018" itemLabel="2018" />
+						   	<f:selectItem itemValue="2019" itemLabel="2019" />
+						   	<f:selectItem itemValue="2020" itemLabel="2020" />
+						   	<f:selectItem itemValue="2021" itemLabel="2021" />
+						   	<f:selectItem itemValue="2022" itemLabel="2022" />
+						   	<f:selectItem itemValue="2023" itemLabel="2023" />				   		
+						   	<f:selectItem itemValue="2024" itemLabel="2024" />
+						   	<f:selectItem itemValue="2025" itemLabel="2025" />
+						   	<f:selectItem itemValue="2026" itemLabel="2026" />
+						   	<f:selectItem itemValue="2027" itemLabel="2027" />	
+						   	<f:selectItem itemValue="2028" itemLabel="2028" />
+						   	<f:selectItem itemValue="2029" itemLabel="2029" />				   		
+						   	<f:selectItem itemValue="2030" itemLabel="2030" />
+						   	<f:selectItem itemValue="2031" itemLabel="2031" />
+						   	<f:selectItem itemValue="2032" itemLabel="2032" />
+						</h:selectOneMenu>
+					</h:column>
+					
+	                <h:column>
+	                	<h:selectOneMenu value="#{my_item_list.ends_hour}">
+						   	<f:selectItem itemValue="0" itemLabel="00" />
+						   	<f:selectItem itemValue="1" itemLabel="01" />
+						   	<f:selectItem itemValue="2" itemLabel="02" />
+						   	<f:selectItem itemValue="3" itemLabel="03" />
+						   	<f:selectItem itemValue="4" itemLabel="04" />
+						   	<f:selectItem itemValue="5" itemLabel="05" />
+						   	<f:selectItem itemValue="6" itemLabel="06" />
+						   	<f:selectItem itemValue="7" itemLabel="07" />
+						   	<f:selectItem itemValue="8" itemLabel="08" />
+						   	<f:selectItem itemValue="9" itemLabel="09" />
+						   	<f:selectItem itemValue="10" itemLabel="10" />
+						   	<f:selectItem itemValue="11" itemLabel="11" />
+						   	<f:selectItem itemValue="12" itemLabel="12" />
+						   	<f:selectItem itemValue="13" itemLabel="13" />
+						   	<f:selectItem itemValue="14" itemLabel="14" />
+						   	<f:selectItem itemValue="15" itemLabel="15" />
+						   	<f:selectItem itemValue="16" itemLabel="16" />
+						   	<f:selectItem itemValue="17" itemLabel="17" />
+						   	<f:selectItem itemValue="18" itemLabel="18" />
+						   	<f:selectItem itemValue="19" itemLabel="19" />
+						   	<f:selectItem itemValue="20" itemLabel="20" />
+						   	<f:selectItem itemValue="21" itemLabel="21" />
+						   	<f:selectItem itemValue="22" itemLabel="22" />
+						   	<f:selectItem itemValue="23" itemLabel="23" />
+						</h:selectOneMenu>
+	              	</h:column>
+					<h:column>		
+		                <h:selectOneMenu value="#{my_item_list.ends_minute}">
+		                <f:selectItem itemValue="0" itemLabel="00" />
+					   	<f:selectItem itemValue="1" itemLabel="01" />
+					   	<f:selectItem itemValue="2" itemLabel="02" />
+					   	<f:selectItem itemValue="3" itemLabel="03" />
+					   	<f:selectItem itemValue="4" itemLabel="04" />
+					   	<f:selectItem itemValue="5" itemLabel="05" />
+					   	<f:selectItem itemValue="6" itemLabel="06" />
+					   	<f:selectItem itemValue="7" itemLabel="07" />
+					   	<f:selectItem itemValue="8" itemLabel="08" />
+					   	<f:selectItem itemValue="9" itemLabel="09" />
+					   	<f:selectItem itemValue="10" itemLabel="10" />
+					   	<f:selectItem itemValue="11" itemLabel="11" />
+					   	<f:selectItem itemValue="12" itemLabel="12" />
+					   	<f:selectItem itemValue="13" itemLabel="13" />
+					   	<f:selectItem itemValue="14" itemLabel="14" />
+					   	<f:selectItem itemValue="15" itemLabel="15" />
+					   	<f:selectItem itemValue="16" itemLabel="16" />
+					   	<f:selectItem itemValue="17" itemLabel="17" />
+					   	<f:selectItem itemValue="18" itemLabel="18" />
+					   	<f:selectItem itemValue="19" itemLabel="19" />
+					   	<f:selectItem itemValue="20" itemLabel="20" />
+					   	<f:selectItem itemValue="21" itemLabel="21" />
+					   	<f:selectItem itemValue="22" itemLabel="22" />
+					   	<f:selectItem itemValue="23" itemLabel="23" />
+					   	<f:selectItem itemValue="24" itemLabel="24" />
+					   	<f:selectItem itemValue="25" itemLabel="25" />
+					   	<f:selectItem itemValue="26" itemLabel="26" />
+					   	<f:selectItem itemValue="27" itemLabel="27" />
+					   	<f:selectItem itemValue="28" itemLabel="28" />
+					   	<f:selectItem itemValue="29" itemLabel="29" />
+					   	<f:selectItem itemValue="30" itemLabel="30" />
+					   	<f:selectItem itemValue="31" itemLabel="31" />
+					   	<f:selectItem itemValue="32" itemLabel="32" />
+					   	<f:selectItem itemValue="33" itemLabel="33" />
+					   	<f:selectItem itemValue="34" itemLabel="34" />
+					   	<f:selectItem itemValue="35" itemLabel="35" />
+					   	<f:selectItem itemValue="36" itemLabel="36" />
+					   	<f:selectItem itemValue="37" itemLabel="37" />
+					   	<f:selectItem itemValue="38" itemLabel="38" />
+					   	<f:selectItem itemValue="39" itemLabel="39" />
+					   	<f:selectItem itemValue="40" itemLabel="40" />
+					   	<f:selectItem itemValue="41" itemLabel="41" />
+					   	<f:selectItem itemValue="42" itemLabel="42" />
+					   	<f:selectItem itemValue="43" itemLabel="43" />
+					   	<f:selectItem itemValue="44" itemLabel="44" />
+					   	<f:selectItem itemValue="45" itemLabel="45" />
+					   	<f:selectItem itemValue="46" itemLabel="46" />
+					   	<f:selectItem itemValue="47" itemLabel="47" />
+					   	<f:selectItem itemValue="48" itemLabel="48" />
+					   	<f:selectItem itemValue="49" itemLabel="49" />
+					   	<f:selectItem itemValue="50" itemLabel="50" />
+					   	<f:selectItem itemValue="51" itemLabel="51" />
+					   	<f:selectItem itemValue="52" itemLabel="52" />
+					   	<f:selectItem itemValue="53" itemLabel="53" />
+					   	<f:selectItem itemValue="54" itemLabel="54" />
+					   	<f:selectItem itemValue="55" itemLabel="55" />
+					   	<f:selectItem itemValue="56" itemLabel="56" />
+					   	<f:selectItem itemValue="57" itemLabel="57" />
+					   	<f:selectItem itemValue="58" itemLabel="58" />
+					   	<f:selectItem itemValue="59" itemLabel="59" />		   	
+						</h:selectOneMenu>
+					</h:column>	
+			    </h:panelGrid>
+                <h:message for="ends" styleClass="error"/>         		         		
+                Description: 
+                <h:inputText id="description" value="#{my_item_list.item_for_change.description}"
+                         validatorMessage="Maximum length is 500 characters"
+                         required="true" requiredMessage="Please enter description">
+                	<f:validateLength maximum="500"/>
+                </h:inputText>
+                <h:message for="description" styleClass="error"/>     
+                Images: 				  
+				<h:form id="form" enctype="multipart/form-data">
+					<h:inputFile id="image" value="#{my_item_list.current_image_part}"/>
+                	<h:commandButton value="Save" action="#{my_item_list.add_image}"/>
+               	</h:form>
+                <h:message for="image" styleClass="error"/>
+                
+                Selected Images:				
+				<h:dataTable id="added_images" value="#{my_item_list.item_for_change.images}" var="my_img">					
+					<h:column>
+						#{my_img.getFilename()} 
+					</h:column> 
+					<h:column>
+						<h:commandButton value="delete_image" action="#{my_item_list.delete_image}">
+							<f:setPropertyActionListener target="#{my_item_list.my_image_for_delete}"
+							value="#{my_img}" /> 
+						</h:commandButton>	
+					</h:column> 
+				</h:dataTable>
+				<h:message for="added_images" styleClass="error"/> 
+  	           		
+            </h:panelGrid>
+            <p/>    
+           	<h:commandButton id="update_item" value="Update item" action="#{my_item_list.update_item}"/>
+            <h:messages globalOnly="true" styleClass="error"/>
+        </h:form>
+    </h:body>
 </html>

@@ -4,14 +4,21 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.text.SimpleDateFormat;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
+
 
 import db.ImageDAO;
 import db.ItemDAO;
@@ -32,8 +39,6 @@ public class ItemBean {
 	private Float latitude;
 	private Float longitude;
 	private String country;
-	private Timestamp started = new Timestamp(0);
-	private Timestamp ends = new Timestamp(0);
 	private String description;
 	private List<MyImage> my_images = new ArrayList<MyImage>();
 
@@ -84,23 +89,19 @@ public class ItemBean {
 	public String edit() {
 		return "/restricted/edit_item";
 	}
-
+	
+	
 	/* Operations */
-	@SuppressWarnings("deprecation")
-	public String create_item() throws IOException {
-
-		// Thelei ki allous elegxous stis times twn pediwn
-		started.setDate(Integer.valueOf(started_day));
-		started.setMonth(Integer.valueOf(started_month));
-		started.setYear(Integer.valueOf(started_year) - 1900);
-		started.setHours(Integer.valueOf(started_hour));
-		started.setMinutes(Integer.valueOf(started_minute));
-
-		ends.setDate(Integer.valueOf(ends_day));
-		ends.setMonth(Integer.valueOf(ends_month));
-		ends.setYear(Integer.valueOf(ends_year) - 1900);
-		ends.setHours(Integer.valueOf(ends_hour));
-		ends.setMinutes(Integer.valueOf(ends_minute));
+	public String create_item() throws IOException, ParseException {
+		
+		// Thelei ki allous elegxous stis times twn pediwn			
+	    		
+	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );
+		String str_started= started_year+"-"+started_month+"-"+started_day+" "+started_hour+":"+started_minute;	
+	    Date started_date =  df.parse(str_started);  	    
+	
+		String str_ends= ends_year+"-"+ends_month+"-"+ends_day+" "+ends_hour+":"+ends_minute;	
+	    Date ends_date =  df.parse(str_ends);  
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		Item item = new Item();
@@ -115,8 +116,8 @@ public class ItemBean {
 		location.setLongitude(longitude);
 		item.setLocation(location);
 		item.setCountry(country);
-		item.setStarted(started);
-		item.setEnds(ends);
+		item.setStarted(started_date);
+		item.setEnds(ends_date);
 		item.setUser(my_user.getCurrent());
 		item.setDescription(description);
 
@@ -177,8 +178,8 @@ public class ItemBean {
 		return null;
 	}
 
+	
 	/* Getters and Setters */
-
 	public String getName() {
 		return name;
 	}
@@ -241,22 +242,6 @@ public class ItemBean {
 
 	public void setCountry(String country) {
 		this.country = country;
-	}
-
-	public Timestamp getStarted() {
-		return started;
-	}
-
-	public void setStarted(Timestamp started) {
-		this.started = started;
-	}
-
-	public Timestamp getEnds() {
-		return ends;
-	}
-
-	public void setEnds(Timestamp ends) {
-		this.ends = ends;
 	}
 
 	public String getDescription() {

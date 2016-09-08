@@ -29,7 +29,7 @@ public class ItemDAO {
 		tx.begin();
 
 		Query q;
-		q = em.createNamedQuery("Item.findAll"); //Query q = em.createQuery("Select i from item i");
+		q = em.createNamedQuery("Item.findAll");
 	
 		items = q.getResultList();
 
@@ -37,32 +37,9 @@ public class ItemDAO {
 		em.close();
 		return items;
 	}
+
 	
-/*	
-	@SuppressWarnings("unchecked")
-	public User find(String username, String password) {
-		User user = null;
-
-		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-
-		Query q = em.createQuery("Select u from User u where u.username = :username and u.password = :password");
-		q.setParameter("username", username);
-		q.setParameter("password", password);
-		List<User> users = q.getResultList();
-		tx.commit();
-		em.close();
-
-		if (users != null && users.size() == 1) {
-			user = users.get(0);
-		}
-
-		return user;
-
-	}
-*/
-	
+	// prepei na svistei
 	public String update(Item item) {
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
@@ -177,7 +154,8 @@ public class ItemDAO {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
-
+			System.out.println(item.getStarted());
+			
 			em.merge(item);			
 			em.flush(); 
 			
@@ -218,7 +196,6 @@ public class ItemDAO {
 		}
 	}
 	
-	
 	 public void setJpaResourceBean(JPAResourceBean jpaResourceBean) {
 	        this.jpaResourceBean = jpaResourceBean;
 	    }
@@ -229,3 +206,30 @@ public class ItemDAO {
 
 }
 
+
+
+
+/*	
+@SuppressWarnings("unchecked")
+public User find(String username, String password) {
+	User user = null;
+
+	EntityManager em = jpaResourceBean.getEMF().createEntityManager();
+	EntityTransaction tx = em.getTransaction();
+	tx.begin();
+
+	Query q = em.createQuery("Select u from User u where u.username = :username and u.password = :password");
+	q.setParameter("username", username);
+	q.setParameter("password", password);
+	List<User> users = q.getResultList();
+	tx.commit();
+	em.close();
+
+	if (users != null && users.size() == 1) {
+		user = users.get(0);
+	}
+
+	return user;
+
+}
+*/

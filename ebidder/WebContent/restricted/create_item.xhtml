@@ -88,7 +88,7 @@
                 Started:                 
                 <h:panelGrid columns="5">
 	                <h:column>
-	                	<h:selectOneMenu value="#{item.started_day}">
+	                	<h:selectOneMenu value="#{my_item_list.started_day}">
 					   	<f:selectItem itemValue="1" itemLabel="1" />
 					   	<f:selectItem itemValue="2" itemLabel="2" />
 					   	<f:selectItem itemValue="3" itemLabel="3" />
@@ -123,55 +123,55 @@
 					</h:selectOneMenu>
 	              	</h:column>
 					<h:column>		
-		                <h:selectOneMenu value="#{item.started_month}">
-						   	<f:selectItem itemValue="0" itemLabel="Jan" />
-						   	<f:selectItem itemValue="1" itemLabel="Feb" />
-						   	<f:selectItem itemValue="2" itemLabel="Marc" />
-						   	<f:selectItem itemValue="3" itemLabel="Apr" />
-						   	<f:selectItem itemValue="4" itemLabel="May" />
-						   	<f:selectItem itemValue="5" itemLabel="Jun" />
-						   	<f:selectItem itemValue="6" itemLabel="Jul" />
-						   	<f:selectItem itemValue="7" itemLabel="Aug" />				   		
-						   	<f:selectItem itemValue="8" itemLabel="Sep" />
-						   	<f:selectItem itemValue="9" itemLabel="Oct" />
-						   	<f:selectItem itemValue="10" itemLabel="Nov" />
-						   	<f:selectItem itemValue="11" itemLabel="Dec" />				   	
+		                <h:selectOneMenu value="#{my_item_list.started_month}">
+						   	<f:selectItem itemValue="1" itemLabel="Jan" />
+						   	<f:selectItem itemValue="2" itemLabel="Feb" />
+						   	<f:selectItem itemValue="3" itemLabel="Marc" />
+						   	<f:selectItem itemValue="4" itemLabel="Apr" />
+						   	<f:selectItem itemValue="5" itemLabel="May" />
+						   	<f:selectItem itemValue="6" itemLabel="Jun" />
+						   	<f:selectItem itemValue="7" itemLabel="Jul" />
+						   	<f:selectItem itemValue="8" itemLabel="Aug" />				   		
+						   	<f:selectItem itemValue="9" itemLabel="Sep" />
+						   	<f:selectItem itemValue="10" itemLabel="Oct" />
+						   	<f:selectItem itemValue="11" itemLabel="Nov" />
+						   	<f:selectItem itemValue="12" itemLabel="Dec" />				   	
 						</h:selectOneMenu>
 					</h:column>
 					<h:column>		
-		                <h:selectOneMenu value="#{item.started_year}">
+		                <h:selectOneMenu value="#{my_item_list.started_year}">
 						   	<f:selectItem itemValue="2016" itemLabel="2016" />
 						   	<f:selectItem itemValue="2017" itemLabel="2017" />
 						   	<f:selectItem itemValue="2018" itemLabel="2018" />
 						   	<f:selectItem itemValue="2019" itemLabel="2019" />
 						   	<f:selectItem itemValue="2020" itemLabel="2020" />
 						   	<f:selectItem itemValue="2021" itemLabel="2021" />
-						   	<f:selectItem itemValue="2020" itemLabel="2020" />
-						   	<f:selectItem itemValue="2021" itemLabel="2021" />				   		
 						   	<f:selectItem itemValue="2022" itemLabel="2022" />
-						   	<f:selectItem itemValue="2023" itemLabel="2023" />
+						   	<f:selectItem itemValue="2023" itemLabel="2023" />				   		
 						   	<f:selectItem itemValue="2024" itemLabel="2024" />
-						   	<f:selectItem itemValue="2025" itemLabel="2025" />	
+						   	<f:selectItem itemValue="2025" itemLabel="2025" />
 						   	<f:selectItem itemValue="2026" itemLabel="2026" />
-						   	<f:selectItem itemValue="2027" itemLabel="2027" />				   		
+						   	<f:selectItem itemValue="2027" itemLabel="2027" />	
 						   	<f:selectItem itemValue="2028" itemLabel="2028" />
-						   	<f:selectItem itemValue="2029" itemLabel="2029" />
+						   	<f:selectItem itemValue="2029" itemLabel="2029" />				   		
 						   	<f:selectItem itemValue="2030" itemLabel="2030" />
+						   	<f:selectItem itemValue="2031" itemLabel="2031" />
+						   	<f:selectItem itemValue="2032" itemLabel="2032" />
 						</h:selectOneMenu>
 					</h:column>
 					
 	                <h:column>
-	                	<h:selectOneMenu value="#{item.started_hour}">
-						   	<f:selectItem itemValue="00" itemLabel="00" />
-						   	<f:selectItem itemValue="01" itemLabel="01" />
-						   	<f:selectItem itemValue="02" itemLabel="02" />
-						   	<f:selectItem itemValue="03" itemLabel="03" />
-						   	<f:selectItem itemValue="04" itemLabel="04" />
-						   	<f:selectItem itemValue="05" itemLabel="05" />
-						   	<f:selectItem itemValue="06" itemLabel="06" />
-						   	<f:selectItem itemValue="07" itemLabel="07" />
-						   	<f:selectItem itemValue="08" itemLabel="08" />
-						   	<f:selectItem itemValue="09" itemLabel="09" />
+	                	<h:selectOneMenu value="#{my_item_list.started_hour}">
+						   	<f:selectItem itemValue="0" itemLabel="00" />
+						   	<f:selectItem itemValue="1" itemLabel="01" />
+						   	<f:selectItem itemValue="2" itemLabel="02" />
+						   	<f:selectItem itemValue="3" itemLabel="03" />
+						   	<f:selectItem itemValue="4" itemLabel="04" />
+						   	<f:selectItem itemValue="5" itemLabel="05" />
+						   	<f:selectItem itemValue="6" itemLabel="06" />
+						   	<f:selectItem itemValue="7" itemLabel="07" />
+						   	<f:selectItem itemValue="8" itemLabel="08" />
+						   	<f:selectItem itemValue="9" itemLabel="09" />
 						   	<f:selectItem itemValue="10" itemLabel="10" />
 						   	<f:selectItem itemValue="11" itemLabel="11" />
 						   	<f:selectItem itemValue="12" itemLabel="12" />
@@ -189,17 +189,17 @@
 						</h:selectOneMenu>
 	              	</h:column>
 					<h:column>		
-		                <h:selectOneMenu value="#{item.started_minute}">
-		                <f:selectItem itemValue="00" itemLabel="00" />
-					   	<f:selectItem itemValue="01" itemLabel="01" />
-					   	<f:selectItem itemValue="02" itemLabel="02" />
-					   	<f:selectItem itemValue="03" itemLabel="03" />
-					   	<f:selectItem itemValue="04" itemLabel="04" />
-					   	<f:selectItem itemValue="05" itemLabel="05" />
-					   	<f:selectItem itemValue="06" itemLabel="06" />
-					   	<f:selectItem itemValue="07" itemLabel="07" />
-					   	<f:selectItem itemValue="08" itemLabel="08" />
-					   	<f:selectItem itemValue="09" itemLabel="09" />
+		                <h:selectOneMenu value="#{my_item_list.started_minute}">
+		                <f:selectItem itemValue="0" itemLabel="00" />
+					   	<f:selectItem itemValue="1" itemLabel="01" />
+					   	<f:selectItem itemValue="2" itemLabel="02" />
+					   	<f:selectItem itemValue="3" itemLabel="03" />
+					   	<f:selectItem itemValue="4" itemLabel="04" />
+					   	<f:selectItem itemValue="5" itemLabel="05" />
+					   	<f:selectItem itemValue="6" itemLabel="06" />
+					   	<f:selectItem itemValue="7" itemLabel="07" />
+					   	<f:selectItem itemValue="8" itemLabel="08" />
+					   	<f:selectItem itemValue="9" itemLabel="09" />
 					   	<f:selectItem itemValue="10" itemLabel="10" />
 					   	<f:selectItem itemValue="11" itemLabel="11" />
 					   	<f:selectItem itemValue="12" itemLabel="12" />
@@ -246,10 +246,10 @@
 					   	<f:selectItem itemValue="53" itemLabel="53" />
 					   	<f:selectItem itemValue="54" itemLabel="54" />
 					   	<f:selectItem itemValue="55" itemLabel="55" />
-					   	<f:selectItem itemValue="56" itemLabel="26" />
-					   	<f:selectItem itemValue="57" itemLabel="27" />
-					   	<f:selectItem itemValue="58" itemLabel="28" />
-					   	<f:selectItem itemValue="59" itemLabel="29" />		   	
+					   	<f:selectItem itemValue="56" itemLabel="56" />
+					   	<f:selectItem itemValue="57" itemLabel="57" />
+					   	<f:selectItem itemValue="58" itemLabel="58" />
+					   	<f:selectItem itemValue="59" itemLabel="59" />		   	
 						</h:selectOneMenu>
 					</h:column>	
 			    </h:panelGrid>
@@ -257,7 +257,7 @@
                 Ends: 
                 <h:panelGrid columns="5">
 	                <h:column>
-	                	<h:selectOneMenu value="#{item.ends_day}">
+	                	<h:selectOneMenu value="#{my_item_list.ends_day}">
 					   	<f:selectItem itemValue="1" itemLabel="1" />
 					   	<f:selectItem itemValue="2" itemLabel="2" />
 					   	<f:selectItem itemValue="3" itemLabel="3" />
@@ -292,55 +292,55 @@
 					</h:selectOneMenu>
 	              	</h:column>
 					<h:column>		
-		                <h:selectOneMenu value="#{item.ends_month}">
-						   	<f:selectItem itemValue="0" itemLabel="Jan" />
-						   	<f:selectItem itemValue="1" itemLabel="Feb" />
-						   	<f:selectItem itemValue="2" itemLabel="Marc" />
-						   	<f:selectItem itemValue="3" itemLabel="Apr" />
-						   	<f:selectItem itemValue="4" itemLabel="May" />
-						   	<f:selectItem itemValue="5" itemLabel="Jun" />
-						   	<f:selectItem itemValue="6" itemLabel="Jul" />
-						   	<f:selectItem itemValue="7" itemLabel="Aug" />				   		
-						   	<f:selectItem itemValue="8" itemLabel="Sep" />
-						   	<f:selectItem itemValue="9" itemLabel="Oct" />
-						   	<f:selectItem itemValue="10" itemLabel="Nov" />
-						   	<f:selectItem itemValue="11" itemLabel="Dec" />				   	
+		                <h:selectOneMenu value="#{my_item_list.ends_month}">
+						   	<f:selectItem itemValue="1" itemLabel="Jan" />
+						   	<f:selectItem itemValue="2" itemLabel="Feb" />
+						   	<f:selectItem itemValue="3" itemLabel="Marc" />
+						   	<f:selectItem itemValue="4" itemLabel="Apr" />
+						   	<f:selectItem itemValue="5" itemLabel="May" />
+						   	<f:selectItem itemValue="6" itemLabel="Jun" />
+						   	<f:selectItem itemValue="7" itemLabel="Jul" />
+						   	<f:selectItem itemValue="8" itemLabel="Aug" />				   		
+						   	<f:selectItem itemValue="9" itemLabel="Sep" />
+						   	<f:selectItem itemValue="10" itemLabel="Oct" />
+						   	<f:selectItem itemValue="11" itemLabel="Nov" />
+						   	<f:selectItem itemValue="12" itemLabel="Dec" />				   	
 						</h:selectOneMenu>
 					</h:column>
 					<h:column>		
-		                <h:selectOneMenu value="#{item.ends_year}">
+		                <h:selectOneMenu value="#{my_item_list.ends_year}">
 						   	<f:selectItem itemValue="2016" itemLabel="2016" />
 						   	<f:selectItem itemValue="2017" itemLabel="2017" />
 						   	<f:selectItem itemValue="2018" itemLabel="2018" />
 						   	<f:selectItem itemValue="2019" itemLabel="2019" />
 						   	<f:selectItem itemValue="2020" itemLabel="2020" />
 						   	<f:selectItem itemValue="2021" itemLabel="2021" />
-						   	<f:selectItem itemValue="2020" itemLabel="2020" />
-						   	<f:selectItem itemValue="2021" itemLabel="2021" />				   		
 						   	<f:selectItem itemValue="2022" itemLabel="2022" />
-						   	<f:selectItem itemValue="2023" itemLabel="2023" />
+						   	<f:selectItem itemValue="2023" itemLabel="2023" />				   		
 						   	<f:selectItem itemValue="2024" itemLabel="2024" />
-						   	<f:selectItem itemValue="2025" itemLabel="2025" />	
+						   	<f:selectItem itemValue="2025" itemLabel="2025" />
 						   	<f:selectItem itemValue="2026" itemLabel="2026" />
-						   	<f:selectItem itemValue="2027" itemLabel="2027" />				   		
+						   	<f:selectItem itemValue="2027" itemLabel="2027" />	
 						   	<f:selectItem itemValue="2028" itemLabel="2028" />
-						   	<f:selectItem itemValue="2029" itemLabel="2029" />
+						   	<f:selectItem itemValue="2029" itemLabel="2029" />				   		
 						   	<f:selectItem itemValue="2030" itemLabel="2030" />
+						   	<f:selectItem itemValue="2031" itemLabel="2031" />
+						   	<f:selectItem itemValue="2032" itemLabel="2032" />
 						</h:selectOneMenu>
 					</h:column>
 					
 	                <h:column>
-	                	<h:selectOneMenu value="#{item.ends_hour}">
-						   	<f:selectItem itemValue="00" itemLabel="00" />
-						   	<f:selectItem itemValue="01" itemLabel="01" />
-						   	<f:selectItem itemValue="02" itemLabel="02" />
-						   	<f:selectItem itemValue="03" itemLabel="03" />
-						   	<f:selectItem itemValue="04" itemLabel="04" />
-						   	<f:selectItem itemValue="05" itemLabel="05" />
-						   	<f:selectItem itemValue="06" itemLabel="06" />
-						   	<f:selectItem itemValue="07" itemLabel="07" />
-						   	<f:selectItem itemValue="08" itemLabel="08" />
-						   	<f:selectItem itemValue="09" itemLabel="09" />
+	                	<h:selectOneMenu value="#{my_item_list.ends_hour}">
+						   	<f:selectItem itemValue="0" itemLabel="00" />
+						   	<f:selectItem itemValue="1" itemLabel="01" />
+						   	<f:selectItem itemValue="2" itemLabel="02" />
+						   	<f:selectItem itemValue="3" itemLabel="03" />
+						   	<f:selectItem itemValue="4" itemLabel="04" />
+						   	<f:selectItem itemValue="5" itemLabel="05" />
+						   	<f:selectItem itemValue="6" itemLabel="06" />
+						   	<f:selectItem itemValue="7" itemLabel="07" />
+						   	<f:selectItem itemValue="8" itemLabel="08" />
+						   	<f:selectItem itemValue="9" itemLabel="09" />
 						   	<f:selectItem itemValue="10" itemLabel="10" />
 						   	<f:selectItem itemValue="11" itemLabel="11" />
 						   	<f:selectItem itemValue="12" itemLabel="12" />
@@ -358,17 +358,17 @@
 						</h:selectOneMenu>
 	              	</h:column>
 					<h:column>		
-		                <h:selectOneMenu value="#{item.ends_minute}">
-		                <f:selectItem itemValue="00" itemLabel="00" />
-					   	<f:selectItem itemValue="01" itemLabel="01" />
-					   	<f:selectItem itemValue="02" itemLabel="02" />
-					   	<f:selectItem itemValue="03" itemLabel="03" />
-					   	<f:selectItem itemValue="04" itemLabel="04" />
-					   	<f:selectItem itemValue="05" itemLabel="05" />
-					   	<f:selectItem itemValue="06" itemLabel="06" />
-					   	<f:selectItem itemValue="07" itemLabel="07" />
-					   	<f:selectItem itemValue="08" itemLabel="08" />
-					   	<f:selectItem itemValue="09" itemLabel="09" />
+		                <h:selectOneMenu value="#{my_item_list.ends_minute}">
+		                <f:selectItem itemValue="0" itemLabel="00" />
+					   	<f:selectItem itemValue="1" itemLabel="01" />
+					   	<f:selectItem itemValue="2" itemLabel="02" />
+					   	<f:selectItem itemValue="3" itemLabel="03" />
+					   	<f:selectItem itemValue="4" itemLabel="04" />
+					   	<f:selectItem itemValue="5" itemLabel="05" />
+					   	<f:selectItem itemValue="6" itemLabel="06" />
+					   	<f:selectItem itemValue="7" itemLabel="07" />
+					   	<f:selectItem itemValue="8" itemLabel="08" />
+					   	<f:selectItem itemValue="9" itemLabel="09" />
 					   	<f:selectItem itemValue="10" itemLabel="10" />
 					   	<f:selectItem itemValue="11" itemLabel="11" />
 					   	<f:selectItem itemValue="12" itemLabel="12" />
@@ -415,14 +415,14 @@
 					   	<f:selectItem itemValue="53" itemLabel="53" />
 					   	<f:selectItem itemValue="54" itemLabel="54" />
 					   	<f:selectItem itemValue="55" itemLabel="55" />
-					   	<f:selectItem itemValue="56" itemLabel="26" />
-					   	<f:selectItem itemValue="57" itemLabel="27" />
-					   	<f:selectItem itemValue="58" itemLabel="28" />
-					   	<f:selectItem itemValue="59" itemLabel="29" />		   	
+					   	<f:selectItem itemValue="56" itemLabel="56" />
+					   	<f:selectItem itemValue="57" itemLabel="57" />
+					   	<f:selectItem itemValue="58" itemLabel="58" />
+					   	<f:selectItem itemValue="59" itemLabel="59" />		   	
 						</h:selectOneMenu>
 					</h:column>	
 			    </h:panelGrid>
-                <h:message for="ends" styleClass="error"/>         		         		
+                <h:message for="ends" styleClass="error"/>        		         		
                 Description: 
                 <h:inputText id="description" value="#{item.description}"
                          validatorMessage="Maximum length is 500 characters"
@@ -452,8 +452,8 @@
 				<h:message for="added_images" styleClass="error"/> 
   	           		
             </h:panelGrid>
-            <p/>           
-            <h:commandButton id="create_item" value="Create item" action="#{item.create_item}"/>
+            <p/>    
+           	<h:commandButton id="create_item" value="Create item" action="#{item.create_item}"/>
             <h:messages globalOnly="true" styleClass="error"/>
         </h:form>
     </h:body>
