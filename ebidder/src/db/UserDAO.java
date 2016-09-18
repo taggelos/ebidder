@@ -19,7 +19,7 @@ public class UserDAO {
 	protected JPAResourceBean jpaResourceBean;
 
 	@SuppressWarnings("unchecked")
-	public List<User> getUsers(String value) {
+	public List<User> getUsers(String value,int first,int rows) {
 		List<User> users = null;
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -35,7 +35,7 @@ public class UserDAO {
 		} else {
 			q = em.createQuery("Select u from User u where u.pending=1");
 		}
-
+		q.setFirstResult(first).setMaxResults(rows);
 		users = q.getResultList();
 
 		tx.commit();

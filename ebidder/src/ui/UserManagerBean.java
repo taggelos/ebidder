@@ -43,30 +43,25 @@ public class UserManagerBean {
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String value = params.get("action");
 
-		if (!dot.equals(value) && value != null) // dot used to recognise what
+		if (!dot.equals(value)) // dot used to recognise what
 													// we need as list to be filled by Dao
 		{
-			if (value.equals("showall")) {
-				userList = userDAO.getUsers("all");
-				dot = "showall";
+			if(value !=null){dot=value;first=0;}
+			if (dot.equals("showall")) {
+				userList = userDAO.getUsers("all",first,rows+1);
 				acceptButtonEnabled = false;
 				declineButtonEnabled = false;
 				banButtonEnabled = false;
-				first = 0;
-			} else if (value.equals("accepted")) {
-				userList = userDAO.getUsers("nopending");
-				dot = "accepted";
+			} else if (dot.equals("accepted")) {
+				userList = userDAO.getUsers("nopending",first,rows+1);
 				acceptButtonEnabled = false;
 				declineButtonEnabled = false;
 				banButtonEnabled = true;
-				first = 0;
 			} else {
-				userList = userDAO.getUsers("pending");
-				dot = "pending";
+				userList = userDAO.getUsers("pending",first,rows+1);
 				acceptButtonEnabled = true;
 				declineButtonEnabled = true;
 				banButtonEnabled = false;
-				first = 0;
 			}
 		}
 		return userList;
@@ -121,11 +116,13 @@ public class UserManagerBean {
 		else{
 			first -= rows;
 		}
+		getUserlist();
 		return null;
 	}
 	
 	public boolean getNext(){
-		return (userList.size() <= (first + rows));
+		//return (userList.size() <= (first + rows));
+		return userList.size() <= rows;
 	}
 	
 	public boolean getPrev(){
