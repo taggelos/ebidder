@@ -8,6 +8,30 @@
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
+			<script type="text/javascript">
+			    setInterval(function() { 
+			        document.getElementById('myForm:btnLoadData').click();
+			        }, 200);
+			</script>
+	
+			<h:form id="myForm">
+			    <h:commandButton id="btnLoadData" value="Hidden" 
+			        style="display:none">
+			        <f:ajax execute="@form" render=":unread_messages" />
+			    </h:commandButton>
+			</h:form>
+    
+       		<h:panelGrid columns="4">
+	    		<h:form>
+			   		<h:commandLink value="Messages" action="#{messagenotify.go_to_conversations()}" />
+				</h:form>
+ 			   	( <h:form id="unread_messages">
+	   				<h:outputText value="#{messagenotify.numofunread}"/>
+	   		  	</h:form> )
+	   		</h:panelGrid>
+
+ 
+    
             <h1> Welcome <h:outputText id="welcome" value="#{user.username}" required="true" 
                                            requiredMessage="Please enter your username"/> </h1>
             <h:form>
@@ -21,7 +45,8 @@
             <p/>
              
             <h3> Suggestions </h3> 
-            
-
+            <h:form>
+				<h:commandButton value="Message" action="#{message.go_to_message_page()}" />
+			</h:form>
     </h:body>
 </html>

@@ -90,7 +90,6 @@ public class ItemBean {
 		return "/restricted/edit_item";
 	}
 	
-	
 	/* Operations */
 	public String create_item() throws IOException, ParseException {
 		

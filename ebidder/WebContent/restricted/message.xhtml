@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Chat test!</title>
+		<h:outputStylesheet name="newcss.css" library="css"/>
+    </h:head>
+
+    <h:body> 
+
+		<script type="text/javascript">
+		    setInterval(function() { 
+		        document.getElementById('myForm:btnLoadData').click();
+		        }, 200);
+		</script>
+
+		<h:form id="myForm">
+		    <h:commandButton id="btnLoadData" value="Hidden" 
+		        style="display:none">
+		        <f:ajax execute="@form" render=":MessageTable" />
+		    </h:commandButton>
+		</h:form>
+    	 	
+   		<h:form id="MessageTable">
+			<h:dataTable id="Messages" value="#{ message.conversationMessages }" var="msg"	
+			styleClass="userTable" headerClass="userTableHeader"
+			rowClasses="userTableOddRow,userTableEvenRow">  
+			
+				<h:column>
+				<f:facet name="header">Time</f:facet>
+					[#{msg.time}]	
+				</h:column>				
+				<h:column>
+					:
+				</h:column>							
+				<h:column>   
+				<f:facet name="header">Sender</f:facet> 
+					 <b>#{msg.user1.name}</b>
+				</h:column>
+				<h:column>
+					:
+				</h:column>							
+				<h:column>   
+				<f:facet name="header">Message</f:facet> 
+					 #{msg.text}
+				</h:column>
+					
+			</h:dataTable>
+		</h:form>
+    	
+    	<p/>
+    	<h:form>
+	    	<h:inputText type="text" size="98" value="#{message.text}" />   	
+	   		<h:commandButton value="Send" action="#{message.send_message()}" />
+   		</h:form>
+    </h:body>
+</html>
