@@ -56,24 +56,27 @@ public class UserDAO {
 	 * tx.commit(); em.close(); return users; }
 	 */
 
+	
 	@SuppressWarnings("unchecked")
 	public User find(String username, String password) {
-		User user = null;
-
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
-		Query q = em.createQuery("Select u from User u where u.username = :username and u.password = :password");
+		User user=null;
+		Query q = em.createQuery("Select u from User u where u.username = :username");
 		q.setParameter("username", username);
-		q.setParameter("password", password);
 		List<User> users = q.getResultList();
 		tx.commit();
 		em.close();
-
 		if (users != null && users.size() == 1) {
 			user = users.get(0);
 		}
+
+		if (user == null || !user.getPassword().equals(password) || !user.getUsername().equals(username)) {
+			return null;
+		}
+		
 
 		return user;
 

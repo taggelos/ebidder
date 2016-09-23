@@ -176,14 +176,7 @@ public class UserBean {
     	return "/restricted/userlist";
     }
     
-    
-    public String pendinglist(){
-    	return "/restricted/pendinglist";
-    }
-    
-    public String acceptedlist(){
-    	return "/restricted/acceptedlist";
-    }
+ 
     //////////////////action="#{users.show('showall')}
     
     public boolean getLoginButtonEnabled() {

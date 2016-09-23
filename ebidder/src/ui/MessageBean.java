@@ -39,7 +39,7 @@ public class MessageBean {
 	// Functions
 	public String send_message()
 	{
-		// +Elegxos
+		// +Elegxos text
 		
 		Message message= new Message();
 		message.setUser1(getSender());
@@ -86,7 +86,7 @@ public class MessageBean {
 	
 	// Proswrino
 	public User getReceiver() {
-		//receiver=my_user.getCurrent();
+		receiver=my_user.getCurrent(); //afton p prepei (ap prohgumenh selida)
 		return receiver;
 	}
 	public void setReceiver(User receiver) {

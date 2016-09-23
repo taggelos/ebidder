@@ -16,13 +16,13 @@
 		</h:form>
 		
 			
-		<h:outputText value="Incoming" rendered="#{conversation_list.isIncoming()  eq true}" style="font-weight:bold"/>	
+		<h:outputText value="Incoming" rendered="#{conversation_list.isIncoming() eq true}" style="font-weight:bold"/>	
 		<h:outputText value="Outcoming" rendered="#{conversation_list.isIncoming()eq false}" style="font-weight:bold"/>	
 				
 		<script type="text/javascript">
 		    setInterval(function() { 
 		        document.getElementById('myForm:btnLoadData').click();
-		        }, 200);
+		        }, 1000);
 		</script>
 
 		<h:form id="myForm">
