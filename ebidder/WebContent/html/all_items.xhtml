@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
-     	xmlns:f="http://java.sun.com/jsf/core">
+     	xmlns:f="http://java.sun.com/jsf/core"
+     	xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <h:title>All Items</h:title>
         <h:outputStylesheet name="newcss.css" library="css"/>
@@ -10,7 +11,11 @@
     <h:body>
     	<h1> All Items  </h1>              
 	   	<h:form> 
-	   		 
+	   		 <div style="border-width:2px; border-color:green; border-style:solid;">
+         <ui:insert name="headerVisitor" >
+            <ui:include src="/template/header.xhtml" />
+         </ui:insert> 
+     	 </div>
 	   		 <h:panelGrid columns="3">
  			 	<h:inputText id="search_value" value="#{item_list.search_value}" /> 
   			 	<h:selectOneMenu value="#{item_list.selected_field}">
@@ -46,6 +51,10 @@
 			</h:dataTable>
         </h:form>
 
-        <p/>
+<div style="border-width:2px; border-color:red; border-style:solid;">
+         <ui:insert name="footer" >
+            <ui:include src="/template/footer.xhtml" />
+         </ui:insert>
+      </div>
     </h:body>
 </html>

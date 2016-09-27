@@ -27,7 +27,8 @@ public class UserBean {
 
 	private String country;
 	private String email;
-	private String location;
+	//private String location;
+	private Location location =new Location();
 	private String phone;
 	private int rating_Bidder;
 	private int rating_Seller;
@@ -66,11 +67,13 @@ public class UserBean {
 	    user.setSurname(surname);
 	    user.setUsername(username);
 	    user.setPassword(password);
-	    Location location = new Location();
+	    /*Location location = new Location();
 	    // TODO
 	    //location.setLatitude(latitude);
 	    //location.setLatitude(latitude);
 	    location.setName(this.location);
+	    user.setLocation(location);*/
+	    
 	    user.setLocation(location);
 	    user.setCountry(country);
 	    user.setEmail(email);
@@ -103,7 +106,7 @@ public class UserBean {
          else if(current.getPending()==0){
              System.out.println(username);
              System.out.println(current);
-            return "/restricted/welcome";  //prepei na allaksei sth selida plohghshs
+            return "/restricted/welcome"; 
         }
          else {  //pending users
         	 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("You have not been registered yet!"));
@@ -120,14 +123,7 @@ public class UserBean {
     public boolean isLoggedIn() {
         return current != null;
     } 
-    
-    public String blue(){
-    	System.out.println("EDIT---CURRENT");
-    	//System.out.println(current.getUserID());
-	   // System.out.println(current.getUsername());
-		return "/restricted/edit";
-    }
-    
+
     public String submit(){
     	System.out.println("SUBMIT---CURRENT");
     	System.out.println(current.getUserID());
@@ -138,11 +134,13 @@ public class UserBean {
         user.setName(name);
 	    user.setSurname(surname);
 	    user.setUsername(username);
-	    user.setPassword(password);Location location = new Location();
+	    user.setPassword(password);
+	    /*Location location = new Location();
 	    // TODO
 	    //location.setLatitude(latitude);
 	    //location.setLatitude(latitude);
 	    location.setName(this.location);
+	    user.setLocation(location);*/
 	    user.setLocation(location);
 	    user.setCountry(country);
 	    user.setEmail(email);
@@ -181,9 +179,9 @@ public class UserBean {
     
     public boolean getLoginButtonEnabled() {
     	if (current!= null){
-    		return false;
+    		return true;
     	}
-    	return true;
+    	return false;
 	}
     
     
@@ -215,12 +213,23 @@ public class UserBean {
 		this.email = email;
 	}
 
-	public String getLocation() {
+	/*public String getLocation() {
 		return this.location;
 	}
 
 	public void setLocation(String location) {
 		this.location = location;
+	}*/
+	
+	public String getLocation() {
+		return this.location.getName();
+	}
+	
+	public void setLocation(String location) {
+		//Location l = new Location();
+		//l.setName(location);
+		//this.location=l;
+		this.location.setName(location);
 	}
 
 	public String getName() {

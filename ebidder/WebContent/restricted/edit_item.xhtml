@@ -9,6 +9,11 @@
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
+    <div style="border-width:2px; border-color:green; border-style:solid;">
+         <ui:insert name="header" >
+            <ui:include src="/template/header.xhtml" />
+         </ui:insert> 
+     	 </div>
         <h:form enctype="multipart/form-data">
             <h1> Update Item </h1>   
             <h:panelGrid columns="3">
@@ -471,5 +476,10 @@
            	<h:commandButton id="update_item" value="Update item" action="#{my_item_list.update_item}"/>
             <h:messages globalOnly="true" styleClass="error"/>
         </h:form>
+        <div style="border-width:2px; border-color:red; border-style:solid;">
+         <ui:insert name="footer" >
+            <ui:include src="/template/footer.xhtml" />
+         </ui:insert>
+      </div>
     </h:body>
 </html>

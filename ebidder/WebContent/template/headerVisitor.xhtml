@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+</head>
+<body>
+	<ui:composition>
+		<h:head>
+        	<h:outputStylesheet name="newcss.css" library="css"/>
+   		 </h:head>
+   		 <h:form id="form">
+   		 <h:column> 
+			<h:commandLink action="/html/login.xhtml">
+    			<h:graphicImage library="images" name="pic.png" style="width: 10%; height: 10%"/>​
+			</h:commandLink>
+		 </h:column>
+		 </h:form>
+		<h:form id="frm1" rendered="#{user.loginButtonEnabled}">
+			Username: <h:inputText id="username"
+				value="#{user.username}" required="true"
+				requiredMessage="Please enter your username" />
+			<h:message for="username" styleClass="error" />
+                    Password: <h:inputSecret id="password"
+				value="#{user.password}" required="true"
+				requiredMessage="Please enter your password" />
+			<h:message for="password" styleClass="error" />
+			<p />
+			<h:commandButton value="login" action="#{user.login}" />
+			<h:messages globalOnly="true" styleClass="error" />
+		</h:form>
+		<h:form rendered="#{user.loginButtonEnabled}">
+            	<h:commandButton id="Register" value="Register NOW" action="#{user.register}"/>
+        </h:form>
+	</ui:composition>
+</body>
+</html>

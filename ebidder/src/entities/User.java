@@ -48,7 +48,7 @@ public class User implements Serializable {
 	private List<Bid> bids;
 
 	//bi-directional many-to-one association to Item
-	@OneToMany(cascade=CascadeType.REMOVE,mappedBy="user")
+	@OneToMany(mappedBy="user")
 	private List<Item> items;
 
 	//bi-directional many-to-one association to Message

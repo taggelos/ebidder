@@ -1,10 +1,6 @@
 package ui;
 
-import db.ImageDAO;
 import db.MessageDAO;
-import db.UserDAO;
-import entities.Category;
-import entities.Location;
 import entities.Message;
 import entities.User;
 
@@ -12,13 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.persistence.Column;
 
 
 @ManagedBean(name="message")

@@ -2,14 +2,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Chat test!</title>
 		<h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
 
     <h:body> 
-		
+		<div style="border-width:2px; border-color:green; border-style:solid;">
+         <ui:insert name="header" >
+            <ui:include src="/template/header.xhtml" />
+         </ui:insert> 
+     	 </div>
+     	 
 		<h:form>
 	   		<h:commandButton value="Incomming" action="#{conversation_list.setIncoming()}" />
 	   		<h:commandButton value="Outcoming" action="#{conversation_list.setOutcoming()}" />				
@@ -80,6 +86,10 @@
 			</h:dataTable>
 		</h:form>
 		
-
+	<div style="border-width:2px; border-color:red; border-style:solid;">
+         <ui:insert name="footer" >
+            <ui:include src="/template/footer.xhtml" />
+         </ui:insert>
+      </div>
     </h:body>
 </html>

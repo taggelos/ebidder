@@ -2,12 +2,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Create Item</title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
+    <div style="border-width:2px; border-color:green; border-style:solid;">
+         <ui:insert name="header" >
+            <ui:include src="/template/header.xhtml" />
+         </ui:insert> 
+     	 </div>
         <h:form enctype="multipart/form-data">
             <h1> Create Item </h1>           
             <h:panelGrid columns="3">
@@ -456,5 +462,11 @@
            	<h:commandButton id="create_item" value="Create item" action="#{item.create_item}"/>
             <h:messages globalOnly="true" styleClass="error"/>
         </h:form>
+        
+        <div style="border-width:2px; border-color:red; border-style:solid;">
+         <ui:insert name="footer" >
+            <ui:include src="/template/footer.xhtml" />
+         </ui:insert>
+      </div>
     </h:body>
 </html>

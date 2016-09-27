@@ -1,5 +1,6 @@
 package db;
 
+import entities.Item;
 import entities.User;
 import java.util.List;
 
@@ -125,6 +126,8 @@ public class UserDAO {
 		}
 	}
 
+private ItemDAO itemDAO;
+	
 	public String remove(User user) {
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
@@ -132,6 +135,9 @@ public class UserDAO {
 		tx.begin();
 		try {
 			user = em.merge(user);
+			for (Item item : user.getItems()){
+				itemDAO.remove(item);
+			}
 			em.remove(user);
 			em.flush();
 			tx.commit();

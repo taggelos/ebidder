@@ -2,23 +2,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Edit User</title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
+    <div style="border-width:2px; border-color:green; border-style:solid;">
+         <ui:insert name="header" >
+            <ui:include src="/template/header.xhtml" />
+         </ui:insert> 
+     	 </div>
         <h:form>
             <h1> Edit Form </h1>
             <h:panelGrid columns="3">
-            	UserID 
-                <h:inputText id="userID" value="#{manager.userID}" 
-                             validatorMessage="Maximum length is 50 characters"
-                             required="true" requiredMessage="Please enter your username">
-                     <f:validateLength maximum="50"/>
-                </h:inputText> 
-                <h:message for="userID" styleClass="error"/>    
-                Username 
+            	Username 
                 <h:inputText id="username" value="#{manager.username}" 
                              validatorMessage="Maximum length is 50 characters"
                              required="true" requiredMessage="Please enter your username">
@@ -42,35 +41,35 @@
                 Location: 
                 <h:inputText id="location" value="#{manager.location}"
                          validatorMessage="Maximum length is 100 characters"
-                         required="true" requiredMessage="Please enter your last name">
+                         required="true" requiredMessage="Please enter your Location">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="location" styleClass="error"/>
                 Country: 
                 <h:inputText id="country" value="#{manager.country}"
                          validatorMessage="Maximum length is 100 characters"
-                         required="true" requiredMessage="Please enter your last name">
+                         required="true" requiredMessage="Please enter your Country">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="country" styleClass="error"/>
                 E-mail: 
                 <h:inputText id="email" value="#{manager.email}"
                          validatorMessage="Maximum length is 100 characters"
-                         required="true" requiredMessage="Please enter your last name">
+                         required="true" requiredMessage="Please enter your E-mail">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="email" styleClass="error"/>
                 Tax-Registration-Number: 
                 <h:inputText id="taxRegistrationNumber" value="#{manager.taxRegistrationNumber}"
                          validatorMessage="Maximum length is 100 characters"
-                         required="true" requiredMessage="Please enter your last name">
+                         required="true" requiredMessage="Please enter your Tax-Registration-Number">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="taxRegistrationNumber" styleClass="error"/>
                 Phone: 
                 <h:inputText id="phone" value="#{manager.phone}"
                          validatorMessage="Maximum length is 100 characters"
-                         required="true" requiredMessage="Please enter your last name">
+                         required="true" requiredMessage="Please enter your Phone">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="phone" styleClass="error"/>
@@ -83,5 +82,10 @@
         <h:form>
             <h:commandButton id="logout" value="Logout" action="#{user.logout}"/>
         </h:form>
+        <div style="border-width:2px; border-color:red; border-style:solid;">
+         <ui:insert name="footer" >
+            <ui:include src="/template/footer.xhtml" />
+         </ui:insert>
+      </div>
     </h:body>
 </html>

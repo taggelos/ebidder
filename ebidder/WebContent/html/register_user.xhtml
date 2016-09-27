@@ -8,6 +8,7 @@
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
+    	
         <h:form>
             <h1> Registration Form </h1>
             <h:panelGrid columns="3">
@@ -18,13 +19,21 @@
                      <f:validateLength maximum="50"/>
                 </h:inputText>                  
                 <h:message for="username" styleClass="error"/>
-                Password: 
-                <h:inputSecret id="password" value="#{user.password}" 
-                             validatorMessage="Maximum length is 15 characters"
-                             required="true" requiredMessage="Please enter your password">
-                <f:validateLength maximum="15"/>
-                </h:inputSecret>                  
-                <h:message for="password" styleClass="error"/>
+                
+                Password:
+				<h:inputSecret id="password" value="#{user.password}" required="true">
+				    <f:validator validatorId="confirmPasswordValidator" />
+				    <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+				    <f:ajax event="blur" execute="password confirm" render="m_password" />
+				</h:inputSecret>
+				<h:message id="m_password" for="password" />
+				
+				Confirm Password:
+				<h:inputSecret id="confirm" binding="#{confirmPassword}" required="true">
+				    <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
+				</h:inputSecret>
+				<h:message id="m_confirm" for="confirm" />
+
                 Name: 
                 <h:inputText id="name" value="#{user.name}" 
                              validatorMessage="Maximum length is 50 characters"

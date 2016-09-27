@@ -1,6 +1,7 @@
 package ui;
 
 import db.UserDAO;
+import entities.Location;
 import entities.User;
 
 import java.util.List;
@@ -167,7 +168,17 @@ public class UserManagerBean {
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	
+	public String getLocation() {
+		return user.getLocation().getName();
+	}
+	
+	public void setLocation(String location) {
+		Location l = new Location();
+		l.setName(location);
+		user.setLocation(l);
+	}
+	
 	public int getUserID() {
 		return user.getUserID();
 	}
