@@ -49,6 +49,7 @@ public class ItemXml {
 	private int itemID;
 
 	private SellerXml seller = new SellerXml();
+	
 
 	/////////////////////////////////////////////////////////////////////// setters
 	/////////////////////////////////////////////////////////////////////// getters
@@ -194,14 +195,15 @@ public class ItemXml {
 		item.setItemID(itemID);
 		item.setCategories(categories);
 		item.setBids(bidXmlToBid(bids.getBids()));
-		item.setUser(seller.getSeller());
+		item.setSeller(seller.getSeller());
 		item.setCurrently(currently);
 		item.setBuy_Price(buy_Price);
 		item.setEnds(ends);
 		item.setStarted(started);
 		item.setNumber_of_Bids(number_of_Bids);
 		item.setFirst_Bid(first_Bid);
-		item.setLocation(location.getLocation());
+		//item.setLocation(location.getLocation());
+		item.setLocation(seller.getSeller().getUser().getLocation());
 	}
 
 	public Item getItem() {

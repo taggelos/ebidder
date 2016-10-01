@@ -5,15 +5,17 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Register User</title>
-        <h:outputStylesheet name="newcss.css" library="css"/>
+        <h:outputStylesheet name="style.css" library="css"/>
     </h:head>
     <h:body>
-    	
+    	<div class="login-box">
+				<div class="box-header">	
+            		<h1> Registration Form </h1>​
+				</div>
         <h:form>
-            <h1> Registration Form </h1>
             <h:panelGrid columns="3">
                 Username: 
-                <h:inputText id="username" value="#{user.username}" 
+                <h:inputText id="username" value="#{user.username}" styleClass = "position: absolute;"
                              validatorMessage="Maximum length is 50 characters"
                              required="true" requiredMessage="Please enter your username">
                      <f:validateLength maximum="50"/>
@@ -21,63 +23,63 @@
                 <h:message for="username" styleClass="error"/>
                 
                 Password:
-				<h:inputSecret id="password" value="#{user.password}" required="true">
+				<h:inputSecret id="password" value="#{user.password}" required="true" styleClass = "position: absolute;">
 				    <f:validator validatorId="confirmPasswordValidator" />
 				    <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
 				    <f:ajax event="blur" execute="password confirm" render="m_password" />
 				</h:inputSecret>
-				<h:message id="m_password" for="password" />
+				<h:message styleClass="error" id="m_password" for="password" />
 				
 				Confirm Password:
-				<h:inputSecret id="confirm" binding="#{confirmPassword}" required="true">
+				<h:inputSecret id="confirm" binding="#{confirmPassword}" required="true" styleClass = "position: absolute;">
 				    <f:ajax event="blur" execute="password confirm" render="m_password m_confirm" />
 				</h:inputSecret>
-				<h:message id="m_confirm" for="confirm" />
+				<h:message styleClass="error" id="m_confirm" for="confirm" />
 
                 Name: 
-                <h:inputText id="name" value="#{user.name}" 
+                <h:inputText id="name" value="#{user.name}" styleClass = "position: absolute;"
                              validatorMessage="Maximum length is 50 characters"
                              required="true" requiredMessage="Please enter your first name">
                 <f:validateLength maximum="50"/>
                 </h:inputText>                  
                 <h:message for="name" styleClass="error"/>
                 Surname: 
-                <h:inputText id="surname" value="#{user.surname}"
+                <h:inputText id="surname" value="#{user.surname}" styleClass = "position: absolute;"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="surname" styleClass="error"/>
                 Location: 
-                <h:inputText id="location" value="#{user.location}"
+                <h:inputText id="location" value="#{user.location}" styleClass = "position: absolute;"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="location" styleClass="error"/>
                 Country: 
-                <h:inputText id="country" value="#{user.country}"
+                <h:inputText id="country" value="#{user.country}" styleClass = "position: absolute;"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="country" styleClass="error"/>
                 E-mail: 
-                <h:inputText id="email" value="#{user.email}"
+                <h:inputText id="email" value="#{user.email}" styleClass = "position: absolute;"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="email" styleClass="error"/>
                 Tax-Registration-Number: 
-                <h:inputText id="taxRegistrationNumber" value="#{user.taxRegistrationNumber}"
+                <h:inputText id="taxRegistrationNumber" value="#{user.taxRegistrationNumber}" styleClass = "position: absolute;"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
                 </h:inputText>
                 <h:message for="taxRegistrationNumber" styleClass="error"/>
                 Phone: 
-                <h:inputText id="phone" value="#{user.phone}"
+                <h:inputText id="phone" value="#{user.phone}" styleClass = "position: absolute;"
                          validatorMessage="Maximum length is 100 characters"
                          required="true" requiredMessage="Please enter your last name">
                 <f:validateLength maximum="100"/>
@@ -85,8 +87,9 @@
                 <h:message for="phone" styleClass="error"/>
             </h:panelGrid>
             <p/>
-            <h:commandButton id="register" value="Register user" action="#{user.registerUser}"/>
+            <h:commandButton class="button" id="register" value="Register user" action="#{user.registerUser}"/>
             <h:messages globalOnly="true" styleClass="error"/>
         </h:form>
+        </div>
     </h:body>
 </html>

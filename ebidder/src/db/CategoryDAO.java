@@ -1,6 +1,5 @@
 package db;
 
-import entities.Category;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -10,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+
+import entities.Category;
 
 @ManagedBean(name="categoryDAO")
 @SessionScoped

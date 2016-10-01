@@ -9,26 +9,26 @@
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
-    <div style="border-width:2px; border-color:green; border-style:solid;">
+    <div style="border-width:2px; border-color:green; border-style:solid; background-color: #FFE5CC;">
          <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
          </ui:insert> 
       </div>
-        <h1> Manage Items</h1>
+        <h1 style="color: #408080;"> Manage Items</h1>
         <h:form>
 	        <h:column> 
-	           <h:commandButton id="Create" value="Create new item" action="#{item.create}"/>
+	           <h:commandButton class="button" id="Create" value="Create new item" action="#{item.create}"/>
 	        </h:column>
         </h:form>
         <p/>
-        <h:form>
+        <h:form rendered="#{ not empty(my_item_list.all_my_items) }">
     		<h:dataTable id="Items" value="#{ my_item_list.all_my_items }" var="itm"	
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">
 
 				<h:column>
 				<f:facet name="header">Image</f:facet>
-					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.images) }" value="/images/${itm.getImages().get(0).imageID}"  />		
+					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="/images/${itm.getImages().get(0).imageID}"  />		
 				</h:column>
 				<h:column>
 				<f:facet name="header">Name</f:facet>
@@ -54,13 +54,11 @@
 				</h:column>
 			</h:dataTable>
         </h:form> 
-        <h:form>
-            <h:commandButton id="logout" value="Logout" action="#{user.logout}"/>
-        </h:form>
-        <div style="border-width:2px; border-color:red; border-style:solid;">
+        <h:form rendered="#{ empty(my_item_list.all_my_items) }"> <h1 style="color: #aeaeae;">Nothing to Show</h1> </h:form>
+        <h:form rendered="#{ user.current ne null }" >
          <ui:insert name="footer" >
             <ui:include src="/template/footer.xhtml" />
          </ui:insert>
-      </div>
+       </h:form>
     </h:body>
 </html>

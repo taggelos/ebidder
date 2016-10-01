@@ -14,8 +14,8 @@
             <ui:include src="/template/header.xhtml" />
          </ui:insert> 
      	 </div>
-	<h1>User List</h1>
-	<h:form>
+	<h1 style="color: #555555">User List</h1>
+	<h:form rendered="#{ not empty(manager.userlist) }" >
 		<h:dataTable value="#{manager.userlist}" var="usr"
 			rows="#{manager.rows}"
 			styleClass="userTable" headerClass="userTableHeader"
@@ -57,49 +57,49 @@
                     #{usr.phone}
                  </h:column>
 			<h:column>
-				<h:commandButton value="Edit" action="#{manager.edit}">
+				<h:commandButton class="userTableButton" value="Edit" action="#{manager.edit}">
 					<f:setPropertyActionListener target="#{manager.user}"
 						value="#{usr}" />
 				</h:commandButton>
 			</h:column>
 			<h:column rendered="#{manager.acceptButtonEnabled}" >
-				<h:commandButton value="Accept" action="#{manager.accept}">
+				<h:commandButton class="userTableButton" value="Accept" action="#{manager.accept}">
 					<f:setPropertyActionListener target="#{manager.user}"
 						value="#{usr}" />
 				</h:commandButton>
 			</h:column> 
 			<h:column rendered="#{manager.declineButtonEnabled}">
-				<h:commandButton value="Decline" action="#{manager.decline}">
+				<h:commandButton class="userTableButton" value="Decline" action="#{manager.decline}">
 					<f:setPropertyActionListener target="#{manager.user}"
 						value="#{usr}" />
 				</h:commandButton>
 			</h:column>
 			<h:column rendered="#{manager.banButtonEnabled}">
-				<h:commandButton value="Ban" action="#{manager.decline}">
+				<h:commandButton class="userTableButton" value="Ban" action="#{manager.decline}">
 					<f:setPropertyActionListener target="#{manager.user}"
 						value="#{usr}" />
 				</h:commandButton>
 			</h:column>
 		</h:dataTable>
 	</h:form>
-	<h:form>
-		<h:commandButton disabled="#{manager.prev}" value="Previous Page"
+	<h:form rendered="#{ not empty(manager.userlist) }">
+		<h:commandButton  class="nextprev" disabled="#{manager.prev}" value="Previous Page"
 			action="#{manager.display('prev')}" />
-		<h:commandButton disabled="#{manager.next}" value="Next Page"
+		<h:commandButton  class="nextprev" disabled="#{manager.next}" value="Next Page"
 			action="#{manager.display('next')}" />
 	</h:form>
 	<p />
 	<h:messages globalOnly="true" styleClass="error" />
+	<h:form rendered="#{ empty(manager.userlist) }"> <h1 style="color: #aeaeae;">Nothing to Show</h1> </h:form>
 	<h:form>
-		<h:commandButton id="GoBack" value="Go Back"
+		<h:commandButton class="userTableButton" id="GoBack" value="Go Back"
 			action="#{manager.goBack}" />
-		<p />
-		<h:commandButton id="logout" value="Logout" action="#{user.logout}" />
 	</h:form>
-	<div style="border-width:2px; border-color:red; border-style:solid;">
+	<p />
+	<h:form rendered="#{ user.current ne null }" >
          <ui:insert name="footer" >
             <ui:include src="/template/footer.xhtml" />
          </ui:insert>
-      </div>
+       </h:form>
 </h:body>
 </html>

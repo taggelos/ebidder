@@ -9,7 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
-import entities.Image;
+
+import entities.Photo;
 
 @ManagedBean(name="imageDAO")
 @SessionScoped
@@ -25,7 +26,7 @@ public class ImageDAO {
 		servletContext.setAttribute("imageDAO", this);
 	}
 
-	public String insertImage(Image image) {
+	public String insertImage(Photo image) {
 		
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
@@ -48,14 +49,14 @@ public class ImageDAO {
 	}
 	
 	
-	public Image findImage(int id) throws PersistenceException {
-		Image image = new Image();
+	public Photo findImage(int id) throws PersistenceException {
+		Photo image = new Photo();
 
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
-		image= em.find(Image.class,id);
+		image= em.find(Photo.class,id);
 		em.flush();  
 		tx.commit();		
 		em.close();

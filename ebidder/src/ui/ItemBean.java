@@ -13,16 +13,15 @@ import java.text.SimpleDateFormat;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
 
 import db.ImageDAO;
 import db.ItemDAO;
 import entities.Category;
-import entities.Image;
 import entities.Item;
 import entities.Location;
+import entities.Photo;
 
 @ManagedBean(name = "item")
 @ViewScoped
@@ -44,7 +43,7 @@ public class ItemBean {
 	private String current_category;
 	private Category category_for_delete;
 	private Part current_image_part;
-	private Image current_image = new Image();
+	private Photo current_image = new Photo();
 	private MyImage my_image_for_delete;
 
 	private String started_day;
@@ -99,7 +98,6 @@ public class ItemBean {
 		String str_ends= ends_year+"-"+ends_month+"-"+ends_day+" "+ends_hour+":"+ends_minute;	
 	    Date ends_date =  df.parse(str_ends);  
 
-		FacesContext context = FacesContext.getCurrentInstance();
 		Item item = new Item();
 		item.setName(name);
 		item.setCategories(categories);
@@ -114,20 +112,20 @@ public class ItemBean {
 		item.setCountry(country);
 		item.setStarted(started_date);
 		item.setEnds(ends_date);
-		item.setUser(my_user.getCurrent());
+		item.setSeller(my_user.getCurrent().getSeller());
 		item.setDescription(description);
 
-		List<Image> temp_images_list = new ArrayList<Image>();
-		Image temp_image;
+		List<Photo> temp_images_list = new ArrayList<Photo>();
+		Photo temp_image;
 		for (MyImage my_image : my_images) {
-			temp_image= new Image();
+			temp_image= new Photo();
 			temp_image.setItem(item);
-			temp_image.setImage(my_image.getImage());
+			temp_image.setPhoto(my_image.getImage());
 			temp_images_list.add(temp_image);
 		}
-		item.setImages(temp_images_list);
+		item.setPhotos(temp_images_list);
 
-		String[] result = itemDAO.insertItem(item);
+		itemDAO.insertItem(item);
 		/*
 		 * if (!message.equals("ok")) { context.addMessage(null, new
 		 * FacesMessage(message)); } if (context.getMessageList().size() > 0)
@@ -288,11 +286,11 @@ public class ItemBean {
 		this.current_image_part = current_image_part;
 	}
 
-	public Image getCurrent_image() {
+	public Photo getCurrent_image() {
 		return current_image;
 	}
 
-	public void setCurrent_image(Image current_image) {
+	public void setCurrent_image(Photo current_image) {
 		this.current_image = current_image;
 	}
 

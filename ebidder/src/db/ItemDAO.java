@@ -1,8 +1,5 @@
 package db;
 
-import entities.Item;
-import entities.User;
-
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+
+import entities.Item;
+import entities.User;
 
 @ManagedBean(name="itemDAO")
 @SessionScoped
@@ -154,7 +154,8 @@ public class ItemDAO {
 		tx.begin();
 		try {
 			System.out.println(item.getStarted());
-			
+			//em.merge(item.getUser());
+			//em.persist(item);
 			em.merge(item);			
 			em.flush(); 
 			

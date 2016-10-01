@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -24,6 +23,11 @@ public class User implements Serializable {
 
 	private String email;
 
+	 //bi-directional many-to-one association to Location
+	 @ManyToOne
+	 @JoinColumn(name="location_name")
+	 private Location location;
+
 	private String name;
 
 	private String password;
@@ -32,10 +36,6 @@ public class User implements Serializable {
 
 	private String phone;
 
-	private int rating_Bidder;
-
-	private int rating_Seller;
-
 	private String surname;
 
 	@Column(name="tax_registration_number")
@@ -43,25 +43,13 @@ public class User implements Serializable {
 
 	private String username;
 
-	//bi-directional many-to-one association to Bid
-	@OneToMany(mappedBy="user")
-	private List<Bid> bids;
+	//bi-directional one-to-one association to Bidder
+	@OneToOne(mappedBy="user")
+	private Bidder bidder;
 
-	//bi-directional many-to-one association to Item
-	@OneToMany(mappedBy="user")
-	private List<Item> items;
-
-	//bi-directional many-to-one association to Message
-	@OneToMany(mappedBy="user1")
-	private List<Message> messages1;
-
-	//bi-directional many-to-one association to Message
-	@OneToMany(mappedBy="user2")
-	private List<Message> messages2;
-
-	//bi-directional many-to-one association to Location
-	@ManyToOne
-	private Location location;
+	//bi-directional one-to-one association to Seller
+	@OneToOne(mappedBy="user")
+	private Seller seller;
 
 	public User() {
 	}
@@ -98,6 +86,14 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	public Location getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(Location locationName) {
+		this.location = locationName;
+	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -130,22 +126,6 @@ public class User implements Serializable {
 		this.phone = phone;
 	}
 
-	public int getRating_Bidder() {
-		return this.rating_Bidder;
-	}
-
-	public void setRating_Bidder(int rating_Bidder) {
-		this.rating_Bidder = rating_Bidder;
-	}
-
-	public int getRating_Seller() {
-		return this.rating_Seller;
-	}
-
-	public void setRating_Seller(int rating_Seller) {
-		this.rating_Seller = rating_Seller;
-	}
-
 	public String getSurname() {
 		return this.surname;
 	}
@@ -170,100 +150,20 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	public List<Bid> getBids() {
-		return this.bids;
+	public Bidder getBidder() {
+		return this.bidder;
 	}
 
-	public void setBids(List<Bid> bids) {
-		this.bids = bids;
+	public void setBidder(Bidder bidder) {
+		this.bidder = bidder;
 	}
 
-	public Bid addBid(Bid bid) {
-		getBids().add(bid);
-		bid.setUser(this);
-
-		return bid;
+	public Seller getSeller() {
+		return this.seller;
 	}
 
-	public Bid removeBid(Bid bid) {
-		getBids().remove(bid);
-		bid.setUser(null);
-
-		return bid;
-	}
-
-	public List<Item> getItems() {
-		return this.items;
-	}
-
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
-
-	public Item addItem(Item item) {
-		getItems().add(item);
-		item.setUser(this);
-
-		return item;
-	}
-
-	public Item removeItem(Item item) {
-		getItems().remove(item);
-		item.setUser(null);
-
-		return item;
-	}
-
-	public List<Message> getMessages1() {
-		return this.messages1;
-	}
-
-	public void setMessages1(List<Message> messages1) {
-		this.messages1 = messages1;
-	}
-
-	public Message addMessages1(Message messages1) {
-		getMessages1().add(messages1);
-		messages1.setUser1(this);
-
-		return messages1;
-	}
-
-	public Message removeMessages1(Message messages1) {
-		getMessages1().remove(messages1);
-		messages1.setUser1(null);
-
-		return messages1;
-	}
-
-	public List<Message> getMessages2() {
-		return this.messages2;
-	}
-
-	public void setMessages2(List<Message> messages2) {
-		this.messages2 = messages2;
-	}
-
-	public Message addMessages2(Message messages2) {
-		getMessages2().add(messages2);
-		messages2.setUser2(this);
-
-		return messages2;
-	}
-
-	public Message removeMessages2(Message messages2) {
-		getMessages2().remove(messages2);
-		messages2.setUser2(null);
-
-		return messages2;
-	}
-
-	public Location getLocation() {
-		return this.location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 
 }

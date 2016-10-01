@@ -3,6 +3,7 @@ package ui;
 import db.UserDAO;
 import entities.Location;
 import entities.User;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -157,6 +158,13 @@ public class UserBean {
     	//userDAO.update(user);
     	return "/restricted/userlist";
     }
+    
+    public boolean getIsAdmin(){
+    	if(current.getAdmin()==1) return true;
+    	return false;
+    }
+    
+    
     /*
     public String accept(){
     	//dao update pending
@@ -183,7 +191,6 @@ public class UserBean {
     	}
     	return false;
 	}
-    
     
     
     /*functions*/

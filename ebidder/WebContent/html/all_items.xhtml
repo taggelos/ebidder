@@ -5,17 +5,16 @@
      	xmlns:f="http://java.sun.com/jsf/core"
      	xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <h:title>All Items</h:title>
+        <title>All Items</title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
-    <h:body>
-    	<h1> All Items  </h1>              
+    <h:body >     
+    	<div style="border-width:2px; border-color:green; border-style:solid; background-color: #CCFFFF; ">
+		         <ui:insert name="headerVisitor" >
+		            <ui:include src="/template/header.xhtml" />
+		         </ui:insert> 
+     	 </div>        
 	   	<h:form> 
-	   		 <div style="border-width:2px; border-color:green; border-style:solid;">
-         <ui:insert name="headerVisitor" >
-            <ui:include src="/template/header.xhtml" />
-         </ui:insert> 
-     	 </div>
 	   		 <h:panelGrid columns="3">
  			 	<h:inputText id="search_value" value="#{item_list.search_value}" /> 
   			 	<h:selectOneMenu value="#{item_list.selected_field}">
@@ -28,13 +27,13 @@
 		   		<h:commandButton id="search" value="Search" action="#{item_list.search}"/>
             </h:panelGrid>  
 	   	 
-    		<h:dataTable id="Items" value="#{ item_list.items_list }" var="itm"	
+    		<h:dataTable rendered="#{ not empty(item_list.items_list)}"> id="Items" value="#{ item_list.items_list }" var="itm"	
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">  
 			
 				<h:column>
 				<f:facet name="header">Image</f:facet>
-					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.images) }" value="/images/${itm.getImages().get(0).imageID}"  />		
+					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="#{'/images/'+itm.getPhotos().get(0).imageID}"  />		
 				</h:column>
 							
 				<h:column>   
@@ -43,18 +42,18 @@
 				</h:column>
 					
 				<h:column>
-					<h:commandButton value="more" action="#{ item_list.details }">
+					<h:commandButton class="userTableButton" value="more" action="#{ item_list.details }">
 						<f:setPropertyActionListener target="#{item_list.item_for_details}"
 						value="#{itm}" />
 					</h:commandButton>
 				</h:column>
 			</h:dataTable>
         </h:form>
-
-<div style="border-width:2px; border-color:red; border-style:solid;">
+        <h:form rendered="#{ empty(item_list.items_list) }"> <h1 style="color: #aeaeae;">Nothing to Show</h1> </h:form>
+		 <h:form rendered="#{ user.current ne null }" >
          <ui:insert name="footer" >
             <ui:include src="/template/footer.xhtml" />
          </ui:insert>
-      </div>
+       </h:form>
     </h:body>
 </html>

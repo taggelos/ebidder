@@ -15,7 +15,7 @@
          </ui:insert> 
      	 </div>
         <h:form enctype="multipart/form-data">
-            <h1> Update Item </h1>   
+            <h1 style="color: #408080;"> Update Item </h1>   
             <h:panelGrid columns="3">
                 Name: 
                 <h:inputText id="name" value="#{my_item_list.item_for_change.name}" 
@@ -455,7 +455,7 @@
 							</h:commandButton>	
 						</h:column> 
 					</h:dataTable>
-					<h:dataTable id="Images" value="#{ my_item_list.item_for_change.images }" var="img" 
+					<h:dataTable id="Images" value="#{ my_item_list.item_for_change.photos }" var="img" 
 	    			styleClass="userTable" headerClass="userTableHeader"
 					rowClasses="userTableOddRow,userTableEvenRow">	
 					<h:column>

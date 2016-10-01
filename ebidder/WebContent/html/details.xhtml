@@ -10,15 +10,15 @@
         	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb6aFntrr2pSFENG2Z5N1tIFAXyehyC8Y"
         	type="text/javascript"> 
         </script>           
-        <h:title>Details</h:title>
+        <title>Details</title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>    
     <h:body >
-    	<h1> Details  </h1>	
+    	<h1 style="color: #408080;"> Details  </h1>	
 		<h:panelGrid columns="2">
 			Images:
 			<h:form> 
-	    		<h:dataTable id="Images" value="#{ item_list.item_for_details.images }" var="img" 
+	    		<h:dataTable id="Images" value="#{ item_list.item_for_details.photos }" var="img" 
 	    		styleClass="userTable" headerClass="userTableHeader"
 				rowClasses="userTableOddRow,userTableEvenRow">	
 					<h:column>
@@ -68,7 +68,7 @@
 			<h:form>
 	            <m:map width="500" height="450px" latitude="#{item_list.item_for_details.location.latitude}" longitude="#{item_list.item_for_details.location.longitude}" enableScrollWheelZoom="true">
 		            <m:marker>
-	                    <m:htmlInformationWindow htmlText="This is Sparta, Greece"/>
+	                    <m:htmlInformationWindow htmlText="Current Location"/>
 	                </m:marker>
                 </m:map>
 			</h:form>
@@ -91,7 +91,7 @@
 		</h:panelGrid>			
 				 
     	<h:panelGrid columns="1"> 
-			<h:form rendered="#{ not empty(user.current) }" >
+			<h:form rendered="#{ user.current ne null }" >
 				 <h:inputText value="#{item_list.sub_value_bid}"/>				
 				<h:commandButton id="submit" value="Submit your bid" onclick="return confirm('Are you sure?')" action="#{item_list.submit_bid}" />
 			</h:form> 

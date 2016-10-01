@@ -1,7 +1,5 @@
 package db;
 
-import entities.Item;
-import entities.User;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -11,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+
+import entities.User;
 
 @ManagedBean(name = "userDAO")
 @SessionScoped
@@ -126,7 +126,6 @@ public class UserDAO {
 		}
 	}
 
-private ItemDAO itemDAO;
 	
 	public String remove(User user) {
 		String retMessage = "";
@@ -135,10 +134,6 @@ private ItemDAO itemDAO;
 		tx.begin();
 		try {
 			user = em.merge(user);
-			for (Item item : user.getItems()){
-				itemDAO.remove(item);
-			}
-			em.remove(user);
 			em.flush();
 			tx.commit();
 			retMessage = "ok";

@@ -5,12 +5,12 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Chat test!</title>
+        <title>Message Me</title>
 		<h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
 
     <h:body> 
-	<div style="border-width:2px; border-color:green; border-style:solid;">
+	<div style="border-width:2px; border-color:green; border-style:solid; background-color: #E5CCFF;">
          <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
          </ui:insert> 
@@ -22,13 +22,13 @@
 		</script>
 
 		<h:form id="myForm">
-		    <h:commandButton id="btnLoadData" value="Hidden" 
+		    <h:commandButton class="userTableButton" id="btnLoadData" value="Hidden" 
 		        style="display:none">
 		        <f:ajax execute="@form" render=":MessageTable" />
 		    </h:commandButton>
 		</h:form>
     	 	
-   		<h:form id="MessageTable">
+   		<h:form id="MessageTable" rendered="#{ not empty(message.conversationMessages) }">
 			<h:dataTable id="Messages" value="#{ message.conversationMessages }" var="msg"	
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">  
@@ -58,12 +58,13 @@
     	<p/>
     	<h:form>
 	    	<h:inputText type="text" size="98" value="#{message.text}" />   	
-	   		<h:commandButton value="Send" action="#{message.send_message()}" />
+	   		<h:commandButton class="userTableButton" value="Send" action="#{message.send_message()}" />
    		</h:form>
-   		<div style="border-width:2px; border-color:red; border-style:solid;">
+   		<h:form rendered="#{ user.current ne null }" >
          <ui:insert name="footer" >
             <ui:include src="/template/footer.xhtml" />
          </ui:insert>
-      </div>
+       </h:form>
+       <h:form rendered="#{ empty(message.conversationMessages) }"> <h1 style="color: #aeaeae;">Nothing to Show</h1> </h:form>
     </h:body>
 </html>

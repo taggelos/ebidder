@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.ImageDAO;
-import entities.Image;
+import entities.Photo;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.BufferedInputStream;
@@ -27,14 +28,14 @@ public class ImageRequestServlet extends HttpServlet {
     	
     	ImageDAO imageDAO = (ImageDAO) getServletContext().getAttribute("imageDAO"); 
         String imageId = String.valueOf(request.getPathInfo().substring(1)); 
-        Image image= imageDAO.findImage(Integer.valueOf(imageId) );
+        Photo image= imageDAO.findImage(Integer.valueOf(imageId) );
         
         
         BufferedInputStream input = null;
         BufferedOutputStream output = null;
 
         try {
-        	InputStream image_data = new ByteArrayInputStream(image.getImage());
+        	InputStream image_data = new ByteArrayInputStream(image.getPhoto());
             input = new BufferedInputStream(image_data); 
             output = new BufferedOutputStream(response.getOutputStream());
             byte[] buffer = new byte[16777215];

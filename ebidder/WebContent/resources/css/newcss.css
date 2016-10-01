@@ -23,6 +23,8 @@ root {
    background: none repeat scroll 0 0 #B5B5B5;
    border-bottom: 1px solid #000000;  
    padding: 2px;
+   color: white;
+   background-color: #555555;
 }
 
 .userTableOddRow {
@@ -33,5 +35,170 @@ root {
 .userTableEvenRow {
    text-align:center;
    background:none repeat scroll 0 0 #D3D3D3;
+}
+
+.userTableButton {
+    background-color: #555555;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.userTableButton:hover {
+	background-color: #408080;
+    color: black;
+}
+
+.userTableOddRow:hover {
+	background-color: #aeaeae;
+    color: black;
+}
+
+.userTableEvenRow:hover {
+	background-color: #aeaeae;
+    color: black;
+}
+
+.button {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button:hover {
+	background-color: #aeaeae;
+    color: black;
+    letter-spacing: 2px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.logout{
+	border-width:2px; 
+	border-color:red; 
+	border-style:solid;
+	background-color: #555555;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    position: absolute;
+	 right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 1rem;
+}
+
+.logout:hover {
+    background-color: red;
+    color: white;
+    letter-spacing: 3px;
+}
+
+.image{
+	display: inline-block;
+    vertical-align: middle;
+    width: 5%; 
+    height: 5%;
+}
+ 
+.image:hover {
+  -webkit-transform: rotate(-10deg);
+     -moz-transform: rotate(-10deg);
+       -o-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+}
+
+.adminbutton{
+	background-color: #408080;
+    color: black;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+	font-size: 24px;
+	padding: 12px 16px;
+}
+
+.adminbutton:hover {
+    color: white;
+	background-color: #555555;
+}
+
+.nextprev{
+	background-color: #555555;
+    border: none;
+    color: white;
+    padding: 7px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+
+input[disabled] {
+   color: red;
+}
+
+.newline {
+    display: block;
+}
+
+.choosefile{
+	background-color: #408080;
+    color: black;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 14px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+	font-size: 19px;
+	padding: 12px 7px;
+}
+
+.choosefile:hover{
+	color: white;
+	background-color: #555555;
+}
+
+.imgback{
+	background-image:url("#{resource['images:ggg.jpg']}");
+    background-repeat: no-repeat;
 }
 

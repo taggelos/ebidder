@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import entities.Location;
+import entities.Seller;
 import entities.User;
 
 
@@ -21,19 +22,20 @@ public class SellerXml implements Serializable {
 	
 	private String userID;
 	
-	private User seller;
+	private Seller seller;
 	
 	public SellerXml(){
-		seller = new User();
-		seller.setCountry("default country");
-		seller.setName("default name");
-		seller.setEmail("default e_mail");
-		seller.setPassword("default password");
-		seller.setSurname("default surname");
-		seller.setTaxRegistrationNumber("default tax_registration_number");
+		seller = new Seller();
+		seller.setUser(new User());
+		seller.getUser().setCountry("default country");
+		seller.getUser().setName("default name");
+		seller.getUser().setEmail("default e_mail");
+		seller.getUser().setPassword("default password");
+		seller.getUser().setSurname("default surname");
+		seller.getUser().setTaxRegistrationNumber("default tax_registration_number");
 		Location location = new Location();
 		location.setName("default location");
-		seller.setLocation(location);
+		seller.getUser().setLocation(location);
 	}
 
 	@XmlAttribute(name="Rating")
@@ -54,12 +56,12 @@ public class SellerXml implements Serializable {
 		this.userID = userID;
 	}
 	
-	public void setSeller(User user){
+	public void setSeller(Seller user){
 		seller = user;		
 	}
 	
-	public User getSeller(){
-		seller.setUsername(userID);
+	public Seller getSeller(){
+		seller.getUser().setUsername(userID);
 		seller.setRating_Seller(rating);
 		return seller;
 	}

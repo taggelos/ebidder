@@ -20,8 +20,8 @@ import javax.servlet.http.Part;
 import db.ItemDAO;
 import db.UserDAO;
 import entities.Category;
-import entities.Image;
 import entities.Item;
+import entities.Photo;
 
 
 
@@ -48,7 +48,7 @@ public class MyItemListBean {
 	private Part current_image_part;	
 	private MyImage my_image_for_delete;
 	private List<MyImage> my_images = new ArrayList<MyImage>();
-	private Image saved_image_for_delete;
+	private Photo saved_image_for_delete;
 
 	private String started_day; 
 	private String started_month; 
@@ -77,20 +77,20 @@ public class MyItemListBean {
 	    item_for_change.setEnds(ends_date);
 		item_for_change.setCurrently(item_for_change.getFirst_Bid());				
 		
-		List<Image> temp_images_list = new ArrayList<Image>();
-		Image temp_image;
+		List<Photo> temp_images_list = new ArrayList<Photo>();
+		Photo temp_image;
 		for (MyImage my_image : my_images) {
-			temp_image= new Image();
+			temp_image= new Photo();
 			temp_image.setItem(item_for_change);
-			temp_image.setImage(my_image.getImage());
+			temp_image.setPhoto(my_image.getImage());
 			temp_images_list.add(temp_image);
 		}
-		temp_images_list.addAll(item_for_change.getImages());
-		item_for_change.setImages(temp_images_list);
+		temp_images_list.addAll(item_for_change.getPhotos());
+		item_for_change.setPhotos(temp_images_list);
 		
-		System.out.println(item_for_change.getImages().size());
+		System.out.println(item_for_change.getPhotos().size());
 		
-		String[] result = itemDAO.insertItem(item_for_change);
+		itemDAO.insertItem(item_for_change);
     	return null;
     }
 	
@@ -140,10 +140,10 @@ public class MyItemListBean {
 	
 	public String delete_saved_image()
 	{
-		List<Image> temp_img_list= new ArrayList<Image>();
-		temp_img_list= item_for_change.getImages();
+		List<Photo> temp_img_list= new ArrayList<Photo>();
+		temp_img_list= item_for_change.getPhotos();
 		temp_img_list.remove(saved_image_for_delete);
-		item_for_change.setImages(temp_img_list);
+		item_for_change.setPhotos(temp_img_list);
 		return null;
 	}
 	
@@ -253,11 +253,11 @@ public class MyItemListBean {
 		this.my_images = my_images;
 	}
 	
-	public Image getSaved_image_for_delete() {
+	public Photo getSaved_image_for_delete() {
 		return saved_image_for_delete;
 	}
 
-	public void setSaved_image_for_delete(Image saved_image_for_delete) {
+	public void setSaved_image_for_delete(Photo saved_image_for_delete) {
 		this.saved_image_for_delete = saved_image_for_delete;
 	}
 	

@@ -1,8 +1,5 @@
 package db;
 
-import entities.Message;
-import entities.User;
-
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+
+import entities.Message;
+import entities.User;
 
 @ManagedBean(name="messageDAO")
 @SessionScoped

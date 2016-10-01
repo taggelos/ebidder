@@ -15,7 +15,6 @@ public class Bid implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int bidID;
 
 	private Float amount;
@@ -23,13 +22,13 @@ public class Bid implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;
 
-	//bi-directional many-to-one association to Item
+	//bi-directional many-to-one association to Bidder
 	@ManyToOne
-	private Item item;
+	private Bidder bidder;
 
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	private User user;
+	//bi-directional many-to-one association to Item
+	@ManyToOne(cascade={CascadeType.REMOVE})
+	private Item item;
 
 	public Bid() {
 	}
@@ -58,20 +57,20 @@ public class Bid implements Serializable {
 		this.time = time;
 	}
 
+	public Bidder getBidder() {
+		return this.bidder;
+	}
+
+	public void setBidder(Bidder bidder) {
+		this.bidder = bidder;
+	}
+
 	public Item getItem() {
 		return this.item;
 	}
 
 	public void setItem(Item item) {
 		this.item = item;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 }

@@ -5,11 +5,11 @@
      	xmlns:f="http://java.sun.com/jsf/core"
      	xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <h:title>Welcome page</h:title>
+        <title>Welcome page</title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
     <h:body>
-    <div style="border-width:2px; border-color:green; border-style:solid;">
+    <div style="border-width:2px; border-color:green; border-style:solid; background-color: #E0E0E0;">
          <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
          </ui:insert> 
@@ -21,7 +21,7 @@
 			</script>
 	
 			<h:form id="myForm">
-			    <h:commandButton id="btnLoadData" value="Hidden" 
+			    <h:commandButton class="userTableButton" id="btnLoadData" value="Hidden" 
 			        style="display:none">
 			        <f:ajax execute="@form" render=":unread_messages" />
 			    </h:commandButton>
@@ -38,26 +38,25 @@
 
  
     
-            <h1> Welcome <h:outputText id="welcome" value="#{user.username}" required="true" 
-                                           requiredMessage="Please enter your username"/> </h1>
+            <h1 style="color: #408080;"> Welcome <h:outputText id="welcome" value="#{user.username}" required="true" /> </h1>
             <h:form>
                 <h:column>
-					<h:commandButton value="All Items" action="#{item.all_items}" />
+					<h:commandButton class="userTableButton" value="All Items" action="#{item.all_items}" />
 				</h:column>
             	<h:column>
-            		<h:commandButton value="Manage Items" action="#{item.manage}" />
+            		<h:commandButton class="userTableButton" value="Manage Items" action="#{item.manage}" />
             	</h:column>
             </h:form>
             <p/>
              
-            <h3> Suggestions </h3> 
+            <h3 style="color: #408080;"> Suggestions </h3> 
             <h:form>
-				<h:commandButton value="Message" action="#{message.go_to_message_page()}" />
+				<h:commandButton class="userTableButton" value="Message" action="#{message.go_to_message_page()}" />
 			</h:form>
-			<div style="border-width:2px; border-color:red; border-style:solid;">
+			<h:form rendered="#{ user.current ne null }" >
          <ui:insert name="footer" >
             <ui:include src="/template/footer.xhtml" />
          </ui:insert>
-      </div>
+       </h:form>
     </h:body>
 </html>

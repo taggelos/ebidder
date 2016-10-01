@@ -75,17 +75,14 @@
                 <h:message for="phone" styleClass="error"/>
             </h:panelGrid>
             <p/>
-            <h:commandButton value="Save Changes" action="#{manager.submit}"/>
+            <h:commandButton class="userTableButton" value="Save Changes" action="#{manager.submit}"/>
             <h:messages globalOnly="true" styleClass="error"/>
         </h:form>
         <p/>
-        <h:form>
-            <h:commandButton id="logout" value="Logout" action="#{user.logout}"/>
-        </h:form>
-        <div style="border-width:2px; border-color:red; border-style:solid;">
+        <h:form rendered="#{ user.current ne null }" >
          <ui:insert name="footer" >
             <ui:include src="/template/footer.xhtml" />
          </ui:insert>
-      </div>
+       </h:form>
     </h:body>
 </html>

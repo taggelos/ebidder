@@ -5,25 +5,25 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Chat test!</title>
+        <title>Messages</title>
 		<h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
 
     <h:body> 
-		<div style="border-width:2px; border-color:green; border-style:solid;">
+		<div style="border-width:2px; border-color:green; border-style:solid; background-color: #CCE5FF;">
          <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
          </ui:insert> 
      	 </div>
      	 
 		<h:form>
-	   		<h:commandButton value="Incomming" action="#{conversation_list.setIncoming()}" />
-	   		<h:commandButton value="Outcoming" action="#{conversation_list.setOutcoming()}" />				
+	   		<h:commandButton class="userTableButton" value="Incoming" action="#{conversation_list.setIncoming()}" />
+	   		<h:commandButton class="userTableButton" value="Outcoming" action="#{conversation_list.setOutcoming()}" />				
 		</h:form>
 		
 			
-		<h:outputText value="Incoming" rendered="#{conversation_list.isIncoming() eq true}" style="font-weight:bold"/>	
-		<h:outputText value="Outcoming" rendered="#{conversation_list.isIncoming()eq false}" style="font-weight:bold"/>	
+		<h:outputText value="Incoming" rendered="#{conversation_list.isIncoming() eq true}" style="color: #408080;"/>	
+		<h:outputText value="Outcoming" rendered="#{conversation_list.isIncoming()eq false}" style="color: #408080;"/>	
 				
 		<script type="text/javascript">
 		    setInterval(function() { 
@@ -32,13 +32,13 @@
 		</script>
 
 		<h:form id="myForm">
-		    <h:commandButton id="btnLoadData" value="Hidden" 
+		    <h:commandButton class="userTableButton" id="btnLoadData" value="Hidden" 
 		        style="display:none">
 		        <f:ajax execute="@form" render=":ConversationListForm" />
 		    </h:commandButton>
 		</h:form>		
 				
-		<h:form id="ConversationListForm">
+		<h:form id="ConversationListForm" rendered="#{ not empty(conversation_list.conversationList) }">
 			<h:dataTable id="ConversationList" value="#{ conversation_list.conversationList }" var="conv"	
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">  
@@ -66,19 +66,19 @@
 					 #{conv.text}
 				</h:column>
 				<h:column rendered="#{conversation_list.isIncoming() eq true}" >
-					<h:commandButton value="See All" action="#{ conversation_list.see_all }">
+					<h:commandButton class="userTableButton" value="See All" action="#{ conversation_list.see_all }">
 						<f:setPropertyActionListener target="#{message.receiver}"
 						value="#{conv.user1}" />
 					</h:commandButton>
 				</h:column>
 				<h:column rendered="#{conversation_list.isIncoming()eq false}">
-					<h:commandButton value="See All" action="#{ conversation_list.see_all }">
+					<h:commandButton class="userTableButton" value="See All" action="#{ conversation_list.see_all }">
 						<f:setPropertyActionListener target="#{message.receiver}"
 						value="#{conv.user2}" />
 					</h:commandButton>
 				</h:column>
 				<h:column>
-					<h:commandButton value="Delete" action="#{ conversation_list.delete() }">
+					<h:commandButton class="userTableButton" value="Delete" action="#{ conversation_list.delete() }">
 						<f:setPropertyActionListener target="#{conversation_list.conversation_for_delete}"
 						value="#{conv}" />
 					</h:commandButton>
@@ -86,10 +86,12 @@
 			</h:dataTable>
 		</h:form>
 		
-	<div style="border-width:2px; border-color:red; border-style:solid;">
+		<h:form rendered="#{ empty(conversation_list.conversationList) }"> <h1 style="color: #aeaeae;">Nothing to Show</h1> </h:form>
+		
+	<h:form rendered="#{ user.current ne null }" >
          <ui:insert name="footer" >
             <ui:include src="/template/footer.xhtml" />
          </ui:insert>
-      </div>
+       </h:form>
     </h:body>
 </html>

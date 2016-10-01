@@ -36,8 +36,6 @@ public class Item implements Serializable {
 
 	private int number_of_Bids;
 
-	private int sellerID;
-
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date started;
 
@@ -45,12 +43,8 @@ public class Item implements Serializable {
 	@OneToMany(mappedBy="item")
 	private List<Bid> bids;
 
-	//bi-directional many-to-one association to Image
-	@OneToMany(mappedBy="item")
-	private List<Image> images;
-
 	//bi-directional many-to-many association to Category
-	@ManyToMany
+	@ManyToMany(cascade={CascadeType.PERSIST})
 	@JoinTable(
 		name="item_has_category"
 		, joinColumns={
@@ -66,9 +60,15 @@ public class Item implements Serializable {
 	@ManyToOne
 	private Location location;
 
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	private User user;
+	//bi-directional many-to-one association to Seller
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinColumn(name="SellerID")
+	private Seller seller;
+
+
+	//bi-directional many-to-one association to Photo
+	@OneToMany(mappedBy="item")
+	private List<Photo> photos;
 
 	public Item() {
 	}
@@ -145,14 +145,6 @@ public class Item implements Serializable {
 		this.number_of_Bids = number_of_Bids;
 	}
 
-	public int getSellerID() {
-		return this.sellerID;
-	}
-
-	public void setSellerID(int sellerID) {
-		this.sellerID = sellerID;
-	}
-
 	public Date getStarted() {
 		return this.started;
 	}
@@ -183,28 +175,6 @@ public class Item implements Serializable {
 		return bid;
 	}
 
-	public List<Image> getImages() {
-		return this.images;
-	}
-
-	public void setImages(List<Image> images) {
-		this.images = images;
-	}
-
-	public Image addImage(Image image) {
-		getImages().add(image);
-		image.setItem(this);
-
-		return image;
-	}
-
-	public Image removeImage(Image image) {
-		getImages().remove(image);
-		image.setItem(null);
-
-		return image;
-	}
-
 	public List<Category> getCategories() {
 		return this.categories;
 	}
@@ -221,12 +191,34 @@ public class Item implements Serializable {
 		this.location = location;
 	}
 
-	public User getUser() {
-		return this.user;
+	public Seller getSeller() {
+		return this.seller;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setSeller(Seller seller) {
+		this.seller = seller;
+	}
+
+	public List<Photo> getPhotos() {
+		return this.photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}
+
+	public Photo addPhoto(Photo photo) {
+		getPhotos().add(photo);
+		photo.setItem(this);
+
+		return photo;
+	}
+
+	public Photo removePhoto(Photo photo) {
+		getPhotos().remove(photo);
+		photo.setItem(null);
+
+		return photo;
 	}
 
 }

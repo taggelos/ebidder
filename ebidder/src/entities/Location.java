@@ -2,6 +2,10 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import entities.Item;
+import entities.User;
+
 import java.util.List;
 
 
@@ -17,9 +21,9 @@ public class Location implements Serializable {
 	@Id
 	private String name;
 
-	private Float latitude;
+	private float latitude;
 
-	private Float longitude;
+	private float longitude;
 
 	//bi-directional many-to-one association to Item
 	@OneToMany(mappedBy="location")
@@ -40,19 +44,19 @@ public class Location implements Serializable {
 		this.name = name;
 	}
 
-	public Float getLatitude() {
+	public float getLatitude() {
 		return this.latitude;
 	}
 
-	public void setLatitude(Float latitude) {
+	public void setLatitude(float latitude) {
 		this.latitude = latitude;
 	}
 
-	public Float getLongitude() {
+	public float getLongitude() {
 		return this.longitude;
 	}
 
-	public void setLongitude(Float longitude) {
+	public void setLongitude(float longitude) {
 		this.longitude = longitude;
 	}
 

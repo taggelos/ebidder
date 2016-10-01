@@ -3,34 +3,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<h:title>Login page</h:title>
-	<h:outputStylesheet name="newcss.css" library="css" />
+	<title>Login page</title>
+	<h:outputStylesheet name="style.css" library="css" />
 </h:head>
-<h:body>
-	<h1>Please Login</h1>
-	<h:form id="frm1">
-		<h:panelGrid columns="3">
-                    Username: <h:inputText id="username"
-				value="#{user.username}" required="true"
-				requiredMessage="Please enter your username" />
-			<h:message for="username" styleClass="error" />
-                    Password: <h:inputSecret id="password"
-				value="#{user.password}" required="true"
-				requiredMessage="Please enter your password" />
-			<h:message for="password" styleClass="error" />
-		</h:panelGrid>
-		<p />
-		<h:commandButton value="Login" action="#{user.login}" />
-		<h:messages globalOnly="true" styleClass="error" />
-	</h:form>
-	<p />
-	<h:form>
-		<h:commandButton id="Register" value="Register NOW"
-			action="#{user.register}" />
-	</h:form>
-	<h:form>
-		<h:commandButton id="Enter_as_Guest" value="Enter as Guest"
-			action="#{user.guest}" />
-	</h:form>
+
+<h:body class="body">
+		<div class="login-box">
+				<div class="box-header">
+					<h:graphicImage class="img" library="images" name="pic.png" style="width: 50%; height: 50%;"/>​
+				</div>
+			<h1>Please Login</h1>
+			<h:form id="frm1">
+				<h:panelGrid columns="3">
+		                    Username: <h:inputText id="username"
+						value="#{user.username}" required="true"
+						requiredMessage="Please enter your username" />
+					<h:message for="username" styleClass="error" />
+		                    Password: <h:inputSecret id="password"
+						value="#{user.password}" required="true"
+						requiredMessage="Please enter your password" />
+					<h:message for="password" styleClass="error" />
+				</h:panelGrid>
+				<p />
+				<h:commandButton  class="button" value="Login" action="#{user.login}" />
+				<h:messages globalOnly="true" styleClass="error" />
+			</h:form>
+		
+			<h:form>
+				<h:commandButton  class="button" id="Register" value="Register NOW"
+					action="#{user.register}" />
+			</h:form>
+			<h:form>
+				<h:commandButton  class="button" id="Enter_as_Guest" value="Enter as Guest"
+					action="#{user.guest}" />
+			</h:form>
+			</div>
+
 </h:body>
+
+
+
 </html>

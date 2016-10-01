@@ -64,7 +64,7 @@ public class BidXml {
 	public void setBid(){
 		bid.setTime(time);
 		bid.setAmount(amount);	
-		bid.setUser(bidder.getBidder());
+		bid.setBidder(bidder.getBidder());
 	}
 	
 	public Bid getBid(){

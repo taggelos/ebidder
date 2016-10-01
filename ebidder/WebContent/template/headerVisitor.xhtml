@@ -3,19 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html">
-<head>
-</head>
+<h:head>
+        	<h:outputStylesheet name="newcss.css" library="css"/>
+</h:head>
 <body>
 	<ui:composition>
-		<h:head>
-        	<h:outputStylesheet name="newcss.css" library="css"/>
-   		 </h:head>
-   		 <h:form id="form">
-   		 <h:column> 
-			<h:commandLink action="/html/login.xhtml">
+   		 <h:form class="inline">
+   		<h:column> 
+			<h:link outcome="/html/all_items.xhtml">
     			<h:graphicImage library="images" name="pic.png" style="width: 10%; height: 10%"/>​
-			</h:commandLink>
-		 </h:column>
+			</h:link>
+		 </h:column> 
 		 </h:form>
 		<h:form id="frm1" rendered="#{user.loginButtonEnabled}">
 			Username: <h:inputText id="username"

@@ -1,14 +1,13 @@
 package db;
 
-import entities.Bid;
-
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
+
+import entities.Bid;
 
 @ManagedBean(name="bidDAO")
 @SessionScoped

@@ -2,28 +2,30 @@ package entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 
 /**
- * The persistent class for the image database table.
+ * The persistent class for the photo database table.
  * 
  */
 @Entity
-@NamedQuery(name="Image.findAll", query="SELECT i FROM Image i")
-public class Image implements Serializable {
+@NamedQuery(name="Photo.findAll", query="SELECT p FROM Photo p")
+@XmlAccessorType(XmlAccessType.NONE)
+public class Photo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int imageID;
 
-	private byte[] image;
+	private byte[] photo;
 
 	//bi-directional many-to-one association to Item
 	@ManyToOne
 	private Item item;
 
-	public Image() {
+	public Photo() {
 	}
 
 	public int getImageID() {
@@ -34,12 +36,12 @@ public class Image implements Serializable {
 		this.imageID = imageID;
 	}
 
-	public byte[] getImage() {
-		return this.image;
+	public byte[] getPhoto() {
+		return this.photo;
 	}
 
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setPhoto(byte[] image) {
+		this.photo = image;
 	}
 
 	public Item getItem() {

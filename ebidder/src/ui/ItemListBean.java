@@ -61,7 +61,7 @@ public class ItemListBean {
 		boolean flag = false;
 		for (int i = 0; i < temp.size(); i++) {
 			Bid temp_bid = temp.get(i);
-			if (temp_bid.getUser() == my_user.getCurrent()) {
+			if (temp_bid.getBidder().getUser() == my_user.getCurrent()) {////////////////////changes
 				temp_bid.setAmount(sub_value_bid);
 				temp_bid.setTime(new Timestamp(System.currentTimeMillis()));
 				bidDAO.update(temp_bid);
@@ -71,21 +71,20 @@ public class ItemListBean {
 		if (flag == false) {
 			Bid new_bid = new Bid();
 			new_bid.setItem(item_for_details);
-			new_bid.setUser(my_user.getCurrent());
+			new_bid.setBidder(my_user.getCurrent().getBidder());////////////////////changes
 			new_bid.setAmount(sub_value_bid);
 			new_bid.setTime(new Timestamp(System.currentTimeMillis()));
 			temp.add(new_bid);
 			item_for_details.setBids(temp);
 		}
-
+		
 		item_for_details.setNumber_of_Bids(item_for_details.getNumber_of_Bids() + 1);
 		item_for_details.setCurrently(sub_value_bid);
-		itemDAO.update(item_for_details);
-
-		if (item_for_details.getBuy_Price() != 0 && sub_value_bid >= item_for_details.getBuy_Price()) {
+		if (item_for_details.getBuy_Price() != 0.0f && sub_value_bid >= item_for_details.getBuy_Price()) { // anti !=null otan htan float
 			// Item sold;
+			item_for_details.setEnds(new Timestamp(System.currentTimeMillis()));  //end time will be the current time 
 		}
-
+		itemDAO.update(item_for_details);
 		return null;
 	}
 

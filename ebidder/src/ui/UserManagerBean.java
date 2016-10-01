@@ -227,22 +227,6 @@ public class UserManagerBean {
 		user.setPhone(phone);
 	}
 
-	public int getRating_Bidder() {
-		return user.getRating_Bidder();
-	}
-
-	public void setRating_Bidder(int rating_Bidder) {
-		user.setRating_Bidder(rating_Bidder);
-	}
-
-	public int getRating_Seller() {
-		return user.getRating_Seller();
-	}
-
-	public void setRating_Seller(int rating_Seller) {
-		user.setRating_Seller(rating_Seller);
-	}
-
 	public String getSurname() {
 		return user.getSurname();
 	}

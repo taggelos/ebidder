@@ -21,6 +21,7 @@ public class Category implements Serializable {
 	@ManyToMany(mappedBy="categories")
 	private List<Item> items;
 
+
 	public Category() {
 	}
 
@@ -40,4 +41,12 @@ public class Category implements Serializable {
 		this.items = items;
 	}
 
+	public boolean equals(Object o){
+	    if (o instanceof Category){
+	        Category temp = (Category)o;
+	        if (this.name.equals(temp.getName()))
+	            return true;
+	    }
+	    return false;
+	}
 }

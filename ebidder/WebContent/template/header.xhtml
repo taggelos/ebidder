@@ -4,31 +4,69 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-<head>
-</head>
+<h:head>
+	<h:outputStylesheet name="newcss.css" library="css" />
+</h:head>
 <body>
 	<ui:composition>
-	<h:form> 
-		 <h:column> 
-			<h:commandLink action="/html/login.xhtml">
-    			<h:graphicImage library="images" name="pic.png" style="width: 10%; height: 10%"/>​
-			</h:commandLink>
-		 </h:column> 
-	
-	  
-		 <h:column> 
-			   	<h:commandButton value="Messages" action="#{messagenotify.go_to_conversations()}" />
-	   	</h:column> 
-	   <h:column> 	
-	           <h:commandButton id="Create" value="Create new item" action="#{item.create}"/>
-	   	</h:column> 
-                <h:column>
-					<h:commandButton value="All Items" action="#{item.all_items}" />
+		<h:form rendered="#{ user.current ne null }">
+			<h:column>
+				<h:link outcome="/html/all_items.xhtml" style="text-decoration: none;">
+					<h:graphicImage  library="images" name="pic.png"
+						styleClass="image"/>​
+				</h:link>
+			</h:column>
+			<h:column>
+				<h:commandButton id="messages" class="button" value="Messages"
+					action="#{messagenotify.go_to_conversations()}" />
+			</h:column>
+			<h:column>
+				<h:commandButton id="create" class="button" value="Create new item"
+					action="#{item.create}" />
+			</h:column>
+			<h:column>
+				<h:commandButton id="manageitems" class="button"
+					value="Manage Items" action="#{item.manage}" />
+			</h:column>
+			<h:column>
+				<h:commandButton rendered="#{ user.isAdmin }" id="adminpage" class="button"
+					value="Admin Site" action="/restricted/admin.xhtml" />
+			</h:column>
+			<h:column>
+				<h:commandButton rendered="#{ !user.isAdmin }" id="welcomepage" class="button"
+					value="Welcome Page" action="/restricted/welcome.xhtml" />
+			</h:column>
+		</h:form>
+		<h:form rendered="#{ user.current eq null }">
+			<h:column>
+				<h:link outcome="/html/all_items.xhtml">
+					<h:graphicImage library="images" name="pic.png"
+						style="width: 10%; height: 10%" />​
+			</h:link>
+			</h:column>
+			<h:panelGrid>
+				<h:column>
+		 	Username: <h:inputText id="username" value="#{user.username}"
+						required="true" requiredMessage="Please enter your username" />
+					<h:message for="username" styleClass="error" />
 				</h:column>
-            	<h:column>
-            		<h:commandButton value="Manage Items" action="#{item.manage}" />
-            	</h:column>
-            </h:form>     
+				<h:column>
+            Password: <h:inputSecret id="password"
+						value="#{user.password}" required="true"
+						requiredMessage="Please enter your password" />
+					<h:message for="password" styleClass="error" />
+					<p />
+				</h:column>
+				<h:column>
+					<h:commandButton value="login" action="#{user.login}" />
+				</h:column>
+				<h:messages globalOnly="true" styleClass="error" />
+			</h:panelGrid>
+			<h:column>
+				<h:commandButton id="Register" value="Register NOW"
+					action="#{user.register}" />
+			</h:column>
+		</h:form>
 	</ui:composition>
 </body>
 </html>

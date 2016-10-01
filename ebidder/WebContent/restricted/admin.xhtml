@@ -1,48 +1,67 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>User List</title>
-        <h:outputStylesheet name="newcss.css" library="css"/>
-    </h:head>
-    <h:body>
-    	<div style="border-width:2px; border-color:green; border-style:solid;">
-         <ui:insert name="header" >
-            <ui:include src="/template/header.xhtml" />
-         </ui:insert> 
-     	 </div>
-        <h1> Admin Site </h1>
-        <h:form>
-                 <h:column> 
-                    <h:commandButton id="show" value="Show All Users" action="#{user.show}">
-                    	<f:param name="action" value="showall" />
-                    </h:commandButton>
-                 </h:column>
-                 <h:column> 
-                 	<h:commandButton id="Accepted" value="Show Accepted Users" action="#{user.show}">
-                    	<f:param name="action" value="accepted" />
-                    </h:commandButton>
-                 </h:column>
-              	 <h:column> 
-              	 	<h:commandButton id="Pending" value="Show Pending Users" action="#{user.show}">
-                    	<f:param name="action" value="pending" />
-                    </h:commandButton>
-                 </h:column>
-                 <h:column> 
-						<h:commandButton id="mXml" value="Unmarshal Xml" action="#{unmarshal.unmarshalXml()}" />
-				</h:column> 
-				<h:column> 
-						<h:commandButton id="uXml" value="Marshal Xml" action="#{marshal.marshalXml()}" />
-				</h:column> 
-       </h:form>
-        <p/>
-        <div style="border-width:2px; border-color:red; border-style:solid;">
-         <ui:insert name="footer" >
-            <ui:include src="/template/footer.xhtml" />
-         </ui:insert>
-      </div>
-    </h:body>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>User List</title>
+	<h:outputStylesheet name="newcss.css" library="css" />
+</h:head>
+<h:body>
+	<div
+		style="border-width: 2px; border-color: green; border-style: solid; background-color: white;">
+		<ui:insert name="header">
+			<ui:include src="/template/header.xhtml" />
+		</ui:insert>
+	</div>
+	<h1 style="color: #408080;">Admin Site</h1>
+	<h:form>
+		<h:column>
+			<h:commandButton class="adminbutton" id="show" value="Show All Users"
+				action="#{user.show}">
+				<f:param name="action" value="showall" />
+			</h:commandButton>
+		</h:column>
+		<h:column>
+			<h:commandButton class="adminbutton" id="Accepted"
+				value="Show Accepted Users" action="#{user.show}">
+				<f:param name="action" value="accepted" />
+			</h:commandButton>
+		</h:column>
+		<h:column>
+			<h:commandButton class="adminbutton" id="Pending"
+				value="Show Pending Users" action="#{user.show}">
+				<f:param name="action" value="pending" />
+			</h:commandButton>
+		</h:column>
+
+
+	</h:form>
+	
+	<div class="newline">
+		<h:form enctype="multipart/form-data">
+				<h:inputFile class="choosefile" id="unmarshal"	value="#{unmarshal.file}" />
+				<h:commandButton class="adminbutton" id="mXml" value="Unmarshal Xml"
+					action="#{unmarshal.unmarshalXml()}" />
+			
+		</h:form>
+		</div>
+		<h:message for="image" styleClass="error" />	
+	
+	
+	<h:form>
+		<h:column>
+			<h:commandButton class="adminbutton" id="uXml" value="Marshal Xml"
+				action="#{marshal.marshalXml()}" />
+		</h:column>
+	</h:form>
+
+	<p />
+	<h:form rendered="#{ user.current ne null }">
+		<ui:insert name="footer">
+			<ui:include src="/template/footer.xhtml" />
+		</ui:insert>
+	</h:form>
+</h:body>
 </html>

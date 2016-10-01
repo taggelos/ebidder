@@ -1,9 +1,12 @@
 package ui;
 
 import java.io.File;
+import java.io.OutputStream;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
@@ -40,13 +43,27 @@ public class MarshalBean {
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 			//jaxbMarshaller.setProperty("jaxb.encoding", "Unicode"); //special signs if dont work
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			
+			FacesContext fc = FacesContext.getCurrentInstance();
+		    ExternalContext ec = fc.getExternalContext();
+			
+			
 			jaxbMarshaller.marshal(item, file);
-			jaxbMarshaller.marshal(item, System.out);
+			
+			ec.responseReset();
+			String fileName="marshal.xml";
+			ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+			
+			OutputStream output = ec.getResponseOutputStream();
+
+			jaxbMarshaller.marshal(item, output);
+			fc.responseComplete();
+			
 		}
 		catch(Exception ex)
 		{
 			System.out.println(ex);
 		}
 		return "/html/commnon";
-	}
+	}	
 }
