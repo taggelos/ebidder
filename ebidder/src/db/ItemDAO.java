@@ -154,7 +154,6 @@ public class ItemDAO {
 		tx.begin();
 		try {
 			System.out.println(item.getStarted());
-			//em.merge(item.getUser());
 			//em.persist(item);
 			em.merge(item);			
 			em.flush(); 

@@ -34,8 +34,9 @@ public class MessageBean {
 		// +Elegxos text
 		
 		Message message= new Message();
-		message.setUser1(getSender());
-		message.setUser2(getReceiver());
+		//TODO
+		//message.setUser1(getSender());
+		//message.setUser2(getReceiver());
 		message.setTime(new Date());
 		message.setText(text);
 		

@@ -15,6 +15,7 @@ public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int messageID;
 
 	private String text;
@@ -22,15 +23,13 @@ public class Message implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;
 
-	//bi-directional many-to-one association to User
+	//bi-directional many-to-one association to Bidder
 	@ManyToOne
-	@JoinColumn(name="UserID_from")
-	private User user1;
+	private Bidder bidder;
 
-	//bi-directional many-to-one association to User
+	//bi-directional many-to-one association to Seller
 	@ManyToOne
-	@JoinColumn(name="UserID_to")
-	private User user2;
+	private Seller seller;
 
 	public Message() {
 	}
@@ -59,20 +58,20 @@ public class Message implements Serializable {
 		this.time = time;
 	}
 
-	public User getUser1() {
-		return this.user1;
+	public Bidder getBidder() {
+		return this.bidder;
 	}
 
-	public void setUser1(User user1) {
-		this.user1 = user1;
+	public void setBidder(Bidder bidder) {
+		this.bidder = bidder;
 	}
 
-	public User getUser2() {
-		return this.user2;
+	public Seller getSeller() {
+		return this.seller;
 	}
 
-	public void setUser2(User user2) {
-		this.user2 = user2;
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 
 }

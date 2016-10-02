@@ -44,7 +44,7 @@ public class Item implements Serializable {
 	private List<Bid> bids;
 
 	//bi-directional many-to-many association to Category
-	@ManyToMany(cascade={CascadeType.PERSIST})
+	@ManyToMany
 	@JoinTable(
 		name="item_has_category"
 		, joinColumns={
@@ -61,10 +61,8 @@ public class Item implements Serializable {
 	private Location location;
 
 	//bi-directional many-to-one association to Seller
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
-	@JoinColumn(name="SellerID")
+	@ManyToOne
 	private Seller seller;
-
 
 	//bi-directional many-to-one association to Photo
 	@OneToMany(mappedBy="item")

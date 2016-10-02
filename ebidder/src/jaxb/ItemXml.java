@@ -49,7 +49,8 @@ public class ItemXml {
 	private int itemID;
 
 	private SellerXml seller = new SellerXml();
-	
+
+	private BidderXml bidder = new BidderXml();
 
 	/////////////////////////////////////////////////////////////////////// setters
 	/////////////////////////////////////////////////////////////////////// getters
@@ -160,6 +161,15 @@ public class ItemXml {
 		this.seller = seller;
 	}
 
+	@XmlElement(name = "Bidder")
+	public BidderXml getBidder() {
+		return bidder;
+	}
+
+	public void setBidder(BidderXml bidder) {
+		this.bidder = bidder;
+	}
+	
 	@XmlElement(name = "Category")
 	public List<String> getCategories() {
 		List<String> category = new ArrayList<>();
@@ -196,6 +206,9 @@ public class ItemXml {
 		item.setCategories(categories);
 		item.setBids(bidXmlToBid(bids.getBids()));
 		item.setSeller(seller.getSeller());
+		for (Bid b : item.getBids()) {
+			b.setBidder(bidder.getBidder());
+		}
 		item.setCurrently(currently);
 		item.setBuy_Price(buy_Price);
 		item.setEnds(ends);
@@ -222,31 +235,21 @@ public class ItemXml {
 	@Override
 	public String toString() {
 		String str;
-		str = " Item " + "\n   " + (itemID != 0 ? "ItemID=" + itemID + ", " : "no itemID,") + "\n   "
-				+ (name != null ? "name=" + name + ", " : "no name,") + "\n   "
-				+ (description != null ? "description=" + description + ", " : "no description,") + "\n   "
-				+ (started != null ? "started= " + started + ", " : "no started,") + "\n   "
-				+ (ends != null ? "ends= " + ends + ", " : "no ends,") + "\n   "
-				+ (first_Bid != null ? "first_Bid= " + first_Bid + "$" + ", " : "no first_Bid,") + "\n   "
-				+ (currently != null ? "currently= " + currently + "$" + ", " : "no currently,") + "\n   "
-				+ (buy_Price != null ? "buy_Price= " + buy_Price + "$" + ", " : "no buy_price,") + "\n   "
-				+ (location != null ? "location= " + location + ", " : "no location,") + "\n   "
-				+ (number_of_Bids != 0 ? "number_of_bids = " + number_of_Bids + ", " : "no number_of_Bids,");
+		str = "Item:"
+		+ "\n	" + "name =" + name
+		+ "\n	" + "description =" + description
+		+ "\n	" + "started = " + started
+		+ "\n   " + "ends = " + ends
+		+ "\n   " + "first_Bid = " + first_Bid
+		+ "\n   " + "currently = " + currently
+		+ "\n   " + "buy_Price= " + buy_Price
+		+ "\n   " + "location= " + location
+		+ "\n   " + "number_of_bids = " + number_of_Bids;
 		for (Category c : categories) {
-			str += "\n   " + (c.getName() != null ? "category =  " + c.getName() + ", " : "no categories,");
+			str += "\n   " + "category =  " + c.getName();
 		}
-		str += "\n   " + (seller != null ? seller : "");
-		str += (bids != null ? bids : "");
-		// alternative printing
-		/*
-		 * for (BidXml bid : bids.getBids()){ str += "\n " + "Amount " +
-		 * bid.getAmount() + "\n"; str += "\n " + "Time " + bid.getTime() +
-		 * "\n"; str += "\n " + "UserID " + bid.getBidder().getUserID() + "\n";
-		 * str += "\n " + "Rating " + bid.getBidder().getRating() + "\n"; str +=
-		 * "\n " + "Location " + bid.getBidder().getLocation() + "\n"; str +=
-		 * "\n " + "Country " + bid.getBidder().getCountry() + "\n"; //str+=
-		 * bid; }
-		 */
+		str += "\n   " + seller;
+		str += "\n   " + bids;
 		return str;
 	}
 }

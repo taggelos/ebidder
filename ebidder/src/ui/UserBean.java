@@ -127,7 +127,7 @@ public class UserBean {
 
     public String submit(){
     	System.out.println("SUBMIT---CURRENT");
-    	System.out.println(current.getUserID());
+    	//System.out.println(current.getUserID());
 	   System.out.println(current.getUsername());
 	    
     	User user =  current;
@@ -149,7 +149,7 @@ public class UserBean {
 	    user.setPhone(phone);
 	    
 	    System.out.println("EDIT---NEW");
-	    System.out.println(current.getUserID());
+	    //System.out.println(current.getUserID());
 	    System.out.println(current.getUsername());
 
 	    

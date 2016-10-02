@@ -106,7 +106,7 @@ public class ItemListBean {
 	}
 	
 	public List<Item> getItems_list() {
-		//items_list = itemDAO.getItems("All");
+		items_list = itemDAO.getItems("All");
 		return items_list;
 	}
 

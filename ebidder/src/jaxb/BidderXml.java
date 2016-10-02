@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import entities.Bid;
 import entities.Bidder;
 import entities.User;
 
@@ -80,7 +81,7 @@ public class BidderXml   {
 		this.country = country;
 	}
 	
-	public void setBidder(Bidder user){
+	/*public void setBidder(Bidder user){
 		userID = user.getUser().getUsername();
 		bidder = user;
 	}
@@ -88,14 +89,35 @@ public class BidderXml   {
 	public Bidder getBidder(){
 		bidder.getUser().setUsername(userID);
 		bidder.getUser().setCountry(country);
+		bidder.setUserUsername(userID);
 		bidder.setRating_Bidder(rating);
 		bidder.getUser().setLocation(location.getLocation());
 		return bidder;
+	}*/
+	
+	
+	public void setBidder(){
+		bidder.getUser().setUsername(userID);
+		bidder.getUser().setCountry(country);
+		bidder.setUserUsername(userID);
+		bidder.setRating_Bidder(rating);
+		bidder.getUser().setLocation(location.getLocation());
+		
+		System.out.println("AXNEEEEWQEQWEQW");
+		System.out.println(bidder.getUserUsername());
 	}
+	
+	public Bidder getBidder(){
+		setBidder();
+		return bidder;	
+	}
+	
+	
+	//item.getBids().sort((o1, o2) -> o1.getTime().compareTo(o2.getTime()));
 	
 	@Override
 	public String toString() {
-		return "   Bidder "
+		return "Bidder:"
 	+ "\n        " + (userID != null ? "bidderID=" + userID +  ", " : "no userID")
 	+ "\n        " + (rating != 0 ? "rating=" + rating + ", " : "no rating")
 	+ "\n        " + (location != null ? location + ", " : "no location")

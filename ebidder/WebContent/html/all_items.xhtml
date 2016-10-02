@@ -27,14 +27,14 @@
 		   		<h:commandButton id="search" value="Search" action="#{item_list.search}"/>
             </h:panelGrid>  
 	   	 
-    		<h:dataTable rendered="#{ not empty(item_list.items_list)}"> id="Items" value="#{ item_list.items_list }" var="itm"	
+    		<h:dataTable rendered="#{ not empty(item_list.items_list)}" id="Items" value="#{ item_list.items_list }" var="itm"	
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">  
 			
-				<h:column>
+				<!--<h:column>
 				<f:facet name="header">Image</f:facet>
-					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="#{'/images/'+itm.getPhotos().get(0).imageID}"  />		
-				</h:column>
+					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="#{'/images/'+itm.getPhotos().get(0).imageID}"  />
+				</h:column>  -->
 							
 				<h:column>   
 				<f:facet name="header">Name</f:facet> 

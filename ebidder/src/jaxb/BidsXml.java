@@ -5,7 +5,7 @@ package jaxb;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
+import entities.Bidder;
 
 import java.util.ArrayList;
 
@@ -25,6 +25,9 @@ public class BidsXml {
 		if (null==bids) {
 			bids = new ArrayList<BidXml>();
 		}
+		for (BidXml b : bids) {
+			b.setBid();
+		}
 		return bids;
 	}
 
@@ -34,6 +37,6 @@ public class BidsXml {
 
 	@Override
 	public String toString() {
-		return " Bids " + "\n"+ (bids != null ?  bids : "\n") ;
+		return "Bids " + "\n	"+ bids ;
 	}
 }

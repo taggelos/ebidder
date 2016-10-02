@@ -73,9 +73,9 @@ public class BidXml {
 	
 	@Override
 	public String toString() {
-		return "  Bid "
-	+ "\n    " + (time != null ? "time=" + time + ", " : "no time")
-	+ "\n    " + (amount != 0 ? "amount=" + amount +  ", " : "no amount")
+		return "\n	Bid"
+	+ "\n    " + "time=" + time
+	+ "\n    " + "amount=" + amount
 	+ "\n    " + bidder ;
 	}
 }

@@ -45,7 +45,8 @@ public class ConversationListBean {
 	
 	public String delete()
 	{
-		messageDAO.delete_conversation(conversation_for_delete.getUser1(), conversation_for_delete.getUser2());
+		//TODO
+		//messageDAO.delete_conversation(conversation_for_delete.getUser1(), conversation_for_delete.getUser2());/////////////ATHANASO
 		return null;
 	}
 	

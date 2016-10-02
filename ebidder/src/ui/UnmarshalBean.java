@@ -17,6 +17,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import db.ItemDAO;
+import entities.Bid;
 import entities.Item;
 import jaxb.ItemXml;
 import jaxb.ItemsXml;
@@ -67,12 +68,11 @@ public class UnmarshalBean {
 	}
 
 	public String unmarshalXml() throws Exception {
-		String myfile = file.getSubmittedFileName();
 		JAXBContext context = JAXBContext.newInstance(ItemsXml.class); 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		/*ItemsXml items = (ItemsXml)unmarshaller.unmarshal(new FileReader("testxml.xml")); */
 		//items.setItems(); //set every itemxml as entity item
-		ItemsXml items = (ItemsXml)unmarshaller.unmarshal(new FileReader(myfile)); 
+		ItemsXml items = (ItemsXml)unmarshaller.unmarshal(file.getInputStream()); 
 		System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 		//System.out.println(items);
 		//ItemDAO itemDAO = new ItemDAO();
@@ -80,6 +80,10 @@ public class UnmarshalBean {
 			//i.getItem();
 			System.out.println(i);
 			Item item = i.getItem();
+			if (item.getBids()!=null)
+			for (Bid b: item.getBids()){
+				System.out.println("--------------------"+b.getBidder().getUserUsername());
+			}
 			itemDAO.insertItem(item);
 		}
 		

@@ -8,8 +8,8 @@
 		<class>entities.Location</class>
 		<class>entities.Message</class>
 		<class>entities.Photo</class>
-		<class>entities.Seller</class>
 		<class>entities.User</class>
+		<class>entities.Seller</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/database"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

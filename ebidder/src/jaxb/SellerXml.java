@@ -27,6 +27,7 @@ public class SellerXml implements Serializable {
 	public SellerXml(){
 		seller = new Seller();
 		seller.setUser(new User());
+		seller.getUser().setUsername("default username");
 		seller.getUser().setCountry("default country");
 		seller.getUser().setName("default name");
 		seller.getUser().setEmail("default e_mail");
@@ -56,19 +57,21 @@ public class SellerXml implements Serializable {
 		this.userID = userID;
 	}
 	
+	/*
 	public void setSeller(Seller user){
 		seller = user;		
-	}
+	}*/
 	
 	public Seller getSeller(){
 		seller.getUser().setUsername(userID);
+		seller.setUserUsername(userID);
 		seller.setRating_Seller(rating);
 		return seller;
 	}
 	
 	@Override
 	public String toString() {
-		return "   Seller "
+		return "Seller:"
 	+ "\n      " + (userID != null ? "sellerID=" + userID +  ", " : "no userID")
 	+ "\n      " + (rating != 0 ? "rating=" + rating + ", " : "no rating");
 	}

@@ -179,14 +179,6 @@ public class UserManagerBean {
 		user.setLocation(l);
 	}
 	
-	public int getUserID() {
-		return user.getUserID();
-	}
-
-	public void setUserID(int userID) {
-		user.setUserID(userID);
-	}
-
 	public String getCountry() {
 		return user.getCountry();
 	}
