@@ -21,8 +21,7 @@ public class ImageDAO {
 	
 	public ImageDAO()
 	{
-		ServletContext servletContext = (ServletContext) FacesContext
-		        .getCurrentInstance().getExternalContext().getContext();
+		ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 		servletContext.setAttribute("imageDAO", this);
 	}
 
@@ -65,9 +64,7 @@ public class ImageDAO {
 
 	}
 	
-	
 
-	
 	 public void setJpaResourceBean(JPAResourceBean jpaResourceBean) {
 	        this.jpaResourceBean = jpaResourceBean;
 	    }

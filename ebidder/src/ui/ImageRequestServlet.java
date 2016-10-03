@@ -4,14 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.BidDAO;
 import db.ImageDAO;
 import entities.Photo;
 
@@ -24,7 +22,7 @@ import java.io.BufferedInputStream;
 public class ImageRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty(value = "#{imageDAO}")
+	/*@ManagedProperty(value = "#{imageDAO}")
 	private ImageDAO imageDAO;
 	
 	
@@ -35,7 +33,7 @@ public class ImageRequestServlet extends HttpServlet {
 
 	public void setImageDAO(ImageDAO imageDAO) {
 		this.imageDAO = imageDAO;
-	}
+	}*/
 
 
 	@Override
@@ -43,7 +41,7 @@ public class ImageRequestServlet extends HttpServlet {
             throws ServletException, IOException {    	
     	
     	//ImageDAO imageDAO = (ImageDAO) getServletContext().getAttribute("imageDAO"); 
-    	
+    	ImageDAO imageDAO = new ImageDAO();
         String imageId = String.valueOf(request.getPathInfo().substring(1)); 
         Photo image= imageDAO.findImage(Integer.valueOf(imageId) );
         

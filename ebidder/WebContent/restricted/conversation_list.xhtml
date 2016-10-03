@@ -9,7 +9,7 @@
 		<h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
 
-    <h:body> 
+    <h:body class="backmanager">
 		<div style="border-width:2px; border-color:green; border-style:solid; background-color: #CCE5FF;">
          <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
@@ -52,11 +52,11 @@
 				</h:column>							
 				<h:column rendered="#{conversation_list.isIncoming()  eq true}" >   
 				<f:facet name="header">Sender</f:facet> 
-					 <b>#{conv.user1.name}</b>
+					 <b>#{conv.seller.userUsername}</b>
 				</h:column>
 				<h:column rendered="#{conversation_list.isIncoming()eq false}"  >   
 				<f:facet name="header">Sender</f:facet> 
-					 <b>#{conv.user2.name}</b>
+					 <b>#{conv.bidder.userUsername}</b>
 				</h:column>
 				<h:column>
 					:

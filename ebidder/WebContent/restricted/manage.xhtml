@@ -8,7 +8,7 @@
         <title>Manage Items</title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
-    <h:body>
+    <h:body class="backmanager">
     <div style="border-width:2px; border-color:green; border-style:solid; background-color: #FFE5CC;">
          <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
@@ -22,32 +22,33 @@
         </h:form>
         <p/>
         <h:form rendered="#{ not empty(my_item_list.all_my_items) }">
-    		<h:dataTable id="Items" value="#{ my_item_list.all_my_items }" var="itm"	
+    		<h:dataTable style="userTable" id="Items" value="#{ my_item_list.all_my_items }" var="itm"	
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">
 
 				<h:column>
 				<f:facet name="header">Image</f:facet>
-					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="/images/${itm.photos().get(0).imageID}"  />		
+					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="/images/${itm.photos.get(0).imageID}"  />		
 				</h:column>
 				<h:column>
 				<f:facet name="header">Name</f:facet>
 					 #{itm.getName()}
 				</h:column>			
 				<h:column>
-					<h:commandButton value="More" action="#{my_item_list.more_item()}">
+					<h:commandButton class="userTableButton" value="More" action="#{my_item_list.more_item()}">
 						<f:setPropertyActionListener target="#{item_list.item_for_details}"
 						value="#{itm}" />
 					</h:commandButton>
 				</h:column>
 				<h:column>
-					<h:commandButton value="Edit" action="#{my_item_list.edit_item()}" rendered="#{my_item_list.isCan_change( itm.started,itm.number_of_Bids )}" >
+					<h:commandButton class="userTableButton" value="Edit" action="#{my_item_list.edit_item()}"  >
 						<f:setPropertyActionListener target="#{my_item_list.item_for_change}"
 						value="#{itm}" />
 					</h:commandButton>
 				</h:column>
+				<!--  rendered="#{my_item_list.isCan_change( itm.started,itm.number_of_Bids )}" -->
 				<h:column>			
-					<h:commandButton value="Delete" rendered="#{my_item_list.isCan_change( itm.started,itm.number_of_Bids )}" action="#{my_item_list.delete_item()}">						
+					<h:commandButton class="userTableButton" value="Delete" action="#{my_item_list.delete_item()}">						
 						<f:setPropertyActionListener target="#{my_item_list.item_for_change}"
 						value="#{itm}" />
 					</h:commandButton>

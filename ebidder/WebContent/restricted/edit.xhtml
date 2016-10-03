@@ -8,14 +8,14 @@
         <title>Edit User</title>
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>
-    <h:body>
-    <div style="border-width:2px; border-color:green; border-style:solid;">
+    <h:body class="backmanager">
+    <div style="border-width:2px; border-color:green; border-style:solid;  background-color: white;">
          <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
          </ui:insert> 
      	 </div>
         <h:form>
-            <h1 style="color: #555555"> Edit Form </h1>
+            <h1 style="color: #f4f400;"> Edit Form </h1>
             <h:panelGrid columns="3">
             	Username 
                 <h:inputText id="username" value="#{manager.username}" 

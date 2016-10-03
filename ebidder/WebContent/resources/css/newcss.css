@@ -5,6 +5,8 @@
         Purpose of the stylesheet follows.
 */
 
+
+
 root { 
     display: block;
 }
@@ -203,6 +205,9 @@ input[disabled] {
 
 .imgback{
 	background-image:url("#{resource['images:ggg.jpg']}");
-    background-repeat: no-repeat;
+}
+
+.backmanager{
+	background-image:url("#{resource['images:one.jpg']}");
 }
 

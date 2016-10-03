@@ -1,5 +1,6 @@
 package db;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -223,33 +224,17 @@ public class ItemDAO {
 	    public JPAResourceBean getJpaResourceBean() {
 	        return jpaResourceBean;
 	    }
+	    
+	    
+
+	    private List<String> usernames = new ArrayList<String>();
+	    private List<Integer> itemids = new ArrayList<Integer>();
+	    private List<Item> recommended = new ArrayList<Item>();
+	    
+	    
+	    
 
 }
 
 
 
-
-/*	
-@SuppressWarnings("unchecked")
-public User find(String username, String password) {
-	User user = null;
-
-	EntityManager em = jpaResourceBean.getEMF().createEntityManager();
-	EntityTransaction tx = em.getTransaction();
-	tx.begin();
-
-	Query q = em.createQuery("Select u from User u where u.username = :username and u.password = :password");
-	q.setParameter("username", username);
-	q.setParameter("password", password);
-	List<User> users = q.getResultList();
-	tx.commit();
-	em.close();
-
-	if (users != null && users.size() == 1) {
-		user = users.get(0);
-	}
-
-	return user;
-
-}
-*/

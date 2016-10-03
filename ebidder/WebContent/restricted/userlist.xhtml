@@ -8,13 +8,13 @@
 	<title>User List</title>
 	<h:outputStylesheet name="newcss.css" library="css" />
 </h:head>
-<h:body>
-<div style="border-width:2px; border-color:green; border-style:solid;">
+<h:body class="imgback">
+<div style="border-width:2px; border-color:green; border-style:solid;  background-color: white;">
          <ui:insert name="header" >
             <ui:include src="/template/header.xhtml" />
          </ui:insert> 
      	 </div>
-	<h1 style="color: #555555">User List</h1>
+	<h1 style="color: #f4f400;">User List</h1>
 	<h:form rendered="#{ not empty(manager.userlist) }" >
 		<h:dataTable value="#{manager.userlist}" var="usr"
 			rows="#{manager.rows}"
