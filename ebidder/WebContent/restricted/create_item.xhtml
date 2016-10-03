@@ -24,30 +24,7 @@
                      <f:validateLength maximum="50"/>
                 </h:inputText>                  
                 <h:message for="name" styleClass="error"/>
-                Category: 
-                <h:panelGrid columns="2">
-	                <h:inputText id="category" value="#{item.current_category}" 
-	                             validatorMessage="Maximum length is 15 characters"
-	                             required="true" requiredMessage="Please enter category">
-	                	<f:validateLength maximum="15"/>
-	                </h:inputText>
-	                <h:commandButton value="Add" action="#{item.add_category}" />	
-                </h:panelGrid>
-                <h:message for="category" styleClass="error"/>
-                 
-               	Selected Categories				
-				<h:dataTable id="added_categories" value="#{item.categories }" var="cat">					
-					<h:column>
-					 #{cat.getName()}
-					</h:column>
-					<h:column>
-						<h:commandButton value="delete" action="#{item.delete_category}">
-							<f:setPropertyActionListener target="#{item.category_for_delete}"
-							value="#{cat}" />
-						</h:commandButton>
-					</h:column>
-				</h:dataTable>
-				<h:message for="added_categories" styleClass="error"/>
+                
                                        
                 Buy_Price: 
                 <h:inputText id="buy_price" value="#{item.buy_price}"
@@ -456,11 +433,34 @@
 					</h:column>
 				</h:dataTable>
 				<h:message for="added_images" styleClass="error"/> 
-  	           		
+  	           		Category: 
+                <h:panelGrid columns="2">
+	                <h:inputText id="category" value="#{item.current_category}" 
+	                             validatorMessage="Maximum length is 15 characters"
+	                             required="true" requiredMessage="Please enter category">
+	                	<f:validateLength maximum="15"/>
+	                </h:inputText>
+	                <h:commandButton value="Add" action="#{item.add_category}" />	
+                </h:panelGrid>
+                <h:message for="category" styleClass="error"/>
+                 
+               	Selected Categories				
+				<h:dataTable id="added_categories" value="#{item.categories }" var="cat">					
+					<h:column>
+					 #{cat.getName()}
+					</h:column>
+					<h:column>
+						<h:commandButton value="delete" action="#{item.delete_category}">
+							<f:setPropertyActionListener target="#{item.category_for_delete}"
+							value="#{cat}" />
+						</h:commandButton>
+					</h:column>
+				</h:dataTable>
+				<h:message for="added_categories" styleClass="error"/>
             </h:panelGrid>
             <p/>    
            	<h:commandButton id="create_item" value="Create item" action="#{item.create_item}"/>
-            <h:messages globalOnly="true" styleClass="error"/>
+            <h:messages globalOnly="true" styleClass="correct"/>
         </h:form>
         
         <h:form rendered="#{ user.current ne null }" >

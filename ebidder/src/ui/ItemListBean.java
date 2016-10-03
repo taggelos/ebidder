@@ -2,12 +2,15 @@ package ui;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import db.BidDAO;
 import db.ItemDAO;
@@ -22,7 +25,7 @@ public class ItemListBean {
     @PostConstruct
     public void init(){
     	items_list = new ArrayList<Item>();
-    	items_list= itemDAO.getItems("All");
+    	items_list= itemDAO.getItems("All",0,0);
     }
 
 	private String search_value;
@@ -39,6 +42,10 @@ public class ItemListBean {
 	@ManagedProperty(value = "#{bidDAO}")
 	private BidDAO bidDAO;
 	
+	private int first=0;
+	
+	private int rows=40;
+	
 	
 // Functions
 	public String search()
@@ -48,47 +55,60 @@ public class ItemListBean {
 	}
 
 	public String submit_bid() {
-		if (item_for_details.getCurrently() == 0 && item_for_details.getFirst_Bid() > sub_value_bid) {
-			// message for more money
-			return null;
-		}
-		if (item_for_details.getCurrently() >= sub_value_bid) {
-			// message for more money
-			return null;
-		}
-
-		List<Bid> temp = item_for_details.getBids();
-		boolean flag = false;
-		for (int i = 0; i < temp.size(); i++) {
-			Bid temp_bid = temp.get(i);
-			if (temp_bid.getBidder().getUser() == my_user.getCurrent()) {////////////////////changes
-				temp_bid.setAmount(sub_value_bid);
-				temp_bid.setTime(new Timestamp(System.currentTimeMillis()));
-				bidDAO.update(temp_bid);
-				flag = true;
+		Date datenow = new Timestamp(System.currentTimeMillis());
+		if(datenow.compareTo(item_for_details.getEnds())<=0){
+			if (item_for_details.getCurrently() == 0 && item_for_details.getFirst_Bid() > sub_value_bid) {
+				// message for more money
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successful"));
+				return null;
 			}
+			if (item_for_details.getCurrently() >= sub_value_bid) {
+				// message for more money
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Throw More Brah"));
+				return null;
+			}
+	
+			List<Bid> temp = item_for_details.getBids();
+			boolean flag = false;
+			for (int i = 0; i < temp.size(); i++) {
+				Bid temp_bid = temp.get(i);
+				if (temp_bid.getBidder().getUser() == my_user.getCurrent() ) {////////////////////changes
+					temp_bid.setAmount(sub_value_bid);
+					temp_bid.setTime(new Timestamp(System.currentTimeMillis()));
+					System.out.println(temp_bid.getBidder().getUserUsername());
+					bidDAO.update(temp_bid);
+					flag = true;
+				}
+			}
+			if (flag == false) {
+				Bid new_bid = new Bid();
+				new_bid.setItem(item_for_details);
+				new_bid.setBidder(my_user.getCurrent().getBidder());////////////////////changes
+				new_bid.setAmount(sub_value_bid);
+				new_bid.setTime(new Timestamp(System.currentTimeMillis()));
+				temp.add(new_bid);
+				item_for_details.setBids(temp);
+			}
+			
+			item_for_details.setNumber_of_Bids(item_for_details.getNumber_of_Bids() + 1);
+			item_for_details.setCurrently(sub_value_bid);
+			if (item_for_details.getBuy_Price() != 0.0f && sub_value_bid >= item_for_details.getBuy_Price()) { // anti !=null otan htan float
+				// Item sold;
+				item_for_details.setEnds(new Timestamp(System.currentTimeMillis()));  //end time will be the current time 
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Auction just finished, no need for bids"));
+				//message ?
+				//TODO
+			}
+			itemDAO.update(item_for_details);
+			return null;
 		}
-		if (flag == false) {
-			Bid new_bid = new Bid();
-			new_bid.setItem(item_for_details);
-			new_bid.setBidder(my_user.getCurrent().getBidder());////////////////////changes
-			new_bid.setAmount(sub_value_bid);
-			new_bid.setTime(new Timestamp(System.currentTimeMillis()));
-			temp.add(new_bid);
-			item_for_details.setBids(temp);
-		}
-		
-		item_for_details.setNumber_of_Bids(item_for_details.getNumber_of_Bids() + 1);
-		item_for_details.setCurrently(sub_value_bid);
-		if (item_for_details.getBuy_Price() != 0.0f && sub_value_bid >= item_for_details.getBuy_Price()) { // anti !=null otan htan float
-			// Item sold;
-			item_for_details.setEnds(new Timestamp(System.currentTimeMillis()));  //end time will be the current time 
-		}
-		itemDAO.update(item_for_details);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Auction is finished, no need for bids"));
 		return null;
 	}
 
 // Getters and Setters
+	
+	
 	public String getSearch_value() {
 		return search_value;
 	}
@@ -106,7 +126,7 @@ public class ItemListBean {
 	}
 	
 	public List<Item> getItems_list() {
-		items_list = itemDAO.getItems("All");
+		items_list = itemDAO.getItems("All",first,rows+1);
 		return items_list;
 	}
 
@@ -159,4 +179,41 @@ public class ItemListBean {
 		this.sub_value_bid = sub_value_bid;
 	}
 
+	public int getFirst() {
+		return first;
+	}
+
+	public void setFirst(int first) {
+		this.first = first;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+	
+	public String display(String action){
+		if(action.equals("next") ){
+			first += rows;
+		}
+		else{
+			first -= rows;
+		}
+		getItems_list();
+		return null;
+	}
+	
+	public boolean getNext(){
+		//return (userList.size() <= (first + rows));
+		return items_list.size() <= rows;
+	}
+	
+	public boolean getPrev(){
+		return first==0;
+	}
+	
+	
 }

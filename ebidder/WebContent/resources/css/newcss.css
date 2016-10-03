@@ -9,6 +9,10 @@ root {
     display: block;
 }
 
+.correct{
+	color: #0000a0;
+}
+
 .error {
    color: red;
 }

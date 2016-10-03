@@ -28,7 +28,7 @@
 
 				<h:column>
 				<f:facet name="header">Image</f:facet>
-					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="/images/${itm.getImages().get(0).imageID}"  />		
+					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="/images/${itm.photos().get(0).imageID}"  />		
 				</h:column>
 				<h:column>
 				<f:facet name="header">Name</f:facet>

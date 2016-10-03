@@ -68,13 +68,13 @@
 				<h:column rendered="#{conversation_list.isIncoming() eq true}" >
 					<h:commandButton class="userTableButton" value="See All" action="#{ conversation_list.see_all }">
 						<f:setPropertyActionListener target="#{message.receiver}"
-						value="#{conv.user1}" />
+						value="#{conv.seller}" />
 					</h:commandButton>
 				</h:column>
 				<h:column rendered="#{conversation_list.isIncoming()eq false}">
 					<h:commandButton class="userTableButton" value="See All" action="#{ conversation_list.see_all }">
 						<f:setPropertyActionListener target="#{message.receiver}"
-						value="#{conv.user2}" />
+						value="#{conv.bidder}" />
 					</h:commandButton>
 				</h:column>
 				<h:column>

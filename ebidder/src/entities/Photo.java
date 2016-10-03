@@ -1,9 +1,10 @@
 package entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.persistence.*;
 
 
 /**
@@ -17,6 +18,7 @@ public class Photo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int imageID;
 
 	private byte[] photo;
@@ -40,8 +42,8 @@ public class Photo implements Serializable {
 		return this.photo;
 	}
 
-	public void setPhoto(byte[] image) {
-		this.photo = image;
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
 	}
 
 	public Item getItem() {

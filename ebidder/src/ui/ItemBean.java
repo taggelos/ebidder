@@ -10,9 +10,11 @@ import java.util.Date;
 import java.util.List;
 import java.text.SimpleDateFormat;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
 
@@ -22,6 +24,7 @@ import entities.Category;
 import entities.Item;
 import entities.Location;
 import entities.Photo;
+import entities.Seller;
 
 @ManagedBean(name = "item")
 @ViewScoped
@@ -112,9 +115,12 @@ public class ItemBean {
 		item.setCountry(country);
 		item.setStarted(started_date);
 		item.setEnds(ends_date);
-		item.setSeller(my_user.getCurrent().getSeller());
+		Seller  seller = new Seller();
+		seller.setUserUsername(my_user.getCurrent().getUsername());
+		item.setSeller(seller);
+		//System.out.println(my_user.getCurrent().getSeller().getUserUsername());
+		//item.getSeller().setUserUsername(my_user.getCurrent().getSeller().getUserUsername());
 		item.setDescription(description);
-
 		List<Photo> temp_images_list = new ArrayList<Photo>();
 		Photo temp_image;
 		for (MyImage my_image : my_images) {
@@ -125,13 +131,16 @@ public class ItemBean {
 		}
 		item.setPhotos(temp_images_list);
 
-		itemDAO.insertItem(item);
-		/*
-		 * if (!message.equals("ok")) { context.addMessage(null, new
-		 * FacesMessage(message)); } if (context.getMessageList().size() > 0)
-		 * return null; else return "/restricted/manage";
-		 */
-		return null;
+		String message = itemDAO.insertItem(item);
+		
+		
+		
+		if (!message.equals("ok")) { 
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("ERROR"));
+			return null;
+		};
+	
+		return "restricted/welcome";
 	}
 
 	public String add_category() {

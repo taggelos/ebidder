@@ -34,7 +34,7 @@ public class MyItemListBean {
 
 	private  List<Item> all_my_items = new ArrayList<Item>();
 	
-	private boolean can_change;
+	private boolean can_change =false;
 	private Item item_for_change;
 
 	@ManagedProperty(value="#{itemDAO}")
@@ -149,7 +149,7 @@ public class MyItemListBean {
 	
 	public List<Item> getAll_my_items() {
 		
-		all_my_items= itemDAO.getMyItems(my_user.getCurrent()); 
+		all_my_items= itemDAO.getMyItems(my_user.getCurrent().getSeller()); 
 		return all_my_items;
 	}
 
@@ -185,11 +185,12 @@ public class MyItemListBean {
 	}
 	
 	public boolean isCan_change(String started,String numofbid) throws ParseException {
-		Timestamp current_time =new Timestamp(System.currentTimeMillis());
+		/*Timestamp current_time =new Timestamp(System.currentTimeMillis());
 		DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");  
+		//DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");   
 		Date item_started_time = format.parse(started);
 		int numofbids= Integer.valueOf(numofbid);
-		can_change= ( item_started_time.compareTo(current_time) >= 0 && numofbids < 1 ); 
+		can_change= ( item_started_time.compareTo(current_time) >= 0 && numofbids < 1 ); */
 		return can_change;
 	}
 

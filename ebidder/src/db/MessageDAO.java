@@ -11,6 +11,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import entities.Message;
+import entities.Seller;
 import entities.User;
 
 @ManagedBean(name="messageDAO")
@@ -21,16 +22,16 @@ public class MessageDAO {
 	protected JPAResourceBean jpaResourceBean;
 	
 	@SuppressWarnings("unchecked")
-	public List<Message> getMesages(User sender,User receiver) {
+	public List<Message> getMessages(User sender,User receiver) {
 		List<Message> messages = null;
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
 		Query q;		
-		q = em.createQuery("Select m from Message m where m.user1 = :from and m.user2 = :to order by m.time "); 
-		q.setParameter("from", sender);
-		q.setParameter("to", receiver);
+		q = em.createQuery("Select m from Message m where m.seller = :from and m.bidder = :to order by m.time "); 
+		q.setParameter("from", sender.getSeller());
+		q.setParameter("to", receiver.getBidder());
 		
 		messages = q.getResultList();
 
@@ -68,17 +69,18 @@ public class MessageDAO {
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-
+		String username = user.getName();
 		Query q;
 		if (incoming)
 		{
-			q = em.createQuery("select m from Message m where m.user2 = :user group by m.user1 having MAX(m.time)>0 "); 
-			q.setParameter("user", user);
+			q = em.createQuery("select m from Message m where m.bidder.userUsername = :user group by m.seller.userUsername having MAX(m.time)>0 "); 
+			q.setParameter("user", username);
 		}
 		else
 		{
-			q = em.createQuery("Select m from Message m where m.user1 = :user group by m.user1 having MAX(m.time)>0 ");
-			q.setParameter("user", user);
+			Seller s = user.getSeller();
+			q = em.createQuery("Select m from Message m where m.seller = :s group by m.seller having MAX(m.time)>0 ");
+			q.setParameter("s", s);
 		}
 		
 		messages = q.getResultList();

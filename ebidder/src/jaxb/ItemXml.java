@@ -2,6 +2,7 @@ package jaxb;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -30,7 +31,7 @@ public class ItemXml {
 	// category
 	private List<Category> categories = new ArrayList<>();
 
-	private BidsXml bids;
+//	private BidsXml bids;
 
 	private Float currently;
 
@@ -47,10 +48,12 @@ public class ItemXml {
 	private Date started;
 
 	private int itemID;
+	
+	private String country;
+
 
 	private SellerXml seller = new SellerXml();
 
-	private BidderXml bidder = new BidderXml();
 
 	/////////////////////////////////////////////////////////////////////// setters
 	/////////////////////////////////////////////////////////////////////// getters
@@ -142,7 +145,18 @@ public class ItemXml {
 	public void setItemID(int itemID) {
 		this.itemID = itemID;
 	}
+	
+	@XmlElement(name = "Country")
+	public String getCountry() {
+		return country;
+	}
 
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	
+	
+/*
 	@XmlElement(name = "Bids")
 	public BidsXml getBids() {
 		return bids;
@@ -150,8 +164,33 @@ public class ItemXml {
 
 	public void setBids(BidsXml bids) {
 		this.bids = bids;
+	}*/
+
+    @XmlElementWrapper(name = "Bids")
+	@XmlElement(name = "Bid")
+	public List<BidXml> getBid() {
+		List<Bid> bid = item.getBids();
+		List<BidXml> list = new ArrayList<>();
+		if (bid != null)
+			for (Bid b : bid) {
+				BidXml bw = new BidXml();
+				bw.setBid(b);
+				list.add(bw);
+			}
+		return list;
 	}
 
+	public void setBid(List<BidXml> bids) {
+		List<Bid> list = new ArrayList<>();
+		for (BidXml b : bids) {
+			Bid bid = b.getBid();
+			bid.setItem(item);
+			list.add(bid);
+		}
+		item.setBids(list);
+	}
+
+	
 	@XmlElement(name = "Seller")
 	public SellerXml getSeller() {
 		return seller;
@@ -161,15 +200,6 @@ public class ItemXml {
 		this.seller = seller;
 	}
 
-	@XmlElement(name = "Bidder")
-	public BidderXml getBidder() {
-		return bidder;
-	}
-
-	public void setBidder(BidderXml bidder) {
-		this.bidder = bidder;
-	}
-	
 	@XmlElement(name = "Category")
 	public List<String> getCategories() {
 		List<String> category = new ArrayList<>();
@@ -204,19 +234,18 @@ public class ItemXml {
 		item.setDescription(description);
 		item.setItemID(itemID);
 		item.setCategories(categories);
-		item.setBids(bidXmlToBid(bids.getBids()));
+		//item.setBids(bidXmlToBid(bids.getBids()));
 		item.setSeller(seller.getSeller());
-		for (Bid b : item.getBids()) {
-			b.setBidder(bidder.getBidder());
-		}
 		item.setCurrently(currently);
 		item.setBuy_Price(buy_Price);
 		item.setEnds(ends);
 		item.setStarted(started);
 		item.setNumber_of_Bids(number_of_Bids);
 		item.setFirst_Bid(first_Bid);
-		//item.setLocation(location.getLocation());
+		item.setCountry(country);
 		item.setLocation(seller.getSeller().getUser().getLocation());
+
+		//System.out.println("EEEEEEEEEEEEEEEE    " +  item.getLocation().getLatitude() + seller.getSeller().getUser().getLocation().getLatitude());
 	}
 
 	public Item getItem() {
@@ -224,10 +253,32 @@ public class ItemXml {
 		return this.item;
 	}
 
+	
+	public void setItem(Item i) {
+		if ( i == null){System.out.println("OXIRE"); }
+		item.setName(i.getName());
+		item.setDescription(i.getDescription());
+		item.setItemID(i.getItemID());
+		item.setCategories(i.getCategories());
+		//item.setBids(bidXmlToBid(bids.getBids()));
+		item.setSeller(i.getSeller());
+		item.setCurrently(i.getCurrently());
+		item.setBuy_Price(i.getBuy_Price());
+		item.setEnds(i.getEnds());
+		item.setStarted(i.getStarted());
+		item.setNumber_of_Bids(i.getNumber_of_Bids());
+		item.setFirst_Bid(i.getFirst_Bid());
+		item.setCountry(i.getCountry());
+		item.setLocation(i.getLocation());
+		
+	}
+	
 	public List<Bid> bidXmlToBid(List<BidXml> bidxml) {
 		List<Bid> bids = new ArrayList<>();
 		for (BidXml b : bidxml) {
-			bids.add(b.getBid());
+			Bid bid = b.getBid();
+			bid.setItem(item);
+			bids.add(bid);
 		}
 		return bids;
 	}
@@ -249,7 +300,7 @@ public class ItemXml {
 			str += "\n   " + "category =  " + c.getName();
 		}
 		str += "\n   " + seller;
-		str += "\n   " + bids;
+//		str += "\n   " + bids;
 		return str;
 	}
 }

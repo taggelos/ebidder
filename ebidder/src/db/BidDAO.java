@@ -22,6 +22,7 @@ public class BidDAO {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
+			em.merge(bid.getItem());
 			em.merge(bid);
 			em.flush();  
 			tx.commit();

@@ -11,6 +11,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import entities.Item;
+import entities.Seller;
 import entities.User;
 
 @ManagedBean(name="itemDAO")
@@ -21,7 +22,7 @@ public class ItemDAO {
 	protected JPAResourceBean jpaResourceBean;
 	
 	@SuppressWarnings("unchecked")
-	public List<Item> getItems(String value) {
+	public List<Item> getItems(String value,int first,int rows) {
 		List<Item> items = null;
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -29,14 +30,33 @@ public class ItemDAO {
 
 		Query q;
 		q = em.createNamedQuery("Item.findAll");
-	
+		
+		if( first!=0 && rows!=0) q.setFirstResult(first).setMaxResults(rows);
 		items = q.getResultList();
-
+		
 		tx.commit();
 		em.close();
 		return items;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	public List<Item> getItems2(String value) {
+		List<Item> items = null;
+		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		Query q;
+		q = em.createNamedQuery("Item.findAll");
+		
+		items = q.getResultList();
+		
+		tx.commit();
+		em.close();
+		return items;
+	}
+	
 	
 	// prepei na svistei
 	public String update(Item item) {
@@ -74,7 +94,7 @@ public class ItemDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Item> getMyItems(User user)
+	public List<Item> getMyItems(Seller user)
 	{		
 		List<Item> items = null;
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
@@ -82,7 +102,7 @@ public class ItemDAO {
 		tx.begin();
 
 		Query q=null;		
-		q = em.createQuery("Select i from Item i where i.user = :user "); 
+		q = em.createQuery("Select i from Item i where i.seller = :user "); 
 		q.setParameter("user", user);
 		items = q.getResultList();
 		tx.commit();
@@ -147,7 +167,7 @@ public class ItemDAO {
 	}
 	
 	
-	public String[] insertItem(Item item) {
+	public String insertItem(Item item) {
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -155,17 +175,18 @@ public class ItemDAO {
 		try {
 			System.out.println(item.getStarted());
 			//em.persist(item);
+			em.merge(item.getLocation());	
 			em.merge(item);			
 			em.flush(); 
 			
 			tx.commit();
 			retMessage = "ok";
-			return new String[] {retMessage, String.valueOf(item.getItemID()) }; 
+			return retMessage; 
 		} catch (PersistenceException e) {
 			if (tx.isActive())
 				tx.rollback();
 			retMessage = e.getMessage();
-			return new String[] {retMessage };
+			return retMessage ;
 		} finally {
 			em.close();
 		}

@@ -14,19 +14,13 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int userID;
+	private String username;
 
 	private int admin;
 
 	private String country;
 
 	private String email;
-
-	 //bi-directional many-to-one association to Location
-	 @ManyToOne
-	 @JoinColumn(name="location_name")
-	 private Location location;
 
 	private String name;
 
@@ -41,25 +35,27 @@ public class User implements Serializable {
 	@Column(name="tax_registration_number")
 	private String taxRegistrationNumber;
 
-	private String username;
-
 	//bi-directional one-to-one association to Bidder
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy="user",cascade={CascadeType.PERSIST})
 	private Bidder bidder;
 
 	//bi-directional one-to-one association to Seller
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy="user",cascade={CascadeType.PERSIST})
 	private Seller seller;
+
+	//bi-directional many-to-one association to Location
+	@ManyToOne
+	private Location location;
 
 	public User() {
 	}
 
-	public int getUserID() {
-		return this.userID;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public int getAdmin() {
@@ -84,14 +80,6 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Location getLocation() {
-		return this.location;
-	}
-
-	public void setLocation(Location locationName) {
-		this.location = locationName;
 	}
 
 	public String getName() {
@@ -142,14 +130,6 @@ public class User implements Serializable {
 		this.taxRegistrationNumber = taxRegistrationNumber;
 	}
 
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public Bidder getBidder() {
 		return this.bidder;
 	}
@@ -164,6 +144,14 @@ public class User implements Serializable {
 
 	public void setSeller(Seller seller) {
 		this.seller = seller;
+	}
+
+	public Location getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
 }

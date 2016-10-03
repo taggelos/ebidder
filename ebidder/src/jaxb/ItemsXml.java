@@ -19,13 +19,10 @@ import java.util.List;
 public class ItemsXml implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private List<ItemXml> items;
+	private List<ItemXml> items = new ArrayList<>();
 	
 	@XmlElement(name = "Item")
 	public List<ItemXml> getBids() {
-		if (null==items) {
-			items = new ArrayList<ItemXml>();
-		}
 		return items;
 	}
 

@@ -34,6 +34,7 @@ public class SellerXml implements Serializable {
 		seller.getUser().setPassword("default password");
 		seller.getUser().setSurname("default surname");
 		seller.getUser().setTaxRegistrationNumber("default tax_registration_number");
+		seller.getUser().setPhone("default phone");
 		Location location = new Location();
 		location.setName("default location");
 		seller.getUser().setLocation(location);
@@ -45,6 +46,7 @@ public class SellerXml implements Serializable {
 	}
 	
 	public void setRating(int rating) {
+		System.out.println("YOLELEEI");
 		this.rating = rating;
 	}
 

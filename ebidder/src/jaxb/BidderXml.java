@@ -1,14 +1,11 @@
 package jaxb;
 
-
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import entities.Bid;
 import entities.Bidder;
 import entities.User;
 
@@ -40,6 +37,7 @@ public class BidderXml   {
 		bidder.getUser().setPassword("default password");
 		bidder.getUser().setSurname("default surname");
 		bidder.getUser().setTaxRegistrationNumber("default tax_registration_number");
+		bidder.getUser().setPhone("default phone");
 	}
 	
 	@XmlAttribute(name="Rating")
@@ -48,6 +46,7 @@ public class BidderXml   {
 	}
 
 	public void setRating(int rating) {
+		System.out.println("YOLELEIS");
 		this.rating = rating;
 	}
 
@@ -96,7 +95,16 @@ public class BidderXml   {
 	}*/
 	
 	
-	public void setBidder(){
+	public void setBidder(Bidder b){
+		
+		rating = b.getRating_Bidder();
+		userID= b.getUserUsername();
+		//location = b.getUser().getLocation().getName();	
+		country=b.getUser().getCountry();
+		bidder = b;;
+	}
+	
+	public Bidder getBidder(){
 		bidder.getUser().setUsername(userID);
 		bidder.getUser().setCountry(country);
 		bidder.setUserUsername(userID);
@@ -105,10 +113,6 @@ public class BidderXml   {
 		
 		System.out.println("AXNEEEEWQEQWEQW");
 		System.out.println(bidder.getUserUsername());
-	}
-	
-	public Bidder getBidder(){
-		setBidder();
 		return bidder;	
 	}
 	

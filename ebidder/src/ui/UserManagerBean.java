@@ -38,7 +38,7 @@ public class UserManagerBean {
 	
 	private int first;
 	
-	private int rows=3;
+	private int rows=25;
 	
 	public List<User> getUserlist() {
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();

@@ -21,10 +21,6 @@
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">
 			<h:column>
-				<f:facet name="header">ID</f:facet>
-                    #{usr.userID}
-                 </h:column>
-			<h:column>
 				<f:facet name="header">Username</f:facet>    				
                     #{usr.username}
                  </h:column>
@@ -89,7 +85,7 @@
 			action="#{manager.display('next')}" />
 	</h:form>
 	<p />
-	<h:messages globalOnly="true" styleClass="error" />
+	<h:messages globalOnly="true" styleClass="correct" />
 	<h:form rendered="#{ empty(manager.userlist) }"> <h1 style="color: #aeaeae;">Nothing to Show</h1> </h:form>
 	<h:form>
 		<h:commandButton class="userTableButton" id="GoBack" value="Go Back"

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
      	xmlns:f="http://java.sun.com/jsf/core" 
-     	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+     	xmlns:m="http://code.google.com/p/gmaps4jsf/"
+     	xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:head>
         <script 
@@ -14,6 +15,12 @@
         <h:outputStylesheet name="newcss.css" library="css"/>
     </h:head>    
     <h:body >
+    	<div style="border-width:2px; border-color:green; border-style:solid; background-color: #e3cf5b; ">
+		         <ui:insert name="headerVisitor" >
+		            <ui:include src="/template/header.xhtml" />
+		         </ui:insert> 
+     	 </div>
+
     	<h1 style="color: #408080;"> Details  </h1>	
 		<h:panelGrid columns="2">
 			Images:
@@ -86,10 +93,11 @@
 			</h:form>
 			Seller:
 			<h:form>
-				#{item_list.item_for_details.user.name}
+				#{item_list.item_for_details.seller.getUser().username}
 			</h:form> 
-		</h:panelGrid>			
-				 
+		</h:panelGrid>	
+		<p/> 		
+		<h:messages globalOnly="true" styleClass="correct"/>
     	<h:panelGrid columns="1"> 
 			<h:form rendered="#{ user.current ne null }" >
 				 <h:inputText value="#{item_list.sub_value_bid}"/>				

@@ -37,6 +37,9 @@ public class MessageBean {
 		//TODO
 		//message.setUser1(getSender());
 		//message.setUser2(getReceiver());
+		message.setSeller(getSender().getSeller());
+		message.setBidder(getReceiver().getBidder());
+		
 		message.setTime(new Date());
 		message.setText(text);
 		
@@ -69,7 +72,11 @@ public class MessageBean {
 	}
 	
 	public List<Message> getConversationMessages() {
-		conversationMessages=messageDAO.getMesages(getSender(),getReceiver());
+		User sender = getSender();
+		User receiver = getReceiver();
+		sender.getSeller().getMessages();
+		receiver.getBidder().getMessages();
+		conversationMessages=messageDAO.getMessages(getSender(),getReceiver());
 		return  conversationMessages;
 	}
 

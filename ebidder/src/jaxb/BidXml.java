@@ -25,7 +25,8 @@ public class BidXml {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date time;
 	
-	private BidderXml bidder = new BidderXml();
+	
+	private BidderXml thebidder = new BidderXml();
 
 
 	@XmlElement(name="Amount")
@@ -50,24 +51,29 @@ public class BidXml {
 		this.time = time;
 	}
 	
-	@XmlElement(name="bidder")
+	@XmlElement(name="Bidder")
 	public BidderXml getBidder() {
-		return bidder;
+		return thebidder;
 	}
 
 
 	public void setBidder(BidderXml bidder) {
-		this.bidder = bidder;
+		this.thebidder = bidder;
 	}
 
 
-	public void setBid(){
-		bid.setTime(time);
-		bid.setAmount(amount);	
-		bid.setBidder(bidder.getBidder());
+	public void setBid(Bid b){
+		time = b.getTime();
+		amount = b.getAmount();
+		thebidder = new BidderXml();
+		thebidder.setBidder(b.getBidder());
+		bid = b;
 	}
 	
 	public Bid getBid(){
+		bid.setTime(time);
+		bid.setAmount(amount);	
+		bid.setBidder(thebidder.getBidder());
 		return bid;	
 	}
 	
@@ -76,6 +82,6 @@ public class BidXml {
 		return "\n	Bid"
 	+ "\n    " + "time=" + time
 	+ "\n    " + "amount=" + amount
-	+ "\n    " + bidder ;
+	+ "\n    " + thebidder ;
 	}
 }

@@ -13,7 +13,8 @@
 		         <ui:insert name="headerVisitor" >
 		            <ui:include src="/template/header.xhtml" />
 		         </ui:insert> 
-     	 </div>        
+     	 </div>
+     	 <br/>        
 	   	<h:form> 
 	   		 <h:panelGrid columns="3">
  			 	<h:inputText id="search_value" value="#{item_list.search_value}" /> 
@@ -26,15 +27,15 @@
 		   		</h:selectOneMenu> 
 		   		<h:commandButton id="search" value="Search" action="#{item_list.search}"/>
             </h:panelGrid>  
-	   	 
+	   	  <br/> 
     		<h:dataTable rendered="#{ not empty(item_list.items_list)}" id="Items" value="#{ item_list.items_list }" var="itm"	
-			styleClass="userTable" headerClass="userTableHeader"
+			styleClass="userTable" headerClass="userTableHeader" rows="#{item_list.rows}"
 			rowClasses="userTableOddRow,userTableEvenRow">  
 			
-				<!--<h:column>
+				<h:column>
 				<f:facet name="header">Image</f:facet>
-					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="#{'/images/'+itm.getPhotos().get(0).imageID}"  />
-				</h:column>  -->
+					<h:graphicImage width="50" height="50" rendered="#{ not empty(itm.photos) }" value="/images/${itm.photos.get(0).imageID}"  />
+				</h:column> 
 							
 				<h:column>   
 				<f:facet name="header">Name</f:facet> 
@@ -49,6 +50,18 @@
 				</h:column>
 			</h:dataTable>
         </h:form>
+        <h:form rendered="#{ not empty(item_list.items_list) }">
+		<h:commandButton  class="nextprev" disabled="#{item_list.prev}" value="Previous Page"
+			action="#{item_list.display('prev')}" />
+		<h:commandButton  class="nextprev" disabled="#{item_list.next}" value="Next Page"
+			action="#{item_list.display('next')}" />
+		</h:form>
+        <br />
+         <br />
+          <br />
+           <br />
+           <br />  
+	<h:messages globalOnly="true" styleClass="error" />
         <h:form rendered="#{ empty(item_list.items_list) }"> <h1 style="color: #aeaeae;">Nothing to Show</h1> </h:form>
 		 <h:form rendered="#{ user.current ne null }" >
          <ui:insert name="footer" >

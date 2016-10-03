@@ -1,7 +1,9 @@
 package ui;
 
 import db.UserDAO;
+import entities.Bidder;
 import entities.Location;
+import entities.Seller;
 import entities.User;
 
 import javax.faces.application.FacesMessage;
@@ -64,6 +66,8 @@ public class UserBean {
     {
         FacesContext context = FacesContext.getCurrentInstance();  
         User user =  new User();
+        Bidder bidder =  new Bidder();
+        Seller seller =  new Seller();
         user.setName(name);
 	    user.setSurname(surname);
 	    user.setUsername(username);
@@ -82,6 +86,11 @@ public class UserBean {
 	    user.setPhone(phone);
         user.setPending(1); //user is pending
        
+        seller.setUserUsername(username);
+        bidder.setUserUsername(username);
+        user.setSeller(seller);
+        user.setBidder(bidder);
+        
         String message = userDAO.insertUser(user);
         
         if (!message.equals("ok"))
