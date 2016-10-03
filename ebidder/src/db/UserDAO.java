@@ -20,7 +20,7 @@ public class UserDAO {
 	protected JPAResourceBean jpaResourceBean;
 
 	@SuppressWarnings("unchecked")
-	public List<User> getUsers(String value,int first,int rows) {
+	public List<User> getUsers(String value, int first, int rows) {
 		List<User> users = null;
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -36,7 +36,8 @@ public class UserDAO {
 		} else {
 			q = em.createQuery("Select u from User u where u.pending=1");
 		}
-		q.setFirstResult(first).setMaxResults(rows);
+		if (rows != 0 && first != 0)
+			q.setFirstResult(first).setMaxResults(rows);
 		users = q.getResultList();
 
 		tx.commit();
@@ -57,14 +58,13 @@ public class UserDAO {
 	 * tx.commit(); em.close(); return users; }
 	 */
 
-	
 	@SuppressWarnings("unchecked")
 	public User find(String username, String password) {
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
-		User user=null;
+		User user = null;
 		Query q = em.createQuery("Select u from User u where u.username = :username");
 		q.setParameter("username", username);
 		List<User> users = q.getResultList();
@@ -77,7 +77,6 @@ public class UserDAO {
 		if (user == null || !user.getPassword().equals(password) || !user.getUsername().equals(username)) {
 			return null;
 		}
-		
 
 		return user;
 
@@ -126,7 +125,6 @@ public class UserDAO {
 		}
 	}
 
-	
 	public String remove(User user) {
 		String retMessage = "";
 		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
@@ -154,6 +152,20 @@ public class UserDAO {
 
 	public JPAResourceBean getJpaResourceBean() {
 		return jpaResourceBean;
+	}
+
+	public User find(String username) {
+		EntityManager em = jpaResourceBean.getEMF().createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+
+		User user = em.find( User.class,username);
+
+		tx.commit();
+		em.close();
+
+
+		return user;
 	}
 
 }

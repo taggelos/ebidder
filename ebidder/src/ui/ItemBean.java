@@ -182,6 +182,12 @@ public class ItemBean {
 	}
 
 	
+	public List<Item> recomlist() {  //suggestions
+		return itemDAO.Recommended();
+	}
+	
+	
+	
 	/* Getters and Setters */
 	public String getName() {
 		return name;

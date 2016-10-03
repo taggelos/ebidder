@@ -50,6 +50,22 @@
             <p/>
              
             <h3 style="color: #408080;"> Suggestions </h3> 
+            
+            
+            
+            
+        <!--    <h:form rendered="#{ not empty(item.recomlist) }" >
+		<h:dataTable value="#{item.recomlist}" var="rec"
+			styleClass="userTable" headerClass="userTableHeader"
+			rowClasses="userTableOddRow,userTableEvenRow">
+			<h:column>
+				<f:facet name="header">item</f:facet>    				
+                    #{rec.name}
+                 </h:column>
+
+		</h:dataTable>
+	</h:form> -->
+                        
             <h:form>
 				<h:commandButton class="userTableButton" value="Message" action="#{message.go_to_message_page()}" />
 			</h:form>
