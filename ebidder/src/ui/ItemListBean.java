@@ -26,6 +26,7 @@ public class ItemListBean {
     public void init(){
     	items_list = new ArrayList<Item>();
     	items_list= itemDAO.getItems("All",0,0);
+    	selected_field="all";
     }
 
 	private String search_value;
@@ -44,13 +45,14 @@ public class ItemListBean {
 	
 	private int first=0;
 	
-	private int rows=40;
+	private int rows=10;
 	
 	
 // Functions
 	public String search()
 	{
-		items_list=itemDAO.search(selected_field,search_value);
+		first=0;
+		getItems_list();
 		return null;
 	}
 
@@ -129,7 +131,8 @@ public class ItemListBean {
 	}
 	
 	public List<Item> getItems_list() {
-		items_list = itemDAO.getItems("All",first,rows+1);
+		items_list=itemDAO.search(selected_field,search_value,first,rows+1);
+		//items_list = itemDAO.getItems("All",first,rows+1);
 		return items_list;
 	}
 

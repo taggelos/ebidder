@@ -118,7 +118,7 @@ public class ItemDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Item> search(String field, String value) {
+	public List<Item> search(String field, String value,int first,int rows) {
 		if (field.equals("price")) {
 			try {
 				Float.valueOf(value);
@@ -151,8 +151,11 @@ public class ItemDAO {
 		}
 
 		if (q != null) {
+			q.setFirstResult(first).setMaxResults(rows);
 			items = q.getResultList();
 		}
+		
+		
 
 		tx.commit();
 		em.close();
