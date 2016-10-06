@@ -318,11 +318,18 @@ public class ItemDAO {
 		List<String> same_users = new ArrayList<>(counts.keySet());
 		same_users = same_users.subList(1, 6);    
 		Map<Integer,Bid> items = new HashMap<>();
+		List<Integer> ItemsIds =new ArrayList<>();
+		if (u.getBidder()!=null)
+			for (Bid bid: u.getBidder().getBids())
+			{
+				ItemsIds.add(bid.getItem().getItemID());
+			}
 		for (String s : same_users) {
 			User f = userDAO.find(s);
 			if (f.getBidder()!=null){
 				for (Bid b : f.getBidder().getBids()) {
-					items.put(b.getItem().getItemID(),b);
+					if ( !ItemsIds.contains(b.getItem().getItemID()) )
+						items.put(b.getItem().getItemID(),b);
 				}
 			}
 		}

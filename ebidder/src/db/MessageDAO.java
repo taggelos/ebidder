@@ -98,10 +98,9 @@ public class MessageDAO {
 		tx.begin();
 
 		Query q;
-		//Allakse tin erwtisi etsi wste na perneis ton arithmo twn adiavastwm munhmatwn
-		//q = em.createQuery("select m from Message m where m.user2 = :user and m.unread=true group by m.user1 having MAX(m.time)>0 "); 
+		//q = em.createQuery("select count(*) from Message m where m.seller = :user and m.unread=true group by m.bidder "); 
 		//q.setParameter("user", user);	
-		//messages = q.getResultList();
+		//messages = (int) q.getResultList().get(0);
 		
 		messages= 7; // gia test. tha fugei
 		
