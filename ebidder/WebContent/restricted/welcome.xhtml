@@ -26,16 +26,17 @@
 			        <f:ajax execute="@form" render=":unread_messages" />
 			    </h:commandButton>
 			</h:form>
-    
+    		
+    		<div style="border-width:1px; width:150px; border-color:green; border-style:solid; background-color: #E0E0E0;">	   	
        		<h:panelGrid columns="4">
 	    		<h:form>
 			   		<h:commandLink value="Messages" action="#{messagenotify.go_to_conversations()}" />
 				</h:form>
- 			   	( <h:form id="unread_messages">
+				( <h:form id="unread_messages">
 	   				<h:outputText value="#{messagenotify.numofunread}"/>
-	   		  	</h:form> )
+	   		  	</h:form> )  	
 	   		</h:panelGrid>
-
+			</div>
  
     
             <h1 style="color: #408080;"> Welcome <h:outputText id="welcome" value="#{user.username}" required="true" /> </h1>
@@ -54,8 +55,8 @@
             
             
             
-        <!--    <h:form rendered="#{ not empty(item.recomlist) }" >
-		<h:dataTable value="#{item.recomlist}" var="rec"
+        <h:form rendered="#{ not empty(item.recomlist) }" >
+			<h:dataTable value="#{item.recomlist}" var="rec"
 			styleClass="userTable" headerClass="userTableHeader"
 			rowClasses="userTableOddRow,userTableEvenRow">
 			<h:column>
@@ -63,8 +64,8 @@
                     #{rec.name}
                  </h:column>
 
-		</h:dataTable>
-	</h:form> -->
+			</h:dataTable>
+		</h:form> 
                         
             <h:form>
 				<h:commandButton class="userTableButton" value="Message" action="#{message.go_to_message_page()}" />

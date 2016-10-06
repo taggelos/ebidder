@@ -22,6 +22,7 @@
      	 </div>
 
     	<h1 style="color: #408080;"> Details  </h1>	
+    	<div style="border-width:2px; border-color:green; border-style:solid; background-color: #e3cf5b;">
 		<h:panelGrid columns="2">
 			Images:
 			<h:form> 
@@ -98,6 +99,7 @@
 		</h:panelGrid>	
 		<p/> 		
 		<h:messages globalOnly="true" styleClass="correct"/>
+		</div>
     	<h:panelGrid columns="1"> 
 			<h:form rendered="#{ user.current ne null }" >
 				 <h:inputText value="#{item_list.sub_value_bid}"/>				

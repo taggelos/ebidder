@@ -31,6 +31,16 @@ public class Message implements Serializable {
 	@ManyToOne
 	private Seller seller;
 
+	private byte unread;
+	
+	public byte getUnread() {
+		return this.unread;
+	}
+
+	public void setUnread(byte unread) {
+		this.unread = unread;
+	}
+	
 	public Message() {
 	}
 

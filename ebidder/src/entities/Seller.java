@@ -21,7 +21,7 @@ public class Seller implements Serializable {
 	private int rating_Seller;
 
 	//bi-directional many-to-one association to Item
-	@OneToMany(mappedBy="seller")
+	@OneToMany(mappedBy="seller",cascade=CascadeType.REMOVE)
 	private List<Item> items;
 
 	//bi-directional many-to-one association to Message

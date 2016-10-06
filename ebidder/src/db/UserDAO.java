@@ -131,7 +131,13 @@ public class UserDAO {
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		try {
-			user = em.merge(user);
+			if (!em.contains(user)) {
+				user = em.merge(user);
+			}
+
+			em.remove(user);
+
+			//em.remove(user);
 			em.flush();
 			tx.commit();
 			retMessage = "ok";

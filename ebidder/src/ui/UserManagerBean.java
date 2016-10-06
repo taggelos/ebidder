@@ -88,7 +88,7 @@ public class UserManagerBean {
 		System.out.println("EDIT---NEW");
 		dot = "";
 		userDAO.update(user);
-		return "/restricted/userlist";
+		return "/restricted/admin";
 	}
 
 	public String accept() {
@@ -106,7 +106,7 @@ public class UserManagerBean {
 		userDAO.remove(user);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successful Operation"));
 
-		return "/restricted/userlist"; // msg ok?
+		return "/restricted/admin"; // msg ok?
 	}
 	
 	
@@ -133,6 +133,10 @@ public class UserManagerBean {
 	public String goBack() {
 		dot = "";
 		return "/restricted/admin";
+	}
+	
+	public User getUser() {
+		return user;
 	}
 	
 	public void setUser(User user) {

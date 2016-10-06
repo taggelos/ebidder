@@ -90,9 +90,7 @@ public class ItemBean {
 	}
 	
 	/* Operations */
-	public String create_item() throws IOException, ParseException {
-		
-		// Thelei ki allous elegxous stis times twn pediwn			
+	public String create_item() throws IOException, ParseException {		
 	    		
 	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm" );
 		String str_started= started_year+"-"+started_month+"-"+started_day+" "+started_hour+":"+started_minute;	
@@ -140,7 +138,7 @@ public class ItemBean {
 			return null;
 		};
 	
-		return "restricted/welcome";
+		return "/restricted/manage";
 	}
 
 	public String add_category() {
@@ -182,7 +180,7 @@ public class ItemBean {
 	}
 
 	
-	public List<Item> recomlist() {  //suggestions
+	public List<Item> getRecomlist() {  //suggestions
 		return itemDAO.Recommended();
 	}
 	

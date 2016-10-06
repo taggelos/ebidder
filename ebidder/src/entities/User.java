@@ -36,11 +36,11 @@ public class User implements Serializable {
 	private String taxRegistrationNumber;
 
 	//bi-directional one-to-one association to Bidder
-	@OneToOne(mappedBy="user",cascade={CascadeType.PERSIST})
+	@OneToOne(mappedBy="user",cascade={CascadeType.PERSIST,CascadeType.REMOVE})
 	private Bidder bidder;
 
 	//bi-directional one-to-one association to Seller
-	@OneToOne(mappedBy="user",cascade={CascadeType.PERSIST})
+	@OneToOne(mappedBy="user",cascade={CascadeType.PERSIST,CascadeType.REMOVE})
 	private Seller seller;
 
 	//bi-directional many-to-one association to Location

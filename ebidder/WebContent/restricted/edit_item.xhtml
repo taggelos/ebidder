@@ -15,7 +15,8 @@
          </ui:insert> 
      	 </div>
         <h:form enctype="multipart/form-data">
-            <h1 style="color: #408080;"> Update Item </h1>   
+            <h1 style="color: #408080;"> Update Item </h1>  
+            <div style="border-width:2px; border-color:green; border-style:solid; background-color: #78a970;"> 
             <h:panelGrid columns="3">
                 Name: 
                 <h:inputText id="name" value="#{my_item_list.item_for_change.name}" 
@@ -472,9 +473,11 @@
 				<h:message for="added_images" styleClass="error"/> 
   	           		
             </h:panelGrid>
-            <p/>    
-           	<h:commandButton id="update_item" value="Update item" action="#{my_item_list.update_item}"/>
+            <p/>   
+            </div> 
+           	<h:commandButton class="button" id="update_item" value="Update item" action="#{my_item_list.update_item}"/>
             <h:messages globalOnly="true" styleClass="error"/>
+           
         </h:form>
         <h:form rendered="#{ user.current ne null }" >
          <ui:insert name="footer" >

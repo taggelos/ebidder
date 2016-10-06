@@ -56,7 +56,7 @@ public class ItemListBean {
 
 	public String submit_bid() {
 		Date datenow = new Timestamp(System.currentTimeMillis());
-		if(datenow.compareTo(item_for_details.getEnds())<=0){
+		if(datenow.compareTo(item_for_details.getEnds())<=0 && datenow.compareTo(item_for_details.getStarted())>0 ){
 			if (item_for_details.getCurrently() == 0 && item_for_details.getFirst_Bid() > sub_value_bid) {
 				// message for more money
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successful"));
@@ -102,7 +102,10 @@ public class ItemListBean {
 			itemDAO.update(item_for_details);
 			return null;
 		}
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Auction is finished, no need for bids"));
+		if (datenow.compareTo(item_for_details.getEnds())<=0 )	
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Auction is finished, no need for bids"));
+		if (datenow.compareTo(item_for_details.getStarted())>0 )
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Auction hasn't started yet, no need for bids"));
 		return null;
 	}
 

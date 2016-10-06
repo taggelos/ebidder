@@ -284,17 +284,20 @@ public class ItemDAO {
 		Map<String, List<Integer>> map = new HashMap<>();
 		for(User u : users) {
 			List<Integer> x = new ArrayList<>();
-			for (Bid b : u.getBidder().getBids()) {
-				x.add(b.getItem().getItemID());
+			if ( u.getBidder()!=null ){
+				for (Bid b : u.getBidder().getBids()) {
+					x.add(b.getItem().getItemID());
+				}
 			}
 			map.put(u.getUsername(), x);
 		}
 
 		User u =my_user.getCurrent();    //intersaction
 		List<Integer> original = new ArrayList<>();
-		for (Bid b : u.getBidder().getBids()) {
-			original.add(b.getItem().getItemID());
-		}
+		if (u.getBidder()!=null)
+			for (Bid b : u.getBidder().getBids()) {
+				original.add(b.getItem().getItemID());
+			}
 		Map<String, Integer> counts = new HashMap<>();
 		for (String name : map.keySet()){
 			int count = 0;
@@ -314,13 +317,16 @@ public class ItemDAO {
 		Map<Integer,Bid> items = new HashMap<>();
 		for (String s : same_users) {
 			User f = userDAO.find(s);
-			for (Bid b : f.getBidder().getBids()) {
-				items.put(b.getItem().getItemID(),b);
+			if (f.getBidder()!=null){
+				for (Bid b : f.getBidder().getBids()) {
+					items.put(b.getItem().getItemID(),b);
+				}
 			}
 		}
-		for (Bid b : u.getBidder().getBids()) {
-			items.remove(b.getBidID());
-		}
+		if (u.getBidder()!=null)
+			for (Bid b : u.getBidder().getBids()) {
+				items.remove(b.getBidID());
+			}
 		List<Item> recomm_items = new ArrayList<>();
 		for (Bid b : items.values()) {
 			recomm_items.add(b.getItem());
